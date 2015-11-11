@@ -82,17 +82,13 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
 
         XCApp.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanySecret()--" + needSecret);
 
-        if (oClient instanceof AsyncHttpClient) {
-            // 添加header
-            AsyncHttpClient client = (AsyncHttpClient) oClient;
-            client.addHeader("_v", UtilSystem.getVersionCode(XCApp.getBase_applicationContext()) + "");// 版本号，必填
-            client.addHeader("_m", UtilSystem.getMacAddress(XCApp.getBase_applicationContext()));// 设备的mac地址，选填
-            client.addHeader("_c", "2222");// JSONP的回调函数名 ,可选
-            client.addHeader("_p", "1"); // 平台，必填
-        } else {
-            throw new RuntimeException("yourCompanySecret()---中传入的obj不是AsynHttpClient类型");
-        }
+        setHeaders(oClient);
 
+        secretParams(oParams, needSecret);
+
+    }
+
+    private void secretParams(Object oParams, boolean needSecret) {
         if (oParams instanceof RequestParams) {
             if (needSecret) {
                 RequestParams params = (RequestParams) oParams;
@@ -103,7 +99,19 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
         } else {
             throw new RuntimeException("yourCompanySecret()---中传入的params不是RequestParams类型");
         }
+    }
 
+    private void setHeaders(Object oClient) {
+        if (oClient instanceof AsyncHttpClient) {
+            // 添加header
+            AsyncHttpClient client = (AsyncHttpClient) oClient;
+            client.addHeader("_v", UtilSystem.getVersionCode(XCApp.getBase_applicationContext()) + "");// 版本号，必填
+            client.addHeader("_m", UtilSystem.getMacAddress(XCApp.getBase_applicationContext()));// 设备的mac地址，选填
+            client.addHeader("_c", "2222");// JSONP的回调函数名 ,可选
+            client.addHeader("_p", "1"); // 平台，必填
+        } else {
+            throw new RuntimeException("yourCompanySecret()---中传入的obj不是AsynHttpClient类型");
+        }
     }
 
     @Override
