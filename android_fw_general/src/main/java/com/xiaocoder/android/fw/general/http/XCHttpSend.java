@@ -1,5 +1,7 @@
 package com.xiaocoder.android.fw.general.http;
 
+import android.support.annotation.NonNull;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -100,49 +102,73 @@ public class XCHttpSend {
         Map<String, Object> map = model.getMap();
 
         if (isFrequentlyClick || !isNeting) {
+
             isNeting = true;
+
             XCApp.i(XCConfig.TAG_HTTP_HANDLER, model);
-            /*
-             * 是否show Dialog
-             */
-            if (isShowDialog && resHandler.obtainActivity() != null) {
-                resHandler.showHttpDialog();
-            }
 
-            /*
-             * 转换参数
-             */
-            RequestParams params = new RequestParams();
-            for (Map.Entry<String, Object> item : map.entrySet()) {
-                String key = item.getKey();
-                Object value = item.getValue();
-                params.put(key, value);
-            }
-            XCApp.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
+            showHttpDialog(resHandler, isShowDialog);
 
-            /*
-             * 加密
-             */
-            resHandler.yourCompanySecret(params, client, needSecret);
+            RequestParams params = getRequestParams(map);
 
-            /*
-             * 发送请求
-             */
-            if (resHandler instanceof AsyncHttpResponseHandler) {
-                if (httpType == XCHttpType.GET) {
-                    XCApp.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
-                    client.get(urlString, params, (AsyncHttpResponseHandler) resHandler);
-                } else if (httpType == XCHttpType.POST) {
-                    XCApp.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
-                    client.post(urlString, params, (AsyncHttpResponseHandler) resHandler);
-                } else {
-                    throw new RuntimeException("XCHttpAsyn中的XCHttpType类型不匹配");
-                }
-            } else {
-                throw new RuntimeException("XCHttpAsyn中的Handler类型不匹配");
-            }
+            secretHttp(resHandler, needSecret, params);
+
+            sendHttp(resHandler, httpType, urlString, params);
+
         } else {
             XCApp.e(urlString + "--该请求无效，前一个请求还未返回");
+        }
+    }
+
+    /**
+     * 发送请求
+     */
+    private void sendHttp(XCIResponseHandler resHandler, XCHttpType httpType, String urlString, RequestParams params) {
+
+        if (resHandler instanceof AsyncHttpResponseHandler) {
+            if (httpType == XCHttpType.GET) {
+                XCApp.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
+                client.get(urlString, params, (AsyncHttpResponseHandler) resHandler);
+            } else if (httpType == XCHttpType.POST) {
+                XCApp.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
+                client.post(urlString, params, (AsyncHttpResponseHandler) resHandler);
+            } else {
+                throw new RuntimeException("XCHttpAsyn中的XCHttpType类型不匹配");
+            }
+        } else {
+            throw new RuntimeException("XCHttpAsyn中的Handler类型不匹配");
+        }
+    }
+
+    /**
+     * 加密
+     */
+    private void secretHttp(XCIResponseHandler resHandler, boolean needSecret, RequestParams params) {
+        resHandler.yourCompanySecret(params, client, needSecret);
+    }
+
+    /**
+     * 转换参数
+     */
+    @NonNull
+    private RequestParams getRequestParams(Map<String, Object> map) {
+        RequestParams params = new RequestParams();
+        for (Map.Entry<String, Object> item : map.entrySet()) {
+            String key = item.getKey();
+            Object value = item.getValue();
+            params.put(key, value);
+        }
+        XCApp.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
+        return params;
+    }
+
+    /**
+     * 是否show Dialog
+     */
+    private void showHttpDialog(XCIResponseHandler resHandler, boolean isShowDialog) {
+
+        if (isShowDialog && resHandler.obtainActivity() != null) {
+            resHandler.showHttpDialog();
         }
     }
 

@@ -193,6 +193,10 @@ public class XCIOAndroid {
 
     /**
      * 在sd卡中创建，如果没有sd卡， 则在内部存储中创建
+     *
+     * @param dirName "123","123/234","345/456/678","456/567/789.txt" (这个也是文件夹)
+     *                <p/>
+     *                会在 Environment.getExternalStorageDirectory()   + dirName下去建立目录
      */
     public static File createDirInAndroid(Context context, String dirName) {
         try {
