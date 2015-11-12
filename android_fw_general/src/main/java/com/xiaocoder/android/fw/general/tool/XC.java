@@ -1,14 +1,10 @@
 package com.xiaocoder.android.fw.general.tool;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import com.xiaocoder.android.fw.general.application.XCBaseActivity;
 import com.xiaocoder.android.fw.general.application.XCConfig;
-import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
-import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.function.helper.XCExecutorHelper;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.http.XCHttpSend;
@@ -16,7 +12,6 @@ import com.xiaocoder.android.fw.general.imageloader.XCIImageLoader;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.io.XCSP;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,10 +21,6 @@ import java.util.concurrent.ScheduledExecutorService;
  * description: 开发工具集
  */
 public class XC {
-    /**
-     * activity管理类
-     */
-    protected static XCActivityHelper activityHelper = XCActivityHelper.getInstance();
     /**
      * 可变线程池
      */
@@ -42,7 +33,6 @@ public class XC {
      * http
      */
     protected static XCHttpSend httpSend = new XCHttpSend();
-
 
     /**
      * 以下的涉及到路径和文件名等配置的，在子类中初始化
@@ -62,21 +52,9 @@ public class XC {
     protected static XCLog log;
     protected static XCSP sp;
     /**
-     * 异常类 -- 路径
-     */
-    protected static XCCrashHandler crashHandler;
-    /**
      * 图片加载 -- 缓存路径
      */
     protected static XCIImageLoader imageLoader;
-
-    public static XCActivityHelper getActivityHelper() {
-        return activityHelper;
-    }
-
-    public static void setActivityHelper(XCActivityHelper activityHelper) {
-        XC.activityHelper = activityHelper;
-    }
 
     public static ExecutorService getCacheThreadPool() {
         return cacheThreadPool;
@@ -132,14 +110,6 @@ public class XC {
 
     public static void setSp(XCSP sp) {
         XC.sp = sp;
-    }
-
-    public static XCCrashHandler getCrashHandler() {
-        return crashHandler;
-    }
-
-    public static void setCrashHandler(XCCrashHandler crashHandler) {
-        XC.crashHandler = crashHandler;
     }
 
     public static XCIImageLoader getImageLoader() {
@@ -290,53 +260,6 @@ public class XC {
 
     public static void sendHttpRequest(XCIResponseHandler responseHandler) {
         httpSend.sendAsyn(responseHandler);
-    }
-
-    /**
-     * activity
-     */
-    public static void addActivityToStack(Activity activity) {
-        activityHelper.addActivityToStack(activity);
-    }
-
-    public static void delActivityFromStack(Activity activity) {
-        activityHelper.delActivityFromStack(activity);
-    }
-
-    public static Activity getCurrentActivity() {
-        return activityHelper.getCurrentActivity();
-    }
-
-    public static boolean isActivityExist(Class<?> cls) {
-        return activityHelper.isActivityExist(cls);
-    }
-
-    public static List<Activity> getActivity(Class<?> cls) {
-        return activityHelper.getActivity(cls);
-    }
-
-    public static void finishActivity(Activity activity) {
-        activityHelper.finishActivity(activity);
-    }
-
-    public static void finishActivity(Class<?> cls) {
-        activityHelper.finishActivity(cls);
-    }
-
-    public static void finishCurrentActivity() {
-        activityHelper.finishCurrentActivity();
-    }
-
-    public static void finishAllActivity() {
-        activityHelper.finishAllActivity();
-    }
-
-    public static Activity toActivity(Class<? extends XCBaseActivity> main_activity_class) {
-        return activityHelper.toActivity(main_activity_class);
-    }
-
-    public static void appExit() {
-        activityHelper.appExit();
     }
 
 }

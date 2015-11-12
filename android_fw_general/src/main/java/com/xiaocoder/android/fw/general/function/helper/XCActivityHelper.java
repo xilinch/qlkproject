@@ -2,7 +2,6 @@ package com.xiaocoder.android.fw.general.function.helper;
 
 import android.app.Activity;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.util.ArrayList;
@@ -16,39 +15,33 @@ import java.util.Stack;
  */
 public class XCActivityHelper {
 
-    private Stack<Activity> stack = new Stack<Activity>();
+    private static Stack<Activity> stack = new Stack<Activity>();
 
-    public Stack<Activity> getStack() {
+    public static Stack<Activity> getStack() {
         return stack;
     }
 
     private XCActivityHelper() {
     }
 
-    private static XCActivityHelper activityHelper = new XCActivityHelper();
-
-    public static XCActivityHelper getInstance() {
-        return activityHelper;
-    }
-
     /**
      * 添加Activity到栈中
      */
-    public void addActivityToStack(Activity activity) {
+    public static void addActivityToStack(Activity activity) {
         stack.push(activity);
     }
 
     /**
      * 把Activity移出栈
      */
-    public void delActivityFromStack(Activity activity) {
+    public static void delActivityFromStack(Activity activity) {
         stack.remove(activity);
     }
 
     /**
      * 获取顶层Activity（activity不删除）
      */
-    public Activity getCurrentActivity() {
+    public static Activity getCurrentActivity() {
 
         return stack.lastElement();
     }
@@ -56,7 +49,7 @@ public class XCActivityHelper {
     /**
      * 判断某个acivity实例是否存在
      */
-    public boolean isActivityExist(Class<?> cls) {
+    public static boolean isActivityExist(Class<?> cls) {
         for (Activity activity : stack) {
             if (activity.getClass().equals(cls)) {
                 return true;
@@ -68,7 +61,7 @@ public class XCActivityHelper {
     /**
      * 获取某(几)个activity（activity不删除）
      */
-    public List<Activity> getActivity(Class<?> cls) {
+    public static List<Activity> getActivity(Class<?> cls) {
         List<Activity> list = new ArrayList<Activity>();
         for (Activity activity : stack) {
             if (activity.getClass().equals(cls)) {
@@ -81,7 +74,7 @@ public class XCActivityHelper {
     /**
      * 结束指定的一个Activity
      */
-    public void finishActivity(Activity activity) {
+    public static void finishActivity(Activity activity) {
         if (activity != null) {
             stack.remove(activity);
             activity.finish();
@@ -91,7 +84,7 @@ public class XCActivityHelper {
     /**
      * 通过class ， 结束指定类名的（几个或一个）Activity
      */
-    public void finishActivity(Class<?> cls) {
+    public static void finishActivity(Class<?> cls) {
 
         for (Iterator<Activity> it = stack.iterator(); it.hasNext(); ) {
             Activity activity = it.next();
@@ -106,7 +99,7 @@ public class XCActivityHelper {
     /**
      * 结束当前Activity
      */
-    public void finishCurrentActivity() {
+    public static void finishCurrentActivity() {
 
         finishActivity(getCurrentActivity());
     }
@@ -114,7 +107,7 @@ public class XCActivityHelper {
     /**
      * 关闭所有的activity
      */
-    public void finishAllActivity() {
+    public static void finishAllActivity() {
         for (Activity activity : stack) {
             // finishActivity(activity);//并发修改异常
             if (activity != null) {
@@ -129,7 +122,7 @@ public class XCActivityHelper {
      * <p/>
      * 如果该activity不存在，则一个也不删除
      */
-    public Activity toActivity(Class<? extends Activity> activity_class) {
+    public static Activity toActivity(Class<? extends Activity> activity_class) {
 
         if (isActivityExist(activity_class)) {
             // activity存在
@@ -138,7 +131,7 @@ public class XCActivityHelper {
             while (true) {
 
                 if (stack.isEmpty()) {
-                    XC.e(this + "---toActivity()的stack为null");
+                    XC.e("---toActivity()的stack为null");
                     return null;
                 }
 
@@ -168,7 +161,7 @@ public class XCActivityHelper {
     /**
      * 退出应用程序
      */
-    public void appExit() {
+    public static void appExit() {
         finishAllActivity();
         System.exit(0);
     }

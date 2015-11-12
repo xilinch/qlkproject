@@ -4,8 +4,9 @@ import android.os.Bundle;
 
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.db.XCExceptionDao;
+import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
+import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.model.XCExceptionModel;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
@@ -25,7 +26,7 @@ public abstract class MMainActivity extends MActivity {
     public void onBackPressed() {
         long this_quit_time = System.currentTimeMillis();
         if (this_quit_time - back_quit_time <= CLICK_QUICK_GAP) {
-            XC.appExit();
+            XCActivityHelper.appExit();
         } else {
             back_quit_time = this_quit_time;
             XC.shortToast("快速再按一次退出");
@@ -55,7 +56,7 @@ public abstract class MMainActivity extends MActivity {
      * 进入首页时或闪屏页，把未上传的异常信息上传到服务器
      */
     protected void uploadException() {
-        List<XCExceptionModel> xcExceptionModels = XC.getCrashHandler().getDao().queryUploadFail(XCExceptionDao.SORT_DESC);
+        List<XCExceptionModel> xcExceptionModels = XCCrashHandler.getInstance().getDao().queryUploadFail(XCExceptionDao.SORT_DESC);
         // TODO 上传到服务器，每上传成功一条，更新model中的uploadSuccess为“1”
     }
 

@@ -100,10 +100,10 @@ public class MApp extends XCApp {
 
     private void initCrash() {
 
-        XC.setCrashHandler(XCCrashHandler.getInstance().init(MConfig.IS_INIT_CRASH_HANDLER,
-                getApplicationContext(), MConfig.CRASH_DIR, MConfig.IS_SHOW_EXCEPTION_ACTIVITY));
+        XCCrashHandler.getInstance().init(MConfig.IS_INIT_CRASH_HANDLER,
+                getApplicationContext(), MConfig.CRASH_DIR, MConfig.IS_SHOW_EXCEPTION_ACTIVITY);
 
-        XC.getCrashHandler().setUploadServer(new XCIException2Server() {
+        XCCrashHandler.getInstance().setUploadServer(new XCIException2Server() {
             @Override
             public void uploadException2Server(String info, Throwable ex, Thread thread,
                                                XCExceptionModel model, XCExceptionDao dao) {
@@ -128,9 +128,4 @@ public class MApp extends XCApp {
         XC.itemp(dao.queryUnique(model.getUniqueId()));
     }
 
-    public static void exitApp() {
-        // 友盟统计
-        MobclickAgent.onKillProcess(base_applicationContext);
-        XC.appExit();
-    }
 }

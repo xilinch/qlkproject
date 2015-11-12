@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilInput;
@@ -80,7 +81,7 @@ public abstract class XCBaseActivity extends FragmentActivity {
         }
 
         // 添加到stack
-        XC.addActivityToStack(this);
+        XCActivityHelper.addActivityToStack(this);
         base_context = this;
         base_inflater = LayoutInflater.from(this);
         base_fm = getSupportFragmentManager();
@@ -113,7 +114,7 @@ public abstract class XCBaseActivity extends FragmentActivity {
         recoderNetFailHandler = null;
         super.onDestroy();
 
-        XC.delActivityFromStack(this);
+        XCActivityHelper.delActivityFromStack(this);
     }
 
     public void myFinish() {

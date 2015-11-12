@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.db.XCExceptionDao;
+import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.model.XCExceptionModel;
@@ -164,20 +165,20 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
 
     }
 
-    public static int QUICK_FREEZE_TIME = 2500;
+    public static int QUIT_FREEZE_TIME = 2500;
 
     public void endException() {
 
         showToast(application, "很抱歉，程序遭遇异常，即将退出！");
 
         try {
-            Thread.sleep(QUICK_FREEZE_TIME);
+            Thread.sleep(QUIT_FREEZE_TIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         if (application != null) {
-            XC.appExit();
+            XCActivityHelper.appExit();
         }
 
     }
