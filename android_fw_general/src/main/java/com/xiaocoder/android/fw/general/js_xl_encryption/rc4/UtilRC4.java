@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.security.Key;
 
@@ -28,7 +29,7 @@ public class UtilRC4 {
 
             byte[] decryStr = cipher1.doFinal(data.getBytes("UTF-8"));
             String str = Base64.encodeToString(decryStr, Base64.DEFAULT);
-            XCApp.i("Myyyy", str);
+            XC.i("Myyyy", str);
             return str;
 
         } catch (Exception e){

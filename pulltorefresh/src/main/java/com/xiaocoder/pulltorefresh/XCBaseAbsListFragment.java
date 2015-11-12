@@ -22,6 +22,7 @@ import com.handmark.pulltorefresh.library.R;
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.android.fw.general.util.UtilString;
 
@@ -204,7 +205,7 @@ public abstract class XCBaseAbsListFragment<T extends AbsListView> extends XCBas
 
         if (base_refresh_abs_listview != null && whichMode != XCBaseAbsListFragment.MODE_NOT_PULL) {
             base_refresh_abs_listview.onRefreshComplete();
-            XCApp.i("completeRefresh()");
+            XC.i("completeRefresh()");
         }
 
         base_isPullRefreshing = false;
@@ -218,7 +219,7 @@ public abstract class XCBaseAbsListFragment<T extends AbsListView> extends XCBas
         if (base_totalPage != 0 && base_currentPage > base_totalPage) {
             // 是底部则结束
             completeRefresh();
-            XCApp.shortToast("已经是最后一页了");
+            XC.shortToast("已经是最后一页了");
             return true;
         }
         return false;

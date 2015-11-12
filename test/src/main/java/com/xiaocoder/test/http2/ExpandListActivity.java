@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.xiaocoder.android.fw.general.function.adapter.XLBaseAdapterExpand;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.android.fw.general.util.UtilScreen;
 import com.xiaocoder.views.view.open.OPSlideBar;
@@ -142,7 +143,7 @@ public class ExpandListActivity extends MActivity {
         test_expandablelistview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                XCApp.shortToast(groupPosition);
+                XC.shortToast(groupPosition);
                 return true;
             }
         });
@@ -193,7 +194,7 @@ public class ExpandListActivity extends MActivity {
             @Override
             public void onTouchingLetterChanged(String s) {
                 Integer position = adapter.getPositionFromLetter(s);
-                XCApp.dShortToast(position + "");
+                XC.dShortToast(position + "");
                 if (position != null) {
                     test_expandablelistview.setSelection(position);
                 }
@@ -251,7 +252,7 @@ public class ExpandListActivity extends MActivity {
                 view = getTextView();
             }
             if (viewGroup != null) {
-                XCApp.i(XCConfig.TAG_TEST, "getGroupView()---" + viewGroup.toString());
+                XC.i(XCConfig.TAG_TEST, "getGroupView()---" + viewGroup.toString());
             }
             ((TextView) view).setText(getGroup(i).toString());
             return view;
@@ -263,7 +264,7 @@ public class ExpandListActivity extends MActivity {
                 view = getTextView();
             }
             if (viewGroup != null) {
-                XCApp.i(XCConfig.TAG_TEST, "getChildView()---" + viewGroup.toString());
+                XC.i(XCConfig.TAG_TEST, "getChildView()---" + viewGroup.toString());
             }
             ((TextView) view).setText(getChild(groupPosition, childPosition).toString());
             return view;

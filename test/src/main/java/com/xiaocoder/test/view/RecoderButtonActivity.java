@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.view.xc.XCRecordVoiceButton;
 import com.xiaocoder.views.view.xc.XCRecordVoiceButtonPlus;
 import com.xiaocoder.middle.MActivity;
@@ -55,7 +56,7 @@ public class RecoderButtonActivity extends MActivity {
         button.setOnRecordVoiceSuccessListener(new XCRecordVoiceButton.OnRecordVoiceSuccessListener() {
             @Override
             public void onRecordVoiceSuccessListener(File file, float duration) {
-                XCApp.shortToast(file + "---" + duration);
+                XC.shortToast(file + "---" + duration);
             }
         });
 
@@ -90,17 +91,17 @@ public class RecoderButtonActivity extends MActivity {
             public void onEndTouch(RecoderStop stop) {
                 if (stop == RecoderStop.OUT_TIME_STOP) {
                     hint2.setText("录音时间超出范围了");
-                    XCApp.shortToast("录音时间超出范围了");
+                    XC.shortToast("录音时间超出范围了");
                 } else if (stop == RecoderStop.LESS_TIME_STOP) {
                     hint2.setText("录音时间少了");
-                    XCApp.shortToast("录音时间少了");
+                    XC.shortToast("录音时间少了");
                 }
                 dialog2.cancel();
             }
 
             @Override
             public void onRecoderSuccess(File file, double time) {
-                XCApp.shortToast(time + "----" + file);
+                XC.shortToast(time + "----" + file);
             }
         });
 

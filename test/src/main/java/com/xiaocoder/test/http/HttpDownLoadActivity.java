@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.android.fw.general.function.runnable.XCDownloadRunnable;
@@ -38,34 +39,34 @@ public class HttpDownLoadActivity extends MActivity {
 
     public void request() {
 //        XCApp.getAsyn(true,true, this, "http://" + MainActivity.TEST_HOST + ":8080/qlktest/test.mp3", new RequestParams(), new QlkHttpResponseHandler(HttpDownLoadActivity.this) {
-        XCApp.getAsyn( true,url, new HashMap<String, Object>()
-                , new MResponseHandlerBean<MBean>(this, this,MBean.class) {
+        XC.getAsyn(true, url, new HashMap<String, Object>()
+                , new MResponseHandlerBean<MBean>(this, this, MBean.class) {
 
-                    @Override
-                    public void success(int code, Header[] headers, byte[] arg2) {
-                        super.success(code, headers, arg2);
-                        // 这里拿到的result_bean是一个XCJsonBean对象
-                        if (result_boolean) {
+            @Override
+            public void success(int code, Header[] headers, byte[] arg2) {
+                super.success(code, headers, arg2);
+                // 这里拿到的result_bean是一个XCJsonBean对象
+                if (result_boolean) {
 
-                            dialog = new XCQueryDialog(HttpDownLoadActivity.this, XCBaseDialog.TRAN_STYLE, "下载提示", "该文件大小为" + UtilString.getFileSizeByUnit(arg2.length), new String[]{"下载", "取消"}, false);
+                    dialog = new XCQueryDialog(HttpDownLoadActivity.this, XCBaseDialog.TRAN_STYLE, "下载提示", "该文件大小为" + UtilString.getFileSizeByUnit(arg2.length), new String[]{"下载", "取消"}, false);
 
-                            dialog.setOnDecideListener(new XCQueryDialog.OnDecideListener() {
-                                @Override
-                                public void confirm() {
-                                    downLoad();
-                                    dialog.dismiss();
-                                }
-
-                                @Override
-                                public void cancle() {
-                                    dialog.dismiss();
-                                }
-                            });
-                            dialog.show();
+                    dialog.setOnDecideListener(new XCQueryDialog.OnDecideListener() {
+                        @Override
+                        public void confirm() {
+                            downLoad();
+                            dialog.dismiss();
                         }
-                    }
 
-                });
+                        @Override
+                        public void cancle() {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }
+            }
+
+        });
     }
 
     private void downLoad() {
@@ -95,7 +96,7 @@ public class HttpDownLoadActivity extends MActivity {
             }
         });
 
-        MApp.getBase_cache_threadpool().execute(downloadHelper);
+        XC.getCacheThreadPool().execute(downloadHelper);
     }
 
     @Override

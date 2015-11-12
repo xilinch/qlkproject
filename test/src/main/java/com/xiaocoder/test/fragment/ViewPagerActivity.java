@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
@@ -50,7 +51,7 @@ public class ViewPagerActivity extends MActivity {
 
             @Override
             public void onImageClickListener(int position) {
-                XCApp.shortToast(position);
+                XC.shortToast(position);
             }
         });
     }

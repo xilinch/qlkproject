@@ -7,6 +7,7 @@ import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 /**
  * gson 解析
@@ -32,7 +33,7 @@ public abstract class MResponseHandlerModel<T extends MModel> extends MResponseH
     @Override
     public T parseWay(String responseStr, byte[] response_bytes) {
 
-        XCApp.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "-----parseWay()");
+        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "-----parseWay()");
 
         return new Gson().fromJson(responseStr, result_bean_class);
     }

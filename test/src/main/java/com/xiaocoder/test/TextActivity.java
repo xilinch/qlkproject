@@ -10,6 +10,7 @@ import com.xiaocoder.android.fw.general.js_xl_encryption.des.DesEncryptAndDecryp
 import com.xiaocoder.android.fw.general.js_xl_encryption.md5.UtilMd5;
 import com.xiaocoder.android.fw.general.json.XCJsonBean;
 import com.xiaocoder.android.fw.general.json.XCJsonParse;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
 import com.xiaocoder.android.fw.general.util.UtilSystem;
 import com.xiaocoder.middle.MActivity;
@@ -45,7 +46,7 @@ public class TextActivity extends MActivity {
     }
 
     private void test3() {
-        XCApp.i("UUID----" + UUID.randomUUID() + "----" + UUID.randomUUID().toString().length());
+        XC.i("UUID----" + UUID.randomUUID() + "----" + UUID.randomUUID().toString().length());
 
         LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>();
         queue.add("a");
@@ -54,22 +55,22 @@ public class TextActivity extends MActivity {
         queue.add("d");
 
 //        try {
-//            XCApp.i(queue.take()); // a  //take 类似 poll remove
-//            XCApp.i(queue.take()); // b
-//            XCApp.i(queue.take()); // c
-//            XCApp.i(queue.take()); // d
+//            XC.i(queue.take()); // a  //take 类似 poll remove
+//            XC.i(queue.take()); // b
+//            XC.i(queue.take()); // c
+//            XC.i(queue.take()); // d
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
 
-            XCApp.i(queue.peek()); //a  // peek 类似 element
-            XCApp.i(queue.peek()); //a
-            XCApp.i(queue.peek()); //a
-            XCApp.i(queue.peek()); //a
+            XC.i(queue.peek()); //a  // peek 类似 element
+            XC.i(queue.peek()); //a
+            XC.i(queue.peek()); //a
+            XC.i(queue.peek()); //a
             queue.remove("a");
-            XCApp.i(queue.peek()); //b
-            XCApp.i(queue.peek()); //b
-            XCApp.i(queue.peek()); //b
+            XC.i(queue.peek()); //b
+            XC.i(queue.peek()); //b
+            XC.i(queue.peek()); //b
 
 
     }
@@ -77,19 +78,19 @@ public class TextActivity extends MActivity {
     private void test2() {
         String one = UtilMd5.MD5Encode("123456abc");
         String two = UtilMd5.MD5Encode2("123456abc");
-        XCApp.i(one);
-        XCApp.i(two);
-        XCApp.i(UtilString.equalsStr(one, two)); // true
+        XC.i(one);
+        XC.i(two);
+        XC.i(UtilString.equalsStr(one, two)); // true
 
         String des_close = DesEncryptAndDecrypt.encodeRequestStr("today is haha 123");
         String des_open = DesEncryptAndDecrypt.decodeResponseStr(des_close);
-        XCApp.i(des_close);
-        XCApp.i(des_open);
+        XC.i(des_close);
+        XC.i(des_open);
 
         String aes_close = AesEncryptAndDecrypt.encodeRequestStr("computer 123 macpro");
         String aes_open = AesEncryptAndDecrypt.decodeResponseStr(aes_close);
-        XCApp.i(aes_close);
-        XCApp.i(aes_open);
+        XC.i(aes_close);
+        XC.i(aes_open);
     }
 
     private void test1() {
@@ -107,28 +108,28 @@ public class TextActivity extends MActivity {
         List beans = bean.getListList("data", new ArrayList<ArrayList>());
 
         try {
-            XCApp.i(beans.toString());
-            XCApp.i(beans.get(0).toString());
+            XC.i(beans.toString());
+            XC.i(beans.get(0).toString());
             if (beans.get(0) instanceof List) {
-                XCApp.i("List");
+                XC.i("List");
             } else if (beans.get(0) instanceof String[]) {
-                XCApp.i("string[]");
+                XC.i("string[]");
             } else {
-                XCApp.i(beans.get(0).getClass().toString());
+                XC.i(beans.get(0).getClass().toString());
 
                 JSONArray array = (JSONArray) beans.get(0);
                 int count = array.length();
                 for (int i = 0; i < count; i++) {
-                    XCApp.i((String) array.get(i));
+                    XC.i((String) array.get(i));
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            XCApp.e(this.toString() + "---exception");
+            XC.e(this.toString() + "---exception");
         }
 
-        XCApp.i(UtilSystem.getDeviceId(this) + "--------------deviceId");
+        XC.i(UtilSystem.getDeviceId(this) + "--------------deviceId");
     }
 
     // 设置监听

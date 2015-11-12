@@ -16,6 +16,7 @@ import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.io.XCSP;
 import com.xiaocoder.android.fw.general.model.XCExceptionModel;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.test.R;
 
 /**
@@ -31,36 +32,40 @@ public class MApp extends XCApp {
 
         createDir();
 
-        initNumThreadPool();
-
         initLog();
 
         initSp();
+
+        initNumThreadPool();
 
         initImageLoader();
 
         initCrash();
 
-        simpleDeviceInfo();
-
     }
 
+    /**
+     * sp保存文件名 与 模式
+     */
     private void initSp() {
-        // sp保存文件名 与 模式
-        base_sp = new XCSP(getApplicationContext(), MConfig.SP_FILE, Context.MODE_APPEND);// Context.MODE_MULTI_PROCESS
+        XC.setSp(new XCSP(getApplicationContext(), MConfig.SP_FILE, Context.MODE_APPEND));// Context.MODE_MULTI_PROCESS
     }
 
+    /**
+     * log(可以打印日志到控制台和文件中) 与 toast
+     */
     private void initLog() {
-        // log(可以打印日志到控制台和文件中) 与 toast
-        base_log = new XCLog(getApplicationContext(),
+        XC.setLog(new XCLog(getApplicationContext(),
                 MConfig.IS_DTOAST, MConfig.IS_OUTPUT, MConfig.IS_PRINTLOG,
-                MConfig.APP_ROOT, MConfig.LOG_FILE, MConfig.TEMP_PRINT_FILE, XCConfig.ENCODING_UTF8);
+                MConfig.APP_ROOT, MConfig.LOG_FILE, MConfig.TEMP_PRINT_FILE, XCConfig.ENCODING_UTF8));
     }
 
+    /**
+     * http解析时用到该固定线程池
+     */
     private void initNumThreadPool() {
-        // http解析时用到该固定线程池,基类中还有一个cache线程池
-        base_fix_threadpool = XCExecutorHelper.getInstance().getFix(MConfig.FIX_THREAD_NUM);
-        base_scheduled_threadpool = XCExecutorHelper.getInstance().getScheduledFix(MConfig.SCHEDULE_THREAD_NUM);
+        XC.setFixThreadPool(XCExecutorHelper.getInstance().getFix(MConfig.FIX_THREAD_NUM));
+        XC.setScheduledThreadPool(XCExecutorHelper.getInstance().getScheduledFix(MConfig.SCHEDULE_THREAD_NUM));
     }
 
     private void createDir() {
@@ -78,27 +83,27 @@ public class MApp extends XCApp {
 
     private void initImageLoader() {
 
-        setBase_imageloader(new XCAsynLoader(MConfig.getImageloader(getApplicationContext()),
+        XC.setImageLoader(new XCAsynLoader(MConfig.getImageloader(getApplicationContext()),
                 MConfig.default_image_options
         ));
     }
 
     private void initImageLoader2() {
-        setBase_imageloader(new XCImageLoader(getApplicationContext(),
+        XC.setImageLoader(new XCImageLoader(getApplicationContext(),
                 XCIOAndroid.createDirInAndroid(getApplicationContext(), MConfig.CACHE_DIR),
                 R.drawable.image_a));
     }
 
     private void initImageLoader3() {
-        setBase_imageloader(new JSImageLoader(R.drawable.image_a));
+        XC.setImageLoader(new JSImageLoader(R.drawable.image_a));
     }
 
     private void initCrash() {
 
-        base_crashHandler = XCCrashHandler.getInstance().init(MConfig.IS_INIT_CRASH_HANDLER,
-                getApplicationContext(), MConfig.CRASH_DIR, MConfig.IS_SHOW_EXCEPTION_ACTIVITY);
+        XC.setCrashHandler(XCCrashHandler.getInstance().init(MConfig.IS_INIT_CRASH_HANDLER,
+                getApplicationContext(), MConfig.CRASH_DIR, MConfig.IS_SHOW_EXCEPTION_ACTIVITY));
 
-        base_crashHandler.setUploadServer(new XCIException2Server() {
+        XC.getCrashHandler().setUploadServer(new XCIException2Server() {
             @Override
             public void uploadException2Server(String info, Throwable ex, Thread thread,
                                                XCExceptionModel model, XCExceptionDao dao) {
@@ -115,17 +120,17 @@ public class MApp extends XCApp {
     }
 
     public void test(XCExceptionModel model, XCExceptionDao dao) {
-        XCApp.itemp(dao.queryCount());
-        XCApp.itemp(dao.queryUploadFail(XCExceptionDao.SORT_ASC));
-        XCApp.itemp(dao.queryUploadFail(XCExceptionDao.SORT_DESC));
-        XCApp.itemp(dao.queryUploadSuccess(XCExceptionDao.SORT_DESC));
-        XCApp.itemp(dao.queryAll(XCExceptionDao.SORT_DESC));
-        XCApp.itemp(dao.queryUnique(model.getUniqueId()));
+        XC.itemp(dao.queryCount());
+        XC.itemp(dao.queryUploadFail(XCExceptionDao.SORT_ASC));
+        XC.itemp(dao.queryUploadFail(XCExceptionDao.SORT_DESC));
+        XC.itemp(dao.queryUploadSuccess(XCExceptionDao.SORT_DESC));
+        XC.itemp(dao.queryAll(XCExceptionDao.SORT_DESC));
+        XC.itemp(dao.queryUnique(model.getUniqueId()));
     }
 
     public static void exitApp() {
         // 友盟统计
         MobclickAgent.onKillProcess(base_applicationContext);
-        appExit();
+        XC.appExit();
     }
 }

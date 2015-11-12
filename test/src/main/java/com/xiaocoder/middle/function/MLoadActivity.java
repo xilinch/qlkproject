@@ -16,6 +16,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.view.xc.XCImageView;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
@@ -36,8 +37,8 @@ public abstract class MLoadActivity extends MActivity implements OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        if (XCApp.spGet("isInstall", true)) {
-            XCApp.spPut("isInstall", false);
+        if (XC.spGet("isInstall", true)) {
+            XC.spPut("isInstall", false);
             initWelCom();
         } else {
             initLoad();

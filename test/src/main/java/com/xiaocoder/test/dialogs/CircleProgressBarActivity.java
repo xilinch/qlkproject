@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.view.open.OPCircleProgressBar;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
@@ -34,7 +35,7 @@ public class CircleProgressBarActivity extends MActivity {
 
         for (int i = 0; i < 10; i++) {
             final int finalI = i;
-            XCApp.getBase_handler().postDelayed(new Runnable() {
+            XC.getHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (finalI * 10 >= 90) {

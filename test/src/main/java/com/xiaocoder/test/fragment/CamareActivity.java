@@ -9,6 +9,7 @@ import com.xiaocoder.android.fw.general.function.fragment.XCCameraPhotoFragment;
 import com.xiaocoder.android.fw.general.function.fragment.XCCameraPhotoFragment.OnCaremaSelectedFileListener;
 import com.xiaocoder.android.fw.general.function.fragment.XCLocalPhotoFragment;
 import com.xiaocoder.android.fw.general.function.fragment.XCLocalPhotoFragment.OnLocalSelectedFileListener;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 
@@ -49,9 +50,9 @@ public class CamareActivity extends MActivity {
 
             @Override
             public void onCaremaSelectedFile(File file) {
-                XCApp.i(Uri.fromFile(file));
-                XCApp.i(file.getAbsolutePath());
-                XCApp.i(file.toURI());
+                XC.i(Uri.fromFile(file));
+                XC.i(file.getAbsolutePath());
+                XC.i(file.toURI());
                 test_imageview.setImageURI(Uri.fromFile(file));
             }
         });
@@ -60,9 +61,9 @@ public class CamareActivity extends MActivity {
 
             @Override
             public void onLocalSelectedFile(File file) {
-                XCApp.i(Uri.fromFile(file));
-                XCApp.i(file.getAbsolutePath());
-                XCApp.i(file.toURI());
+                XC.i(Uri.fromFile(file));
+                XC.i(file.getAbsolutePath());
+                XC.i(file.toURI());
                 test_imageview.setImageURI(Uri.fromFile(file));
             }
         });

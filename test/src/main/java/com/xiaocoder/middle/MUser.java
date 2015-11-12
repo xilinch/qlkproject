@@ -2,8 +2,8 @@ package com.xiaocoder.middle;
 
 import android.content.Context;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseActivity;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 /**
  * Created by xiaocoder on 2015/7/13.
@@ -23,30 +23,30 @@ public class MUser {
 
     public static String getUserId() {
 
-        return XCApp.spGet(USER_ID, "");
+        return XC.spGet(USER_ID, "");
 
     }
 
     public static String getUserToken() {
 
-        return XCApp.spGet(USER_TOKEN, "");
+        return XC.spGet(USER_TOKEN, "");
 
     }
 
     public static String getUserName() {
 
-        return XCApp.spGet(USER_NAME, "");
+        return XC.spGet(USER_NAME, "");
 
     }
 
     public static String getUserHead() {
 
-        return XCApp.spGet(USER_HEAD, "");
+        return XC.spGet(USER_HEAD, "");
     }
 
     public static String getUserPhoneNum() {
 
-        return XCApp.spGet(USER_PHONE_NUM, "");
+        return XC.spGet(USER_PHONE_NUM, "");
     }
 
     /**
@@ -56,37 +56,37 @@ public class MUser {
      */
     public static boolean isLogin() {
 
-        return XCApp.spGet(IS_LOGIN, false);
+        return XC.spGet(IS_LOGIN, false);
 
     }
 
     public static void putUserId(String userId) {
 
-        XCApp.spPut(USER_ID, userId);
+        XC.spPut(USER_ID, userId);
 
     }
 
     public static void putUserToken(String userToken) {
 
-        XCApp.spPut(USER_TOKEN, userToken);
+        XC.spPut(USER_TOKEN, userToken);
 
     }
 
     public static void putUserName(String userName) {
 
-        XCApp.spPut(USER_NAME, userName);
+        XC.spPut(USER_NAME, userName);
 
     }
 
     public static void putUserHeader(String userHeader) {
 
-        XCApp.spPut(USER_HEAD, userHeader);
+        XC.spPut(USER_HEAD, userHeader);
 
     }
 
     public static void putUserPhoneNum(String userPhoneNum) {
 
-        XCApp.spPut(USER_PHONE_NUM, userPhoneNum);
+        XC.spPut(USER_PHONE_NUM, userPhoneNum);
 
     }
 
@@ -97,7 +97,7 @@ public class MUser {
      */
     public static void putLogin(boolean isLogin) {
 
-        XCApp.spPut(IS_LOGIN, isLogin);
+        XC.spPut(IS_LOGIN, isLogin);
 
     }
 

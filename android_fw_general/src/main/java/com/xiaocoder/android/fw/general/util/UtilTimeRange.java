@@ -1,6 +1,6 @@
 package com.xiaocoder.android.fw.general.util;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,12 +10,12 @@ public class UtilTimeRange {
 
         String timePoint = getCurrentTime();
         String timeQuantum = "01:13-23:9";
-        XCApp.i(m(timePoint, timeQuantum) + "");
+        XC.i(m(timePoint, timeQuantum) + "");
 
 
         timePoint = getCurrentTime();
         timeQuantum = "01:13-03:20";
-        XCApp.i(m(timePoint, timeQuantum) + "");
+        XC.i(m(timePoint, timeQuantum) + "");
     }
 
     /**
@@ -46,8 +46,8 @@ public class UtilTimeRange {
         try {
             String str_timePoint = timePoint;
             String str_timeQuantum = timeQuantum;
-            XCApp.i("当前时间点：" + timePoint);
-            XCApp.i("当前时间段：" + timeQuantum);
+            XC.i("当前时间点：" + timePoint);
+            XC.i("当前时间段：" + timeQuantum);
 
             String[] ss = str_timeQuantum.split("-");
             int length = ss.length;

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilScreen;
 import com.xiaocoder.views.pop.XCHintPopupWindow;
 import com.xiaocoder.views.pop.XCPhotoPopupWindow;
@@ -74,19 +75,19 @@ public class PopActivity extends MActivity {
         hintPopupWindow.setOnHintPopupItemClickListener(new XCHintPopupWindow.OnHintPopupItemClickListener() {
             @Override
             public void hint1(TextView textview) {
-                XCApp.dShortToast("1");
+                XC.dShortToast("1");
                 hintPopupWindow.dismiss();
             }
 
             @Override
             public void hint2(TextView textview) {
-                XCApp.dShortToast("2");
+                XC.dShortToast("2");
                 hintPopupWindow.dismiss();
             }
 
             @Override
             public void hint3(TextView textview) {
-                XCApp.dShortToast("3");
+                XC.dShortToast("3");
                 hintPopupWindow.dismiss();
             }
         });
@@ -94,25 +95,25 @@ public class PopActivity extends MActivity {
         photoPopupWindow.setOnPhotoPopupItemClickListener(new XCPhotoPopupWindow.onPhotoPopupItemClickListener() {
             @Override
             public void onPhotoUpload() {
-                XCApp.dShortToast("1");
+                XC.dShortToast("1");
                 photoPopupWindow.dismiss();
             }
 
             @Override
             public void onLocalAlbum() {
-                XCApp.dShortToast("2");
+                XC.dShortToast("2");
                 photoPopupWindow.dismiss();
             }
 
             @Override
             public void onCancel() {
-                XCApp.dShortToast("3");
+                XC.dShortToast("3");
                 photoPopupWindow.dismiss();
             }
 
             @Override
             public void onNetPrescription() {
-                XCApp.dShortToast("4");
+                XC.dShortToast("4");
                 photoPopupWindow.dismiss();
             }
         });

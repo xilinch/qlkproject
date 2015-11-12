@@ -1,0 +1,342 @@
+package com.xiaocoder.android.fw.general.tool;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Handler;
+import android.widget.ImageView;
+
+import com.xiaocoder.android.fw.general.application.XCBaseActivity;
+import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
+import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
+import com.xiaocoder.android.fw.general.function.helper.XCExecutorHelper;
+import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
+import com.xiaocoder.android.fw.general.http.XCHttpSend;
+import com.xiaocoder.android.fw.general.imageloader.XCIImageLoader;
+import com.xiaocoder.android.fw.general.io.XCLog;
+import com.xiaocoder.android.fw.general.io.XCSP;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+
+/**
+ * Created by xiaocoder on 2015/11/12.
+ * description: 开发工具集
+ */
+public class XC {
+    /**
+     * activity管理类
+     */
+    protected static XCActivityHelper activityHelper = XCActivityHelper.getInstance();
+    /**
+     * 可变线程池
+     */
+    protected static ExecutorService cacheThreadPool = XCExecutorHelper.getInstance().getCache();
+    /**
+     * 主线程中的handler
+     */
+    protected static Handler handler = new Handler();
+    /**
+     * http
+     */
+    protected static XCHttpSend httpSend = new XCHttpSend();
+
+
+    /**
+     * 以下的涉及到路径和文件名等配置的，在子类中初始化
+     */
+
+    /**
+     * 固定线程池（http中用到了这个解析model）-- 数量
+     */
+    protected static ExecutorService fixThreadPool;
+    /**
+     * 调度线程池 -- 数量
+     */
+    protected static ScheduledExecutorService scheduledThreadPool;
+    /**
+     * 日志 -- 路径 文件名
+     */
+    protected static XCLog log;
+    protected static XCSP sp;
+    /**
+     * 异常类 -- 路径
+     */
+    protected static XCCrashHandler crashHandler;
+    /**
+     * 图片加载 -- 缓存路径
+     */
+    protected static XCIImageLoader imageLoader;
+
+    public static XCActivityHelper getActivityHelper() {
+        return activityHelper;
+    }
+
+    public static void setActivityHelper(XCActivityHelper activityHelper) {
+        XC.activityHelper = activityHelper;
+    }
+
+    public static ExecutorService getCacheThreadPool() {
+        return cacheThreadPool;
+    }
+
+    public static void setCacheThreadPool(ExecutorService cacheThreadPool) {
+        XC.cacheThreadPool = cacheThreadPool;
+    }
+
+    public static Handler getHandler() {
+        return handler;
+    }
+
+    public static void setHandler(Handler handler) {
+        XC.handler = handler;
+    }
+
+    public static XCHttpSend getHttpSend() {
+        return httpSend;
+    }
+
+    public static void setHttpSend(XCHttpSend httpSend) {
+        XC.httpSend = httpSend;
+    }
+
+    public static ExecutorService getFixThreadPool() {
+        return fixThreadPool;
+    }
+
+    public static void setFixThreadPool(ExecutorService fixThreadPool) {
+        XC.fixThreadPool = fixThreadPool;
+    }
+
+    public static ScheduledExecutorService getScheduledThreadPool() {
+        return scheduledThreadPool;
+    }
+
+    public static void setScheduledThreadPool(ScheduledExecutorService scheduledThreadPool) {
+        XC.scheduledThreadPool = scheduledThreadPool;
+    }
+
+    public static XCLog getLog() {
+        return log;
+    }
+
+    public static void setLog(XCLog log) {
+        XC.log = log;
+    }
+
+    public static XCSP getSp() {
+        return sp;
+    }
+
+    public static void setSp(XCSP sp) {
+        XC.sp = sp;
+    }
+
+    public static XCCrashHandler getCrashHandler() {
+        return crashHandler;
+    }
+
+    public static void setCrashHandler(XCCrashHandler crashHandler) {
+        XC.crashHandler = crashHandler;
+    }
+
+    public static XCIImageLoader getImageLoader() {
+        return imageLoader;
+    }
+
+    public static void setImageLoader(XCIImageLoader imageLoader) {
+        XC.imageLoader = imageLoader;
+    }
+
+    public static void i(Object msg) {
+        log.i(msg);
+    }
+
+    public static void i(String tag, Object msg) {
+        log.i(tag, msg);
+    }
+
+    public static void dShortToast(Object msg) {
+        log.debugShortToast(msg);
+    }
+
+    public static void dLongToast(Object msg) {
+        log.debugLongToast(msg);
+    }
+
+    public static void tempPrint(String msg) {
+        log.tempPrint(msg);
+    }
+
+    public static void shortToast(Object msg) {
+        log.shortToast(msg);
+    }
+
+    public static void longToast(Object msg) {
+        log.longToast(msg);
+    }
+
+    public static void e(String hint, Exception e) {
+        log.e(hint, e);
+    }
+
+    public static void e(String hint) {
+        log.e(hint);
+    }
+
+    public static void e(Context context, String hint, Exception e) {
+        log.e(context, hint, e);
+    }
+
+    public static void e(Context context, String hint) {
+        log.e(context, hint);
+    }
+
+    public static void itemp(Object msg) {
+        log.i(XCConfig.TAG_TEMP, msg);
+    }
+
+    public static void itest(Object msg) {
+        log.i(XCConfig.TAG_TEST, msg);
+    }
+
+    public static void clearLog() {
+        log.clearLog();
+    }
+
+    public static void spPut(String key, boolean value) {
+        sp.putBoolean(key, value);
+    }
+
+    public static void spPut(String key, int value) {
+        sp.putInt(key, value);
+    }
+
+    public static void spPut(String key, long value) {
+        sp.putLong(key, value);
+    }
+
+    public static void spPut(String key, float value) {
+        sp.putFloat(key, value);
+    }
+
+    public static void spPut(String key, String value) {
+        sp.putString(key, value);
+    }
+
+    public static String spGet(String key, String default_value) {
+        return sp.getString(key, default_value);
+    }
+
+    public static int spGet(String key, int default_value) {
+        return sp.getInt(key, default_value);
+    }
+
+    public static long spGet(String key, long default_value) {
+        return sp.getLong(key, default_value);
+    }
+
+    public static boolean spGet(String key, boolean default_value) {
+        return sp.getBoolean(key, default_value);
+    }
+
+    public static float spGet(String key, float default_value) {
+        return sp.getFloat(key, default_value);
+    }
+
+    public static Map<String, ?> spGetAll() {
+        return sp.getAll();
+    }
+
+    /**
+     * 图片加载
+     */
+    public static void displayImage(String uri, ImageView imageView, Object... options) {
+        imageLoader.display(uri, imageView, options);
+    }
+
+    public static void displayImage(String uri, ImageView imageView) {
+        imageLoader.display(uri, imageView);
+    }
+
+    /**
+     * http请求
+     */
+    public static void resetNetingStatus() {
+        httpSend.resetNetingStatus();
+    }
+
+    public static void postAsyn(boolean needSecret, boolean isFrequentlyClick, boolean isShowDialog,
+                                String urlString, Map<String, Object> map, XCIResponseHandler res) {
+        httpSend.postAsyn(needSecret, isFrequentlyClick, isShowDialog, urlString, map, res);
+    }
+
+    public static void postAsyn(boolean isShowDialog, String urlString, Map<String, Object> map,
+                                XCIResponseHandler res) {
+        httpSend.postAsyn(true, true, isShowDialog, urlString, map, res);
+    }
+
+    public static void getAsyn(boolean needSecret, boolean isFrequentlyClick, boolean isShowDialog,
+                               String urlString, Map<String, Object> map, XCIResponseHandler res) {
+        httpSend.getAsyn(needSecret, isFrequentlyClick, isShowDialog, urlString, map, res);
+    }
+
+    public static void getAsyn(boolean isShowDialog, String urlString, Map<String, Object> map,
+                               XCIResponseHandler res) {
+        httpSend.getAsyn(true, true, isShowDialog, urlString, map, res);
+    }
+
+    public static void sendHttpRequest(XCIResponseHandler responseHandler) {
+        httpSend.sendAsyn(responseHandler);
+    }
+
+    /**
+     * activity
+     */
+    public static void addActivityToStack(Activity activity) {
+        activityHelper.addActivityToStack(activity);
+    }
+
+    public static void delActivityFromStack(Activity activity) {
+        activityHelper.delActivityFromStack(activity);
+    }
+
+    public static Activity getCurrentActivity() {
+        return activityHelper.getCurrentActivity();
+    }
+
+    public static boolean isActivityExist(Class<?> cls) {
+        return activityHelper.isActivityExist(cls);
+    }
+
+    public static List<Activity> getActivity(Class<?> cls) {
+        return activityHelper.getActivity(cls);
+    }
+
+    public static void finishActivity(Activity activity) {
+        activityHelper.finishActivity(activity);
+    }
+
+    public static void finishActivity(Class<?> cls) {
+        activityHelper.finishActivity(cls);
+    }
+
+    public static void finishCurrentActivity() {
+        activityHelper.finishCurrentActivity();
+    }
+
+    public static void finishAllActivity() {
+        activityHelper.finishAllActivity();
+    }
+
+    public static Activity toActivity(Class<? extends XCBaseActivity> main_activity_class) {
+        return activityHelper.toActivity(main_activity_class);
+    }
+
+    public static void appExit() {
+        activityHelper.appExit();
+    }
+
+}

@@ -2,11 +2,11 @@ package com.xiaocoder.middle.parse;
 
 import android.app.Activity;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.json.XCJsonParse;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 /**
  * 通用的jsonbean解析
@@ -32,7 +32,7 @@ public class MResponseHandlerBean<T extends MBean> extends MResponseHandler<T> {
     @Override
     public T parseWay(String responseStr , byte[] response_bytes) {
 
-        XCApp.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "-----parseWay()");
+        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "-----parseWay()");
 
         return XCJsonParse.getJsonParseData(responseStr, result_bean_class);
     }

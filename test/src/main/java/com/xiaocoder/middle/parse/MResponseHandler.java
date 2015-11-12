@@ -8,15 +8,16 @@ import android.view.KeyEvent;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.xiaocoder.android.fw.general.application.XCApp;
-import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.application.XCBaseActivity;
-import com.xiaocoder.views.dialog.XCBaseDialog;
-import com.xiaocoder.views.dialog.XCSystemHDialog;
+import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.http.XCResponseHandler;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilSystem;
 import com.xiaocoder.middle.function.MMainActivity;
+import com.xiaocoder.views.dialog.XCBaseDialog;
+import com.xiaocoder.views.dialog.XCSystemHDialog;
 
 /**
  * Created by xiaocoder on 2015/8/28.
@@ -49,7 +50,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
      */
     public boolean yourCompanyResultRule() {
 
-        XCApp.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanyResultRule()");
+        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanyResultRule()");
 
         /**
          * 统一规则 用MModel 或 MBean
@@ -59,12 +60,12 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
             if (((MIResponseInfo) result_bean).getCode() == 0) {
                 return true;
             } else {
-                XCApp.shortToast(((MIResponseInfo) result_bean).getMsg());
+                XC.shortToast(((MIResponseInfo) result_bean).getMsg());
                 return false;
             }
 
         } else {
-            XCApp.e("yourCompanyResultRule()中的返回结果不是IQlkResponseInfo, MModel 或 Qlkean 类型");
+            XC.e("yourCompanyResultRule()中的返回结果不是IQlkResponseInfo, MModel 或 Qlkean 类型");
             throw new RuntimeException("yourCompanyResultRule()中的返回结果不是IQlkResponseInfo ,MModel 或 Qlkean 类型");
         }
 
@@ -80,7 +81,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
     @Override
     public void yourCompanySecret(Object oParams, Object oClient, boolean needSecret) {
 
-        XCApp.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanySecret()--" + needSecret);
+        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanySecret()--" + needSecret);
 
         setHeaders(oClient);
 
@@ -88,20 +89,20 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
 
     }
 
-    private void secretParams(Object oParams, boolean needSecret) {
+    public void secretParams(Object oParams, boolean needSecret) {
         if (oParams instanceof RequestParams) {
             if (needSecret) {
                 RequestParams params = (RequestParams) oParams;
                 // TODO 补充加密的代码
 
-                XCApp.i(XCConfig.TAG_HTTP, "secret params-->" + params.toString());
+                XC.i(XCConfig.TAG_HTTP, "secret params-->" + params.toString());
             }
         } else {
             throw new RuntimeException("yourCompanySecret()---中传入的params不是RequestParams类型");
         }
     }
 
-    private void setHeaders(Object oClient) {
+    public void setHeaders(Object oClient) {
         if (oClient instanceof AsyncHttpClient) {
             // 添加header
             AsyncHttpClient client = (AsyncHttpClient) oClient;
@@ -118,7 +119,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
     public void closeHttpDialog() {
         if (httpDialog != null && httpDialog.isShowing()) {
             httpDialog.cancel();
-            XCApp.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---closeHttpDialog()");
+            XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---closeHttpDialog()");
         }
     }
 
@@ -139,7 +140,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
                 public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
                         closeHttpDialog();
-                        XCApp.resetNetingStatus();
+                        XC.resetNetingStatus();
                         if (!(activity instanceof MMainActivity)) {
                             ((XCBaseActivity) activity).myFinish();
                         }
@@ -149,6 +150,6 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
             });
         }
         httpDialog.show();
-        XCApp.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---showHttpDialog()");
+        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---showHttpDialog()");
     }
 }

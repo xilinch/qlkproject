@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.Utils;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.middle.parse.MResponseHandlerModel;
@@ -39,7 +40,7 @@ public class GridActivity extends MActivity {
     public void request() {
 
         HashMap<String,Object> params =  new HashMap<String,Object>();
-        XCApp.getAsyn(true, url, params,
+        XC.getAsyn(true, url, params,
                 new MResponseHandlerModel<TestModel>(null,this, TestModel.class) {
                     @Override
                     public void success(int code, Header[] headers, byte[] arg2) {
@@ -54,25 +55,25 @@ public class GridActivity extends MActivity {
 
                             List<TestModel.DataEntity.ResultEntity> result = data.getResult();
 
-                            XCApp.i(result_bean.toString());
-                            XCApp.i(result_bean.getMsg());
-                            XCApp.i(result_bean.getCode() + "");
-                            XCApp.i(result_bean.getData().getTotalCount() + "");
-                            XCApp.i(result_bean.getData().getTotalPages() + "");
+                            XC.i(result_bean.toString());
+                            XC.i(result_bean.getMsg());
+                            XC.i(result_bean.getCode() + "");
+                            XC.i(result_bean.getData().getTotalCount() + "");
+                            XC.i(result_bean.getData().getTotalPages() + "");
 
                             if (!Utils.isListBlank(result)) {
-                                XCApp.i(result_bean.getData().getResult().toString() + "");
-                                XCApp.i(result_bean.getData().getResult().get(0).getCommission() + "");
-                                XCApp.i(result_bean.getData().getResult().get(0).getImgUrl() + "");
-                                XCApp.i(result_bean.getData().getResult().get(0).getMarketPrice() + "");
-                                XCApp.i(result_bean.getData().getResult().get(0).getName() + "");
-                                XCApp.i(result_bean.getData().getResult().get(1).getRebate() + "");
-                                XCApp.i(result_bean.getData().getResult().get(2).getType() + "");
-                                XCApp.i(result_bean.getData().getResult().get(2).getShare().getBaseUrl() + "");
-                                XCApp.i(result_bean.getData().getResult().get(2).getShare().getContent() + "");
-                                XCApp.i(result_bean.getData().getResult().get(2).getShare().getTitle() + "");
-                                XCApp.i(result_bean.getData().getResult().get(2).getShare().getIcon() + "");
-                                XCApp.i(result_bean.getData().getResult().get(1).getImgUrl());
+                                XC.i(result_bean.getData().getResult().toString() + "");
+                                XC.i(result_bean.getData().getResult().get(0).getCommission() + "");
+                                XC.i(result_bean.getData().getResult().get(0).getImgUrl() + "");
+                                XC.i(result_bean.getData().getResult().get(0).getMarketPrice() + "");
+                                XC.i(result_bean.getData().getResult().get(0).getName() + "");
+                                XC.i(result_bean.getData().getResult().get(1).getRebate() + "");
+                                XC.i(result_bean.getData().getResult().get(2).getType() + "");
+                                XC.i(result_bean.getData().getResult().get(2).getShare().getBaseUrl() + "");
+                                XC.i(result_bean.getData().getResult().get(2).getShare().getContent() + "");
+                                XC.i(result_bean.getData().getResult().get(2).getShare().getTitle() + "");
+                                XC.i(result_bean.getData().getResult().get(2).getShare().getIcon() + "");
+                                XC.i(result_bean.getData().getResult().get(1).getImgUrl());
                             }
 
                             // grid_fragment.setTotalNum("100");// 或者setTotalPage也可以
@@ -161,8 +162,8 @@ public class GridActivity extends MActivity {
 
             @Override
             public void onAbsListItemClickListener(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                XCApp.dShortToast(arg2 + "");
-                XCApp.i(arg2 + "");
+                XC.dShortToast(arg2 + "");
+                XC.i(arg2 + "");
             }
         });
     }

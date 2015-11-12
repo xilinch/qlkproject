@@ -7,6 +7,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
 import com.xiaocoder.middle.MActivity;
 
@@ -83,7 +84,7 @@ public abstract class MBaiduMapActivity extends MActivity {
                 sb.append(location.getOperators());
             }
             address = location.getAddrStr();
-            XCApp.i(address);
+            XC.i(address);
             if (!UtilString.isBlank(address)) {
                 mLocationClient.stop();
                 if (addrListener != null) {

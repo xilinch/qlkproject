@@ -214,17 +214,17 @@ public class XCAsynImageLoader {
 		 */
 		if (isCacheToMemory) {
 			if (bitmaps.containsKey(url)) {
-				XCApp.i(url
+				XC.i(url
 						+ "----------------to get bitmap from memory");
 				Bitmap bitmap = bitmaps.get(url);
 				if (bitmap != null && !bitmap.isRecycled()) {
 					imageview.setImageBitmap(bitmap);
-					XCApp.i(url
+					XC.i(url
 							+ "---" + "get bitmap form memory success");
 					return; // 找到了就return;
 				}
 			}
-			XCApp.i(
+			XC.i(
 					url
 							+ "----------------get bitmap from memory faile ----bitmaps contains url ?--"
 							+ bitmaps.containsKey(url));
@@ -234,7 +234,7 @@ public class XCAsynImageLoader {
 		/**
 		 * 如果内存中没有再去本地找,前提是滑动停止的时候才会去局部加载
 		 */
-		XCApp.i(url
+		XC.i(url
 				+ "---isLoadingWhenSliding---" + isLoadingWhenSliding);
 		if (isLoadingWhenSliding && isGetFromLocalFile) {
 			// File file = new File(cacheToLocalDirectory, EncryptUtil.MD5(url)
@@ -242,13 +242,13 @@ public class XCAsynImageLoader {
 			File file = new File(cacheToLocalDirectory, url.substring(url
 					.lastIndexOf("/") + 1));
 			if (file.exists()) {
-				XCApp.i(url
+				XC.i(url
 						+ "----------------to get bitmap from local file");
 				threadservice.execute(new LoadLocalPictureRunnable(imageview,
 						file, url));
 				return;
 			}
-			XCApp.i(
+			XC.i(
 					"local file not exists");
 
 		} else {
@@ -260,7 +260,7 @@ public class XCAsynImageLoader {
 		 * 如果本地没有,就去网络下载
 		 */
 		if (isLoadingWhenSliding && isNetPicture && !url.startsWith("file:")) {
-			XCApp.i(url
+			XC.i(url
 					+ "----------------to get bitmap from net");
 			// 这里要用trim(),因为如果服务端是用println()发过来的,那么最后的url为url+"/r/n"
 			threadservice.execute(new LoadNetPictureRunnable(imageview, url
@@ -301,9 +301,9 @@ public class XCAsynImageLoader {
 							.decodeByteArray(data, 0, data.length, options);
 					// Bitmap.Config.ALPHA_8
 					// Bitmap.Config.ARGB_4444都不相同,这里的*4写固定了,按理是应该判断下的
-					XCApp.i(
+					XC.i(
 							"local file size------ " + data.length);
-					XCApp.i(
+					XC.i(
 							"local file size of bitmap------ "
 									+ options.outWidth * options.outHeight * 4);
 					int ratio = (int) Math
@@ -312,11 +312,11 @@ public class XCAsynImageLoader {
 									/ image_size_limit_by_byte));
 					if (ratio < 1) {
 						options.inSampleSize = 1;// 保持原有大小
-						XCApp.i(
+						XC.i(
 								1 + "----local file ---ratio");
 					} else {
 						options.inSampleSize = ratio;
-						XCApp.i(ratio
+						XC.i(ratio
 								+ "-----local file ---ratio");
 					}
 					options.inJustDecodeBounds = false;
@@ -324,13 +324,13 @@ public class XCAsynImageLoader {
 					bitmap = BitmapFactory.decodeByteArray(data, 0,
 							data.length, options);
 				} catch (Exception e) {
-					XCApp.e(context, "--XCImageLoader--LocalPictureRunnable()", e);
+					XC.e(context, "--XCImageLoader--LocalPictureRunnable()", e);
 					e.printStackTrace();
 					System.gc();
 					handler.post(new Runnable() {
 						@Override
 						public void run() {
-							XCApp.i(
+							XC.i(
 									"oom , so set the default_bitmap");
 							imageview.setImageDrawable(load_fail_drawable);
 						}
@@ -356,12 +356,12 @@ public class XCAsynImageLoader {
 				}
 
 				// 先检查内存中缓存的数量是否超过了规定,如果超过了规定,则删除最前面的1/5 -->这里用锁来判断,必须的
-				XCApp.i(
+				XC.i(
 						bitmaps.size() + "----bitmaps.size()");
 				if (isCacheToMemory && bitmaps.size() >= cacheToMemoryNum) {
 					synchronized (lock) {
 						if (bitmaps.size() >= cacheToMemoryNum) {
-							XCApp.i(
+							XC.i(
 									"bitmaps is full ,now delete 20% ");
 							int delete = cacheToMemoryNum / 5;
 							for (Iterator<Map.Entry<String, Bitmap>> it = bitmaps
@@ -383,7 +383,7 @@ public class XCAsynImageLoader {
 						&& !bitmaps.containsKey(url)) {
 					synchronized (lock) {
 						bitmaps.put(url, bitmap);
-						XCApp.i("add_to_memory",
+						XC.i("add_to_memory",
 								url
 										+ "--have added to bitmaps-------now the size fo bitmaps is "
 										+ bitmaps.size());
@@ -395,7 +395,7 @@ public class XCAsynImageLoader {
 						if (!bitmap.isRecycled()) {
 							imageview.setImageBitmap(bitmap);
 						}
-						XCApp.i(url
+						XC.i(url
 								+ "----------have got from local file");
 					}
 				});
@@ -446,29 +446,29 @@ public class XCAsynImageLoader {
 					try {
 						BitmapFactory.decodeByteArray(data, 0, data.length,
 								options);
-						XCApp.i(
+						XC.i(
 								"net file size------ " + data.length);
-						XCApp.i(
+						XC.i(
 								"net file size of bitmap------ "
 										+ options.outWidth * options.outHeight
 										* 4);
-						// XCApp.i(options.inDensity+"------------options.inDensity");
-						// XCApp.i(options.inScreenDensity+"------------options.inScreenDensity");
-						// XCApp.i(options.outWidth+"------------options.outWidth");
-						// XCApp.i(options.outHeight+"------------options.outHeight");
-						// XCApp.i(options.inTargetDensity+"------------options.inTargetDensity");
-						// XCApp.i(options.inDensity+"------------options.inDensity");
-						// XCApp.i(options.inPreferredConfig+"------------options.inPreferredConfig");
+						// XC.i(options.inDensity+"------------options.inDensity");
+						// XC.i(options.inScreenDensity+"------------options.inScreenDensity");
+						// XC.i(options.outWidth+"------------options.outWidth");
+						// XC.i(options.outHeight+"------------options.outHeight");
+						// XC.i(options.inTargetDensity+"------------options.inTargetDensity");
+						// XC.i(options.inDensity+"------------options.inDensity");
+						// XC.i(options.inPreferredConfig+"------------options.inPreferredConfig");
 						int ratio = (int) Math.round(Math.sqrt(options.outWidth
 								* options.outHeight * 4
 								/ image_size_limit_by_byte));
 						if (ratio < 1) {
 							options.inSampleSize = 1;// 保持原有大小
-							XCApp.i(
+							XC.i(
 									1 + "net file ---ratio");
 						} else {
 							options.inSampleSize = ratio;
-							XCApp.i(
+							XC.i(
 									ratio + "net file---ratio");
 						}
 						options.inJustDecodeBounds = false;
@@ -476,13 +476,13 @@ public class XCAsynImageLoader {
 						bitmap = BitmapFactory.decodeByteArray(data, 0,
 								data.length, options);
 					} catch (Exception e) {
-						XCApp.e(context, "--XCImageLoader--NetPictureRunnable", e);
+						XC.e(context, "--XCImageLoader--NetPictureRunnable", e);
 						e.printStackTrace();
 						System.gc();
 						handler.post(new Runnable() {
 							@Override
 							public void run() {
-								XCApp.i(
+								XC.i(
 
 										"oom , so set the default_bitmap");
 								imageview.setImageDrawable(load_fail_drawable);
@@ -506,7 +506,7 @@ public class XCAsynImageLoader {
 					if (isCacheToMemory && bitmaps.size() > cacheToMemoryNum) {
 						synchronized (lock) {
 							if (bitmaps.size() > cacheToMemoryNum) {
-								XCApp.i(
+								XC.i(
 
 										"bitmaps is full ,now delete 20% ");
 								int delete = cacheToMemoryNum / 5;
@@ -536,7 +536,7 @@ public class XCAsynImageLoader {
 					handler.post(new Runnable() {
 						@Override
 						public void run() {
-							XCApp.i(
+							XC.i(
 									"have got from net");
 							if (!bitmap.isRecycled()) {
 								imageview.setImageBitmap(bitmap);
@@ -627,7 +627,7 @@ public class XCAsynImageLoader {
 		try {
 			threadservice.shutdown();
 		} catch (Exception e) {
-			XCApp.e(context, "--XCImageLoader--closeThreadPool()", e);
+			XC.e(context, "--XCImageLoader--closeThreadPool()", e);
 		}
 		threadservice = null;
 	}

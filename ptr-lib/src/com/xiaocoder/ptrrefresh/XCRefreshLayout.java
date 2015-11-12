@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.function.listener.XCScrollListener;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
 
 import java.util.ArrayList;
@@ -378,7 +379,7 @@ abstract public class XCRefreshLayout extends FrameLayout implements View.OnClic
             // 当前页大于等于总页数时，即最后一页
             if (base_totalPage > 1) {
                 // 如果是空数据0页，或者只有1页，则不提示
-                XCApp.shortToast("已经是最后一页了");
+                XC.shortToast("已经是最后一页了");
             }
             return false;
         }

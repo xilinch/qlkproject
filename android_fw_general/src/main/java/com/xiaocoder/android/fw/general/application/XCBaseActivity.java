@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilInput;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.android_fw_general.R;
@@ -75,11 +76,11 @@ public abstract class XCBaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            XCApp.e(this, "回收后重新创建");
+            XC.e(this, "回收后重新创建");
         }
 
         // 添加到stack
-        XCApp.addActivityToStack(this);
+        XC.addActivityToStack(this);
         base_context = this;
         base_inflater = LayoutInflater.from(this);
         base_fm = getSupportFragmentManager();
@@ -107,12 +108,12 @@ public abstract class XCBaseActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
 
-        XCApp.resetNetingStatus();
+        XC.resetNetingStatus();
         isActivityDestroied = true;
         recoderNetFailHandler = null;
         super.onDestroy();
 
-        XCApp.delActivityFromStack(this);
+        XC.delActivityFromStack(this);
     }
 
     public void myFinish() {
@@ -262,11 +263,11 @@ public abstract class XCBaseActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        XCApp.i(this + "---onActivityResult");
+        XC.i(this + "---onActivityResult");
         List<Fragment> fragments = base_fm.getFragments();
         if (fragments != null) {
             for (Fragment fragment : fragments) {
-                XCApp.i(this + "onActivityResult---" + fragment.toString());
+                XC.i(this + "onActivityResult---" + fragment.toString());
                 fragment.onActivityResult(requestCode, resultCode, data);
             }
         }
@@ -296,7 +297,7 @@ public abstract class XCBaseActivity extends FragmentActivity {
      * 刷新上一次网络失败的请求
      */
     public void refreshNetFailHandler() {
-        XCApp.sendHttpRequest(recoderNetFailHandler);
+        XC.sendHttpRequest(recoderNetFailHandler);
     }
 
     public XCIResponseHandler getRecoderNetFailHandler() {

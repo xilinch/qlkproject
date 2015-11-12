@@ -71,13 +71,13 @@ public abstract class XCHttpResponseHandler<T extends XCJsonBean> extends AsyncH
 
     @Override
     public void onFailure(int code, Header[] headers, byte[] arg2, Throwable e) {
-        XCApp.i(XCConfig.TAG_HTTP, "onFailure----->status code " + code + "----e.toString()" + e.toString());
+        XC.i(XCConfig.TAG_HTTP, "onFailure----->status code " + code + "----e.toString()" + e.toString());
 
         e.printStackTrace();
 
         if (headers != null) {
             for (Header header : headers) {
-                XCApp.i(XCConfig.TAG_HTTP, "headers----->" + header.toString());
+                XC.i(XCConfig.TAG_HTTP, "headers----->" + header.toString());
             }
         }
 
@@ -90,17 +90,17 @@ public abstract class XCHttpResponseHandler<T extends XCJsonBean> extends AsyncH
             result_http.onNetFail(show_background_when_net_fail);
         } else {
             // 显示吐司
-            XCApp.shortToast("网络有误");
+            XC.shortToast("网络有误");
         }
     }
 
     @Override
     public void onSuccess(int code, Header[] headers, byte[] arg2) {
-        XCApp.i(XCConfig.TAG_HTTP, "onSuccess----->status code " + code);
+        XC.i(XCConfig.TAG_HTTP, "onSuccess----->status code " + code);
 
         if (headers != null) {
             for (Header header : headers) {
-                XCApp.i(XCConfig.TAG_HTTP, "headers----->" + header.toString());
+                XC.i(XCConfig.TAG_HTTP, "headers----->" + header.toString());
             }
         }
 
@@ -118,7 +118,7 @@ public abstract class XCHttpResponseHandler<T extends XCJsonBean> extends AsyncH
     @Override
     public void onFinish() {
         super.onFinish();
-        XCApp.i(XCConfig.TAG_HTTP, "onFinish");
+        XC.i(XCConfig.TAG_HTTP, "onFinish");
         XCApp.resetNetingStatus();
         closeHttpDialog();
     }
@@ -130,7 +130,7 @@ public abstract class XCHttpResponseHandler<T extends XCJsonBean> extends AsyncH
                 // 解析数据
                 String response = new String(response_bytes, "utf-8");
                 // 把json串打印到控制台
-                XCApp.i(XCConfig.TAG_HTTP, response);
+                XC.i(XCConfig.TAG_HTTP, response);
 
                 // 打印bean到控制台， 然后复制
                 XCJsonParse.json2Bean(response);
@@ -139,7 +139,7 @@ public abstract class XCHttpResponseHandler<T extends XCJsonBean> extends AsyncH
 
                 if (result_bean == null) {
                     result_boolean = false;
-                    XCApp.i(XCConfig.TAG_HTTP, "onSuccess , 解析数据失败");
+                    XC.i(XCConfig.TAG_HTTP, "onSuccess , 解析数据失败");
                     return;
                 }
 
@@ -148,7 +148,7 @@ public abstract class XCHttpResponseHandler<T extends XCJsonBean> extends AsyncH
         } catch (Exception e) {
             e.printStackTrace();
             result_boolean = false;
-            XCApp.shortToast("解析数据异常");
+            XC.shortToast("解析数据异常");
         }
     }
 

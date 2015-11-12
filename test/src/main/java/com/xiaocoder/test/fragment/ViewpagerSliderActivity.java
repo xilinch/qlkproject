@@ -3,6 +3,7 @@ package com.xiaocoder.test.fragment;
 import android.os.Bundle;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 import com.xiaocoder.viewpagerslider.XCViewPagerFragment;
@@ -47,7 +48,7 @@ public class ViewpagerSliderActivity extends MActivity {
         slider.setOnImageClickListener(new XCViewPagerFragment.OnImageClickListener() {
             @Override
             public void onImageClickListener(int position) {
-                XCApp.shortToast(position);
+                XC.shortToast(position);
             }
         });
     }

@@ -34,6 +34,7 @@ import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
@@ -94,7 +95,7 @@ public class ScanActivity extends MActivity implements Callback, View.OnClickLis
             @Override
             public void rightClick() {
                 // 打开手机中的相册
-                XCApp.shortToast("rightclick");
+                XC.shortToast("rightclick");
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT); // "android.intent.action.GET_CONTENT"
                 intent.setType("image/*");
                 Intent wrapperIntent = Intent.createChooser(intent, "选择本地二维码图片");
@@ -138,7 +139,7 @@ public class ScanActivity extends MActivity implements Callback, View.OnClickLis
                     intent.setData(content_url);
                     startActivity(intent);
                 } else {
-                    XCApp.shortToast("该链接有误");
+                    XC.shortToast("该链接有误");
                     onPause(); // 暂时实现连续扫描
                     try {
                         Thread.sleep(100);
@@ -193,7 +194,7 @@ public class ScanActivity extends MActivity implements Callback, View.OnClickLis
                         isFlashOpen = true;
                         v.setSelected(true);
                     } catch (Exception e) {
-                        XCApp.e(this, "", e);
+                        XC.e(this, "", e);
                     }
 
                 } else {
@@ -202,7 +203,7 @@ public class ScanActivity extends MActivity implements Callback, View.OnClickLis
                         isFlashOpen = false;
                         v.setSelected(false);
                     } catch (Exception e) {
-                        XCApp.e(this, "", e);
+                        XC.e(this, "", e);
                     }
                 }
                 end_timegap = start_timegap;
@@ -264,7 +265,7 @@ public class ScanActivity extends MActivity implements Callback, View.OnClickLis
                             }
                         }).start();
                     } else {
-                        XCApp.shortToast("解析数据有误");
+                        XC.shortToast("解析数据有误");
                     }
                     break;
             }

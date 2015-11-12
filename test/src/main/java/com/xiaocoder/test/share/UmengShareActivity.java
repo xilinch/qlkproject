@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.umeng.UtilUmeng;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
@@ -74,7 +75,7 @@ public class UmengShareActivity extends MActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                XCApp.shortToast("wxlogin");
+                XC.shortToast("wxlogin");
                 UtilUmeng.loginWX(umLogin, UmengShareActivity.this);
             }
         });

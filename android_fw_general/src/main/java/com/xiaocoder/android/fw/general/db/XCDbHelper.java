@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
 
 import java.lang.reflect.Constructor;
@@ -56,14 +57,14 @@ public class XCDbHelper extends SQLiteOpenHelper {
     public static XCDbHelper instanceHelper(Context context, Class<? extends XCDbHelper> dbHelper, String dbName,
                                             int version, String[] sqls) {
         try {
-            XCApp.i(XCConfig.TAG_DB, "dbHelper----instanceHelper()");
+            XC.i(XCConfig.TAG_DB, "dbHelper----instanceHelper()");
             Constructor constructor = dbHelper.getConstructor(Context.class, String.class, int.class, String[].class);
             Object o = constructor.newInstance(context, dbName, version, sqls);
-            XCApp.i(XCConfig.TAG_DB, o);
+            XC.i(XCConfig.TAG_DB, o);
             return (XCDbHelper) o;
         } catch (Exception e) {
             e.printStackTrace();
-            XCApp.e(context, "", e);
+            XC.e(context, "", e);
             return null;
         }
     }

@@ -9,6 +9,7 @@ import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.model.XCHttpModel;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.util.Map;
 
@@ -89,7 +90,7 @@ public class XCHttpSend {
     public void sendAsyn(XCIResponseHandler resHandler) {
 
         if (resHandler == null) {
-            XCApp.e(this + "---resHandler为null");
+            XC.e(this + "---resHandler为null");
             return;
         }
 
@@ -105,7 +106,7 @@ public class XCHttpSend {
 
             isNeting = true;
 
-            XCApp.i(XCConfig.TAG_HTTP_HANDLER, model);
+            XC.i(XCConfig.TAG_HTTP_HANDLER, model);
 
             showHttpDialog(resHandler, isShowDialog);
 
@@ -116,7 +117,7 @@ public class XCHttpSend {
             sendHttp(resHandler, httpType, urlString, params);
 
         } else {
-            XCApp.e(urlString + "--该请求无效，前一个请求还未返回");
+            XC.e(urlString + "--该请求无效，前一个请求还未返回");
         }
     }
 
@@ -127,10 +128,10 @@ public class XCHttpSend {
 
         if (resHandler instanceof AsyncHttpResponseHandler) {
             if (httpType == XCHttpType.GET) {
-                XCApp.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
+                XC.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
                 client.get(urlString, params, (AsyncHttpResponseHandler) resHandler);
             } else if (httpType == XCHttpType.POST) {
-                XCApp.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
+                XC.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
                 client.post(urlString, params, (AsyncHttpResponseHandler) resHandler);
             } else {
                 throw new RuntimeException("XCHttpAsyn中的XCHttpType类型不匹配");
@@ -158,7 +159,7 @@ public class XCHttpSend {
             Object value = item.getValue();
             params.put(key, value);
         }
-        XCApp.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
+        XC.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
         return params;
     }
 

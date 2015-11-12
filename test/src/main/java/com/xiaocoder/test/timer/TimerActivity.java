@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.function.helper.XCTimeHelper;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 
@@ -41,12 +42,12 @@ public class TimerActivity extends MActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                XCApp.i(count++);
+                XC.i(count++);
             }
 
             @Override
             public void onFinish() {
-                XCApp.i(XCConfig.TAG_TEST, count + "--finish");
+                XC.i(XCConfig.TAG_TEST, count + "--finish");
             }
         });
         timeHelper.start();
@@ -64,11 +65,11 @@ public class TimerActivity extends MActivity {
             @Override
             public void run() {
 
-                XCApp.getBase_handler().post(new Runnable() {
+                XC.getHandler().post(new Runnable() {
                     @Override
                     public void run() {
                         index = index + 1;
-                        XCApp.shortToast(index);
+                        XC.shortToast(index);
                     }
                 });
 
@@ -88,18 +89,18 @@ public class TimerActivity extends MActivity {
     ScheduledExecutorService scheduled;
 
     private void timer3() {
-        scheduled = XCApp.getBase_scheduled_threadpool();
+        scheduled = XC.getScheduledThreadPool();
         scheduled.schedule(new Runnable() {
             @Override
             public void run() {
-                XCApp.i("5秒后执行一次");
+                XC.i("5秒后执行一次");
             }
         }, 5, TimeUnit.SECONDS);
 
         scheduled.scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run() {
-                XCApp.i("2秒后开始执行，每隔6秒执行一次");
+                XC.i("2秒后开始执行，每隔6秒执行一次");
             }
         }, 2, 6, TimeUnit.SECONDS);
     }

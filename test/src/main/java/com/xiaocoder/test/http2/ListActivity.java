@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCSystemVDialog;
 import com.xiaocoder.android.fw.general.util.Utils;
@@ -40,7 +41,7 @@ public class ListActivity extends MActivity {
     public void request() {
 
         HashMap<String, Object> params = new HashMap<String, Object>();
-        XCApp.getAsyn(true, url, params,
+        XC.getAsyn(true, url, params,
                 new MResponseHandlerBean<TestBean>(this, this, TestBean.class) {
 
                     @Override
@@ -53,23 +54,23 @@ public class ListActivity extends MActivity {
                             }
 
                             TestBean testBean = result_bean.getModel(result_bean.data);
-                            XCApp.i(testBean);
+                            XC.i(testBean);
 
                             List<TestBean> testBeans = testBean.getList(testBean.result);
 
                             if (!Utils.isListBlank(testBeans)) {
                                 TestBean bean = testBeans.get(0);
 
-                                XCApp.i(bean.getString(bean.commission));
-                                XCApp.i(bean.getString(bean.imgUrl));
-                                XCApp.i(bean.getString(bean.marketPrice));
-                                XCApp.i(bean.getString(bean.rebate));
-                                XCApp.i(bean.getString(bean.proudctId));
+                                XC.i(bean.getString(bean.commission));
+                                XC.i(bean.getString(bean.imgUrl));
+                                XC.i(bean.getString(bean.marketPrice));
+                                XC.i(bean.getString(bean.rebate));
+                                XC.i(bean.getString(bean.proudctId));
 
-                                XCApp.i(bean.getModel(bean.share).toString());
-                                XCApp.i(bean.getModel(bean.share).getString(bean.title));
-                                XCApp.i(bean.getModel(bean.share).getString(bean.icon));
-                                XCApp.i(bean.getModel(bean.share).getString(bean.content));
+                                XC.i(bean.getModel(bean.share).toString());
+                                XC.i(bean.getModel(bean.share).getString(bean.title));
+                                XC.i(bean.getModel(bean.share).getString(bean.icon));
+                                XC.i(bean.getModel(bean.share).getString(bean.content));
                             }
 
                             // grid_fragment.setTotalNum("100");// 或者setTotalPage也可以
@@ -163,8 +164,8 @@ public class ListActivity extends MActivity {
 
             @Override
             public void onAbsListItemClickListener(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                XCApp.dShortToast(arg2 + "");
-                XCApp.i(arg2 + "");
+                XC.dShortToast(arg2 + "");
+                XC.i(arg2 + "");
             }
 
         });

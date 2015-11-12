@@ -40,6 +40,7 @@ import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilScreen;
 
 import java.io.IOException;
@@ -297,7 +298,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "down");
+                        XC.i(XCConfig.TAG_SYSTEM_OUT, "down");
                         down_time = System.currentTimeMillis();
                         first_move = true;
                         break;
@@ -315,7 +316,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
                         if (pop_volumn_or_brightness_changed != null) {
                             pop_volumn_or_brightness_changed.dismiss();
                         }
-                        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "up" + down_time);
+                        XC.i(XCConfig.TAG_SYSTEM_OUT, "up" + down_time);
                         break;
                     case MotionEvent.ACTION_MOVE: //  -->这里是可以双向滑动的
                         if (first_move) {
@@ -324,8 +325,8 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
                         }
                         y2 = event.getRawY();
 
-                        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "move_y1 is " + y1); // 每一个滑动过程中
-                        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "move_y2 is " + y2); // y2是变化的
+                        XC.i(XCConfig.TAG_SYSTEM_OUT, "move_y1 is " + y1); // 每一个滑动过程中
+                        XC.i(XCConfig.TAG_SYSTEM_OUT, "move_y2 is " + y2); // y2是变化的
 
                         float distance = y1 - y2;
                         if (distance > 0) {
@@ -351,7 +352,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
 //                                setBrightness(-1);
                                 count++;
                             }
-                            XCApp.i(XCConfig.TAG_SYSTEM_OUT, "left");
+                            XC.i(XCConfig.TAG_SYSTEM_OUT, "left");
                         }
 
                         if (event.getRawX() > screenWidth * 2 / 3.0) {
@@ -362,7 +363,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
 //                                setVolumn(-1);
                                 count++;
                             }
-                            XCApp.i(XCConfig.TAG_SYSTEM_OUT, "right");
+                            XC.i(XCConfig.TAG_SYSTEM_OUT, "right");
                         }
                     default:
                         break;
@@ -430,8 +431,8 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
             } else {
                 currentVolumn = 0;
             }
-            XCApp.i(XCConfig.TAG_SYSTEM_OUT, "current--" + currentVolumn);
-            XCApp.i(XCConfig.TAG_SYSTEM_OUT, "maxVolumn--" + maxVolumn);
+            XC.i(XCConfig.TAG_SYSTEM_OUT, "current--" + currentVolumn);
+            XC.i(XCConfig.TAG_SYSTEM_OUT, "maxVolumn--" + maxVolumn);
             volumn_or_brightness_imageview.setImageResource(R.drawable.xc_d_soundcontrol_normal);
             volumn_or_brightness_textview.setText((int) ((currentVolumn * 1.0 / maxVolumn) * 100) + "%");
 
@@ -467,7 +468,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
 //			((Activity)context).setVolumeControlStream(AudioManager.STREAM_MUSIC);
             addMediaPlayerListener();
             player.prepareAsync();
-            XCApp.i(XCConfig.TAG_SYSTEM_OUT, "player has been created");
+            XC.i(XCConfig.TAG_SYSTEM_OUT, "player has been created");
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (SecurityException e) {
@@ -598,14 +599,14 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
 //        if (popController != null && surface_view.isShown()) {
 //            popController.showAsDropDown(parent_of_surface_view, 0, -popHeight);
 //        }
-//        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "showController");
+//        XC.i(XCConfig.TAG_SYSTEM_OUT, "showController");
     }
 
     private void dismissControlPop() {
 //        if (popController != null && surface_view.isShown()) {
 //            popController.dismiss();
 //        }
-//        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "dismissController");
+//        XC.i(XCConfig.TAG_SYSTEM_OUT, "dismissController");
     }
 
     private boolean isPopShowing() {
@@ -635,7 +636,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
      */
     private int getCurrentPosition() {
         if (player != null && isPrepared) {
-            XCApp.i(XCConfig.TAG_SYSTEM_OUT, "getCurrentPosition");
+            XC.i(XCConfig.TAG_SYSTEM_OUT, "getCurrentPosition");
             return (int) player.getCurrentPosition();
         }
         return 0;
@@ -646,7 +647,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
     public boolean onError(MediaPlayer mp, int what, int extra) {
         //查看what extra 切换到软解码
 
-        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "onError");
+        XC.i(XCConfig.TAG_SYSTEM_OUT, "onError");
         release();
         new AlertDialog.Builder(context).setTitle("对不起")// 标题
                 .setMessage("您所播的视频格式不正确，播放已停止。")// 提示消息
@@ -674,7 +675,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
     // 小结:感觉onCompletion是播放全部结束标志,不管之前设置了什么都没用,只有真正播放结束了才会调用该监听方法
     @Override
     public void onCompletion(MediaPlayer mp) {
-        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "onCompletion" + "-isLoop" + isLoop);
+        XC.i(XCConfig.TAG_SYSTEM_OUT, "onCompletion" + "-isLoop" + isLoop);
         // 这里可以判断播放列表的下一个播放的视频是什么
         pause_or_start.setImageResource(R.drawable.xc_dd_play);// 按暂停后显示的图片
         isPause = true;//如果不设置,还会不断的发送更新消息
@@ -700,7 +701,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "onBufferingUpdate---" + percent);
+        XC.i(XCConfig.TAG_SYSTEM_OUT, "onBufferingUpdate---" + percent);
 //		isPrepared = false;
         currentBufferingPercentage = percent; // 记录缓冲的进度条
     }
@@ -714,7 +715,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
      */
     @Override
     public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "onVideoSizeChangedListener" + "--width" + width + "/height" + height);
+        XC.i(XCConfig.TAG_SYSTEM_OUT, "onVideoSizeChangedListener" + "--width" + width + "/height" + height);
         videoHeight = height;
         videoWidth = width;
     }
@@ -722,7 +723,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
     // 当播放完成后,如本地视频,设置了循环播放,那么再次播放的时候,不会经过onPrepared方法
     @Override
     public void onPrepared(MediaPlayer mp) {
-        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "OnPreparedListener" + "--the width of mediaplayer is " + player.getVideoWidth() + "--the height of mediaplayer is" + player.getVideoHeight());
+        XC.i(XCConfig.TAG_SYSTEM_OUT, "OnPreparedListener" + "--the width of mediaplayer is " + player.getVideoWidth() + "--the height of mediaplayer is" + player.getVideoHeight());
         // 缓冲好了后,设置seekbar的最大值
         int duration = (int) player.getDuration();
         time_seekbar.setMax(duration);
@@ -737,7 +738,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
         if (!isPause) {
             start();// 继续播放
         }
-        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "seekToWhenPreparedFinished" + seekToWhenPreparedFinished);
+        XC.i(XCConfig.TAG_SYSTEM_OUT, "seekToWhenPreparedFinished" + seekToWhenPreparedFinished);
     }
 
     public void saveState() {
@@ -769,7 +770,7 @@ public class XCVideoPlayerPop2 implements OnErrorListener, OnCompletionListener,
             player = null; // 没这句就报错,why?
             pause_or_start.setImageResource(R.drawable.xc_dd_play);// 按暂停后显示的图片
         }
-        XCApp.i(XCConfig.TAG_SYSTEM_OUT, "release");
+        XC.i(XCConfig.TAG_SYSTEM_OUT, "release");
     }
 
     private void pause() {

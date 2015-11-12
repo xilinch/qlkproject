@@ -3,6 +3,7 @@ package com.xiaocoder.test.dialogs;
 import android.os.Bundle;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.views.view.sx.SXProgressView;
 import com.xiaocoder.middle.MActivity;
@@ -36,7 +37,7 @@ public class ProgressViewActivity extends MActivity {
 
     private void showProgressView() {
         UtilView.setVisible(true, view);
-        XCApp.getBase_cache_threadpool().execute(new Runnable() {
+        XC.getCacheThreadPool().execute(new Runnable() {
             @Override
             public void run() {
 
@@ -46,7 +47,7 @@ public class ProgressViewActivity extends MActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    XCApp.getBase_handler().post(new Runnable() {
+                    XC.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
                             view.setProgress(view.getProgress() + 2);

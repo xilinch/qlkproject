@@ -3,6 +3,7 @@ package com.xiaocoder.android.fw.general.function.helper;
 import android.app.Activity;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -137,7 +138,7 @@ public class XCActivityHelper {
             while (true) {
 
                 if (stack.isEmpty()) {
-                    XCApp.e(this + "---toActivity()的stack为null");
+                    XC.e(this + "---toActivity()的stack为null");
                     return null;
                 }
 

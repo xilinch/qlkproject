@@ -5,6 +5,7 @@ import android.widget.RadioGroup;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.middle.function.MMainActivity;
 import com.xiaocoder.test.R;
@@ -49,19 +50,19 @@ public class SlidingMenuActivity2 extends MMainActivity implements RadioGroup.On
 
 
         if (checkedId == R.id.xc_id_tab_item1) {
-            XCApp.dShortToast("1-->" + base_recoder_selected_tab_item);
+            XC.dShortToast("1-->" + base_recoder_selected_tab_item);
             showFragmentByClass(SlidingFragment1.class, R.id.xc_id_model_content);
         } else if (checkedId == R.id.xc_id_tab_item2) {
-            XCApp.dShortToast("2-->" + base_recoder_selected_tab_item);
+            XC.dShortToast("2-->" + base_recoder_selected_tab_item);
             showFragmentByClass(SlidingFragment2.class, R.id.xc_id_model_content);
         } else if (checkedId == R.id.xc_id_tab_item3) {
-            XCApp.dShortToast("3-->" + base_recoder_selected_tab_item);
+            XC.dShortToast("3-->" + base_recoder_selected_tab_item);
             showFragmentByClass(SlidingFragment3.class, R.id.xc_id_model_content);
         } else if (checkedId == R.id.xc_id_tab_item4) {
-            XCApp.dShortToast("4-->" + base_recoder_selected_tab_item);
+            XC.dShortToast("4-->" + base_recoder_selected_tab_item);
             showFragmentByClass(SlidingFragment4.class, R.id.xc_id_model_content);
         } else if (checkedId == R.id.xc_id_tab_item5) {
-            XCApp.dShortToast("5-->" + base_recoder_selected_tab_item);
+            XC.dShortToast("5-->" + base_recoder_selected_tab_item);
             showFragmentByClass(SlidingFragment5.class, R.id.xc_id_model_content);
         }
 

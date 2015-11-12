@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.views.fragment.XCImagesZoomFragment;
 import com.xiaocoder.middle.MActivity;
@@ -52,8 +53,8 @@ public class ImagesZoomActivity extends MActivity {
                 // 这里用本地的图片模拟 ,
                 // ------------->补充这里即可--------->用你的图片加载方式加载--->url为图片的链接
                 //imageview.setImageResource(R.drawable.ic_launcher);
-                XCApp.i(url);
-                XCApp.displayImage(url, imageview);
+                XC.i(url);
+                XC.displayImage(url, imageview);
             }
         });
 
@@ -61,7 +62,7 @@ public class ImagesZoomActivity extends MActivity {
 
             @Override
             public void onImageClickListener(int position) {
-                XCApp.shortToast(position);
+                XC.shortToast(position);
             }
         });
     }

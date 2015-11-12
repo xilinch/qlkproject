@@ -2,10 +2,10 @@ package com.xiaocoder.test.view;
 
 import android.os.Bundle;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
-import com.xiaocoder.views.view.sx.SXPickerView;
+import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
+import com.xiaocoder.views.view.sx.SXPickerView;
 
 import java.util.ArrayList;
 
@@ -49,14 +49,14 @@ public class PickerViewActiviy extends MActivity {
         viewLeft.setOnSelectListener(new SXPickerView.onSelectListener() {
             @Override
             public void onSelect(String text) {
-                XCApp.shortToast(text);
+                XC.shortToast(text);
             }
         });
 
         viewRight.setOnSelectListener(new SXPickerView.onSelectListener() {
             @Override
             public void onSelect(String text) {
-                XCApp.shortToast(text);
+                XC.shortToast(text);
             }
         });
     }

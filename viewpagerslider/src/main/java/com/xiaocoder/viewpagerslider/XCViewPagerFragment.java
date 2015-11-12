@@ -15,6 +15,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
+import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.util.Map;
 
@@ -167,7 +168,7 @@ public class XCViewPagerFragment extends XCBaseFragment implements BaseSliderVie
             if (descriptionLayout != null) {
                 current.findViewById(R.id.description_layout).setVisibility(View.INVISIBLE);
             }
-            XCApp.i(TAG, "onPrepareCurrentItemLeaveScreen called");
+            XC.i(TAG, "onPrepareCurrentItemLeaveScreen called");
         }
 
         @Override
@@ -176,12 +177,12 @@ public class XCViewPagerFragment extends XCBaseFragment implements BaseSliderVie
             if (descriptionLayout != null) {
                 next.findViewById(R.id.description_layout).setVisibility(View.INVISIBLE);
             }
-            XCApp.i(TAG, "onPrepareNextItemShowInScreen called");
+            XC.i(TAG, "onPrepareNextItemShowInScreen called");
         }
 
         @Override
         public void onCurrentItemDisappear(View view) {
-            XCApp.i(TAG, "onCurrentItemDisappear called");
+            XC.i(TAG, "onCurrentItemDisappear called");
         }
 
         @Override
@@ -197,7 +198,7 @@ public class XCViewPagerFragment extends XCBaseFragment implements BaseSliderVie
 //            new BounceInAnimator().animate(descriptionLayout);
                 new StandUpAnimator().animate(descriptionLayout);
             }
-            XCApp.i(TAG, "onCurrentItemDisappear called");
+            XC.i(TAG, "onCurrentItemDisappear called");
         }
     }
 
