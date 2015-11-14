@@ -141,20 +141,21 @@ public class UtilString {
     }
 
     /**
-     * 获取url的文件名
-     *
-     * @param urlStr
-     * @return
+     * 获取文件名类型
      */
-    public static String getUrlFileName(String urlStr) {
-        urlStr = urlStr.substring(urlStr.lastIndexOf("/") + 1, urlStr.length());
-        return urlStr;
+    public static String getHttpFileType(String origin) {
+        int position = origin.lastIndexOf(".");
+        if (position > 0) {
+            origin = origin.substring(position + 1, origin.length());
+            return origin;
+        }
+        return "";
     }
 
     /**
      * 获取一个url的最后的文件名， 不带文件后缀名
      */
-    public static String getHttplastnameWithoutDotAndLine(String http_url) {
+    public static String getHttpLastNameWithoutDotAndLine(String http_url) {
         int last_dot_position = http_url.lastIndexOf(".");
 
         if (last_dot_position > 0) {
@@ -171,9 +172,6 @@ public class UtilString {
 
     /**
      * 获取真实存在的文件的后缀名
-     *
-     * @param file
-     * @return
      */
     public static String getFileSuffix(File file) {
         if (file != null && file.exists() && !file.isDirectory()) {
