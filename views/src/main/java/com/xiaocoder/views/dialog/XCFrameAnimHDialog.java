@@ -1,8 +1,10 @@
 package com.xiaocoder.views.dialog;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,7 +20,18 @@ import java.util.List;
 /**
  * Created by xiaocoder on 2015/7/15.
  */
-public class XCFrameAnimHDialog extends XCBaseDialog {
+public class XCFrameAnimHDialog extends Dialog {
+
+    public static int TRAN_STYLE = R.style.xc_s_dialog;
+
+    /*
+     * 如果这里使用getLayoutInflater(),则获取不到双圈的dialog，用LayoutInflater.from可以
+     */
+    public LayoutInflater dialogInflater;
+
+    public ViewGroup dialogLayout;
+
+    public Context mContext;
 
     public AnimationDrawable animDrawable;
 
@@ -30,14 +43,20 @@ public class XCFrameAnimHDialog extends XCBaseDialog {
     ImageView imageView;
     TextView textView;
 
-    public XCFrameAnimHDialog(Context context, int style, int anim_framelist_id) {
-        super(context, style);
+    public XCFrameAnimHDialog(Context context, int anim_framelist_id) {
+        super(context, TRAN_STYLE);
+        dialogInflater = LayoutInflater.from(context);
+        mContext = context;
+
         this.anim_framelist_id = anim_framelist_id;
         initDialog();
     }
 
-    public XCFrameAnimHDialog(Context context, int style, List<Integer> imageIdList, int timeGap) {
-        super(context, style);
+    public XCFrameAnimHDialog(Context context, List<Integer> imageIdList, int timeGap) {
+        super(context, TRAN_STYLE);
+        dialogInflater = LayoutInflater.from(context);
+        mContext = context;
+
         this.imageIdList = imageIdList;
         this.timeGap = timeGap;
         initDialog();

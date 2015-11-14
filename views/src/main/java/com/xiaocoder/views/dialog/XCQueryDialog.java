@@ -1,6 +1,8 @@
 package com.xiaocoder.views.dialog;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -14,7 +16,17 @@ import com.xiaocoder.views.R;
 /**
  * Created by xiaocoder on 2015/7/15.
  */
-public class XCQueryDialog extends XCBaseDialog {
+public class XCQueryDialog extends Dialog {
+    public static int TRAN_STYLE = R.style.xc_s_dialog;
+
+    /*
+     * 如果这里使用getLayoutInflater(),则获取不到双圈的dialog，用LayoutInflater.from可以
+     */
+    public LayoutInflater dialogInflater;
+
+    public ViewGroup dialogLayout;
+
+    public Context mContext;
 
     TextView title_textview;
 
@@ -47,8 +59,11 @@ public class XCQueryDialog extends XCBaseDialog {
     public OnDecideListener onDecideListener;
 
 
-    public XCQueryDialog(Context context, int style, String title_content, String content, String[] decide, boolean isCanceledOnTouchOutside) {
-        super(context, style);
+    public XCQueryDialog(Context context, String title_content, String content, String[] decide, boolean isCanceledOnTouchOutside) {
+        super(context, TRAN_STYLE);
+        dialogInflater = LayoutInflater.from(context);
+        mContext = context;
+
         initDialog(title_content, content, decide, isCanceledOnTouchOutside);
     }
 

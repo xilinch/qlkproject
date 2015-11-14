@@ -1,7 +1,9 @@
 package com.xiaocoder.views.dialog;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -11,10 +13,23 @@ import android.widget.TextView;
 import com.xiaocoder.views.R;
 
 
-public class SKShareDialog extends XCBaseDialog {
+public class SKShareDialog extends Dialog {
 
-    public SKShareDialog(Context context, int style) {
-        super(context, style);
+    public static int TRAN_STYLE = R.style.xc_s_dialog;
+
+    /*
+     * 如果这里使用getLayoutInflater(),则获取不到双圈的dialog，用LayoutInflater.from可以
+     */
+    public LayoutInflater dialogInflater;
+
+    public ViewGroup dialogLayout;
+
+    public Context mContext;
+
+    public SKShareDialog(Context context) {
+        super(context, TRAN_STYLE);
+        dialogInflater = LayoutInflater.from(context);
+        mContext = context;
         initDialog();
     }
 

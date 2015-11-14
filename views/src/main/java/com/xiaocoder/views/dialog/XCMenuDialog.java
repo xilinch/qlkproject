@@ -1,6 +1,8 @@
 package com.xiaocoder.views.dialog;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -16,7 +18,17 @@ import java.util.ArrayList;
 /**
  * Created by xiaocoder on 2015/7/15.
  */
-public class XCMenuDialog extends XCBaseDialog implements View.OnClickListener {
+public class XCMenuDialog extends Dialog implements View.OnClickListener {
+    public static int TRAN_STYLE = R.style.xc_s_dialog;
+
+    /*
+     * 如果这里使用getLayoutInflater(),则获取不到双圈的dialog，用LayoutInflater.from可以
+     */
+    public LayoutInflater dialogInflater;
+
+    public ViewGroup dialogLayout;
+
+    public Context mContext;
 
     public interface OnDialogItemClickListener {
         void onClick(View view);
@@ -34,8 +46,11 @@ public class XCMenuDialog extends XCBaseDialog implements View.OnClickListener {
         return items;
     }
 
-    public XCMenuDialog(Context context, int style, String title, String[] items) {
-        super(context, style);
+    public XCMenuDialog(Context context, String title, String[] items) {
+        super(context, TRAN_STYLE);
+        dialogInflater = LayoutInflater.from(context);
+        mContext = context;
+
         initDialog(title, items);
     }
 

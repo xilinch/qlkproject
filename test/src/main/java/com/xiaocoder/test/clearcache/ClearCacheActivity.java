@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCRotateDialog;
 import com.xiaocoder.android.fw.general.function.helper.XCCleanCacheHelper;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
@@ -32,7 +31,7 @@ public class ClearCacheActivity extends MActivity {
         clear = getViewById(R.id.clear);
         // 如果没有该dir会创建再返回，有则返回该dir
         dir = XCIOAndroid.createDirInAndroid(getApplicationContext(), MConfig.APP_ROOT);
-        helper = new XCCleanCacheHelper(new XCRotateDialog(this, XCBaseDialog.TRAN_STYLE, R.drawable.xc_d_dialog_loading_round));
+        helper = new XCCleanCacheHelper(new XCRotateDialog(this,  R.drawable.xc_d_dialog_loading_round));
     }
 
     @Override

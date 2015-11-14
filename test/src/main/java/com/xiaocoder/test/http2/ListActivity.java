@@ -9,9 +9,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
-import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCSystemVDialog;
 import com.xiaocoder.android.fw.general.util.Utils;
 import com.xiaocoder.middle.MActivity;
@@ -92,7 +90,7 @@ public class ListActivity extends MActivity {
                     // 更换一个dialog样式
                     @Override
                     public void showHttpDialog() {
-                        setDialogAndShow(new XCSystemVDialog(activity, XCBaseDialog.TRAN_STYLE));
+                        setDialogAndShow(new XCSystemVDialog(activity));
                     }
                 });
     }

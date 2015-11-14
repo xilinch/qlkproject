@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.SKShareDialog;
-import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimHDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimVDialog;
 import com.xiaocoder.views.dialog.XCMenuDialog;
@@ -111,12 +109,12 @@ public class DialogActivity3 extends MActivity {
     }
 
     private void showRotateDialog() {
-        rotate_dialog = new XCRotateDialog(this, XCBaseDialog.TRAN_STYLE, R.drawable.ic_launcher);
+        rotate_dialog = new XCRotateDialog(this,  R.drawable.ic_launcher);
         rotate_dialog.show();
     }
 
     private void showMenuDialog() {
-        menu_dialog = new XCMenuDialog(this, XCBaseDialog.TRAN_STYLE, "菜单", new String[]{"android", "ios", "java", "swift", "c"});
+        menu_dialog = new XCMenuDialog(this,  "菜单", new String[]{"android", "ios", "java", "swift", "c"});
         menu_dialog.setOnDialogItemClickListener(new XCMenuDialog.OnDialogItemClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +125,7 @@ public class DialogActivity3 extends MActivity {
     }
 
     private void showQueryDialog() {
-        query_dialog = new XCQueryDialog(this, XCBaseDialog.TRAN_STYLE, "温馨提示", "123456\r\n123456789", new String[]{"取消", "确定"}, false);
+        query_dialog = new XCQueryDialog(this,  "温馨提示", "123456\r\n123456789", new String[]{"取消", "确定"}, false);
         query_dialog.setOnDecideListener(new XCQueryDialog.OnDecideListener() {
             @Override
             public void confirm() {
@@ -145,7 +143,7 @@ public class DialogActivity3 extends MActivity {
     }
 
     public void showShareDialog() {
-        share_dialog = new SKShareDialog(this, XCBaseDialog.TRAN_STYLE);
+        share_dialog = new SKShareDialog(this);
         share_dialog.setOnShareListener(new SKShareDialog.OnShareListener() {
             @Override
             public void shareFriend() {
@@ -167,19 +165,19 @@ public class DialogActivity3 extends MActivity {
     }
 
     public void showSystemHDialog() {
-        systemh_dialog = new XCSystemHDialog(this, XCBaseDialog.TRAN_STYLE);
+        systemh_dialog = new XCSystemHDialog(this);
         systemh_dialog.getTextview().setText("loading..");
         systemh_dialog.show();
     }
 
     public void showSystemVDialog() {
-        systemv_dialog = new XCSystemVDialog(this, XCBaseDialog.TRAN_STYLE);
+        systemv_dialog = new XCSystemVDialog(this);
         systemv_dialog.getTextview().setText("loading..");
         systemv_dialog.show();
     }
 
     private void showAnimFrameHDialog() {
-        animframe_dialog_h = new XCFrameAnimHDialog(this, XCBaseDialog.TRAN_STYLE, R.drawable.anim_framelist);
+        animframe_dialog_h = new XCFrameAnimHDialog(this, R.drawable.anim_framelist);
         animframe_dialog_h.getTextView().setText("lala");
         animframe_dialog_h.show();
     }
@@ -188,7 +186,7 @@ public class DialogActivity3 extends MActivity {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(R.drawable.test_1);
         list.add(R.drawable.test_2);
-        animframe_dialog_v = new XCFrameAnimVDialog(this, XCBaseDialog.TRAN_STYLE, list, 150);
+        animframe_dialog_v = new XCFrameAnimVDialog(this, list, 150);
         animframe_dialog_v.getTextView().setText("test");
         animframe_dialog_v.show();
     }

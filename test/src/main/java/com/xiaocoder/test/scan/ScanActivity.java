@@ -33,9 +33,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
-import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment.RightListener;
@@ -115,7 +113,7 @@ public class ScanActivity extends MActivity implements Callback, View.OnClickLis
         xc_id_capture_flash_imageview.setOnClickListener(this);
 
         // 自定义dialog
-        dialog = new XCQueryDialog(this, XCBaseDialog.TRAN_STYLE, getResources().getString(R.string.dialog_query_title_scanresult),
+        dialog = new XCQueryDialog(this,  getResources().getString(R.string.dialog_query_title_scanresult),
                 null, getResources().getStringArray(R.array.dialog_query_decide_scanresult), false);
         result_textview = dialog.getContent_textview();
         dialog.setOnDecideListener(new XCQueryDialog.OnDecideListener() {

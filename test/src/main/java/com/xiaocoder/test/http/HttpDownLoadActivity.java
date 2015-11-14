@@ -5,15 +5,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
-import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.android.fw.general.function.runnable.XCDownloadRunnable;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.util.UtilString;
 import com.xiaocoder.middle.MActivity;
-import com.xiaocoder.middle.MApp;
 import com.xiaocoder.middle.MConfig;
 import com.xiaocoder.middle.parse.MBean;
 import com.xiaocoder.middle.parse.MResponseHandlerBean;
@@ -48,7 +45,7 @@ public class HttpDownLoadActivity extends MActivity {
                 // 这里拿到的result_bean是一个XCJsonBean对象
                 if (result_boolean) {
 
-                    dialog = new XCQueryDialog(HttpDownLoadActivity.this, XCBaseDialog.TRAN_STYLE, "下载提示", "该文件大小为" + UtilString.getFileSizeByUnit(arg2.length), new String[]{"下载", "取消"}, false);
+                    dialog = new XCQueryDialog(HttpDownLoadActivity.this,  "下载提示", "该文件大小为" + UtilString.getFileSizeByUnit(arg2.length), new String[]{"下载", "取消"}, false);
 
                     dialog.setOnDecideListener(new XCQueryDialog.OnDecideListener() {
                         @Override

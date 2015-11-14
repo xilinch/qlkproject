@@ -16,7 +16,6 @@ import com.xiaocoder.android.fw.general.http.XCResponseHandler;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilSystem;
 import com.xiaocoder.middle.function.MMainActivity;
-import com.xiaocoder.views.dialog.XCBaseDialog;
 import com.xiaocoder.views.dialog.XCSystemHDialog;
 
 /**
@@ -128,7 +127,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
      */
     @Override
     public void showHttpDialog() {
-        setDialogAndShow(new XCSystemHDialog(activity, XCBaseDialog.TRAN_STYLE));
+        setDialogAndShow(new XCSystemHDialog(activity));
     }
 
     public final void setDialogAndShow(Dialog yourDialog) {

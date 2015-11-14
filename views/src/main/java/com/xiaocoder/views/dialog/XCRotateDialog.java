@@ -1,6 +1,8 @@
 package com.xiaocoder.views.dialog;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,7 +18,17 @@ import com.xiaocoder.views.R;
  * version: 1.2.0
  * description:
  */
-public class XCRotateDialog extends XCBaseDialog {
+public class XCRotateDialog extends Dialog {
+    public static int TRAN_STYLE = R.style.xc_s_dialog;
+
+    /*
+     * 如果这里使用getLayoutInflater(),则获取不到双圈的dialog，用LayoutInflater.from可以
+     */
+    public LayoutInflater dialogInflater;
+
+    public ViewGroup dialogLayout;
+
+    public Context mContext;
 
     ImageView imageview;
     Animation anim;
@@ -34,8 +46,11 @@ public class XCRotateDialog extends XCBaseDialog {
         return anim;
     }
 
-    public XCRotateDialog(Context context, int theme, int imageViewId) {
-        super(context, theme);
+    public XCRotateDialog(Context context, int imageViewId) {
+        super(context, TRAN_STYLE);
+        dialogInflater = LayoutInflater.from(context);
+        mContext = context;
+
         initDialog(imageViewId);
     }
 
