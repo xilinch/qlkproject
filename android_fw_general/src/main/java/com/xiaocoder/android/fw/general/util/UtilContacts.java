@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.xiaocoder.android.fw.general.model.XCContactModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,5 +55,13 @@ public class UtilContacts {
         }
         cursor.close();
         return contact_list;
+    }
+
+    public static class XCContactModel implements Serializable {
+        private static final long serialVersionUID = -4958724953107486903L;
+
+        public String name;
+        public String phone_number;
+        public String email;
     }
 }
