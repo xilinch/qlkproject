@@ -48,7 +48,7 @@ public class MApp extends XCApp {
      * sp保存文件名 与 模式
      */
     private void initSp() {
-        XC.setSp(new XCSP(getApplicationContext(), MConfig.SP_FILE, Context.MODE_APPEND));// Context.MODE_MULTI_PROCESS
+        XCSP.initXCSP(getApplicationContext(), MConfig.SP_FILE, Context.MODE_APPEND);// Context.MODE_MULTI_PROCESS
     }
 
     /**

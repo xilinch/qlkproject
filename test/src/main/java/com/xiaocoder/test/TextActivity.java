@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
+import com.xiaocoder.android.fw.general.io.XCSP;
 import com.xiaocoder.android.fw.general.js_xl_encryption.aes.AesEncryptAndDecrypt;
 import com.xiaocoder.android.fw.general.js_xl_encryption.des.DesEncryptAndDecrypt;
 import com.xiaocoder.android.fw.general.js_xl_encryption.md5.UtilMd5;
@@ -42,6 +43,11 @@ public class TextActivity extends MActivity {
         test1();
         test2();
         test3();
+        test4();
+    }
+
+    private void test4() {
+        XCSP.SP
     }
 
     private void test3() {

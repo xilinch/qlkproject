@@ -1,16 +1,12 @@
 package com.xiaocoder.android.fw.general.tool;
 
-import android.content.Context;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.function.helper.XCExecutorHelper;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.http.XCHttpSend;
 import com.xiaocoder.android.fw.general.imageloader.XCIImageLoader;
-import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.io.XCSP;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -47,7 +43,6 @@ public class XC {
      */
     protected static ScheduledExecutorService scheduledThreadPool;
 
-    protected static XCSP sp;
     /**
      * 图片加载 -- 缓存路径
      */
@@ -93,65 +88,12 @@ public class XC {
         XC.scheduledThreadPool = scheduledThreadPool;
     }
 
-
-    public static XCSP getSp() {
-        return sp;
-    }
-
-    public static void setSp(XCSP sp) {
-        XC.sp = sp;
-    }
-
     public static XCIImageLoader getImageLoader() {
         return imageLoader;
     }
 
     public static void setImageLoader(XCIImageLoader imageLoader) {
         XC.imageLoader = imageLoader;
-    }
-
-    public static void spPut(String key, boolean value) {
-        sp.putBoolean(key, value);
-    }
-
-    public static void spPut(String key, int value) {
-        sp.putInt(key, value);
-    }
-
-    public static void spPut(String key, long value) {
-        sp.putLong(key, value);
-    }
-
-    public static void spPut(String key, float value) {
-        sp.putFloat(key, value);
-    }
-
-    public static void spPut(String key, String value) {
-        sp.putString(key, value);
-    }
-
-    public static String spGet(String key, String default_value) {
-        return sp.getString(key, default_value);
-    }
-
-    public static int spGet(String key, int default_value) {
-        return sp.getInt(key, default_value);
-    }
-
-    public static long spGet(String key, long default_value) {
-        return sp.getLong(key, default_value);
-    }
-
-    public static boolean spGet(String key, boolean default_value) {
-        return sp.getBoolean(key, default_value);
-    }
-
-    public static float spGet(String key, float default_value) {
-        return sp.getFloat(key, default_value);
-    }
-
-    public static Map<String, ?> spGetAll() {
-        return sp.getAll();
     }
 
     /**

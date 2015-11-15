@@ -248,7 +248,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 
                 FileOutputStream fos = new FileOutputStream(XCIOAndroid.createFileInSDCard(mCrashDir, fileName));
-                fos.write(sb.toString().getBytes());
+                fos.write(("crash=" + fileName + XCIO.LINE_SEPARATOR + sb.toString()).getBytes());
                 fos.close();
 
             }
