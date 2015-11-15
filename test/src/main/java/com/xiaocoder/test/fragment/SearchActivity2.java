@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.views.fragment.XCSearchRecordFragment;
 import com.xiaocoder.views.fragment.XCTitleSearchFragment;
 import com.xiaocoder.android.fw.general.model.XCSearchRecordModel;
@@ -66,14 +65,14 @@ public class SearchActivity2 extends MActivity {
                             if (!is_key_board_show) {
                                 hideFragment(record_fragment);
                             }
-                            XC.shortToast("change");
+                            XCLog.shortToast("change");
                         }
                     });
 
                     record_fragment.setOnRecordItemClickListener(new XCSearchRecordFragment.OnRecordItemClickListener() {
                         @Override
                         public void onRecordItemClickListener(XCSearchRecordModel model, String key_word, int position) {
-                            XC.shortToast(key_word);
+                            XCLog.shortToast(key_word);
                             UtilActivity.myStartActivity(SearchActivity2.this, WebActivity.class);
                         }
                     });
@@ -91,7 +90,7 @@ public class SearchActivity2 extends MActivity {
         title_fragment.setOnPressSearchlistener(new XCTitleSearchFragment.OnKeyBoardSearchListener() {
             @Override
             public void searchKeyDown(String key_word) {
-                XC.shortToast(key_word);
+                XCLog.shortToast(key_word);
                 UtilActivity.myStartActivity(SearchActivity2.this, WebActivity.class);
             }
         });

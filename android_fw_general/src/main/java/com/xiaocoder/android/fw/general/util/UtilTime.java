@@ -1,6 +1,6 @@
 package com.xiaocoder.android.fw.general.util;
 
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,8 +48,8 @@ public class UtilTime {
         try {
             String str_timePoint = timePoint;
             String str_timeQuantum = timeQuantum;
-            XC.i("当前时间点：" + timePoint);
-            XC.i("当前时间段：" + timeQuantum);
+            XCLog.i("当前时间点：" + timePoint);
+            XCLog.i("当前时间段：" + timeQuantum);
 
             String[] ss = str_timeQuantum.split("-");
             int length = ss.length;

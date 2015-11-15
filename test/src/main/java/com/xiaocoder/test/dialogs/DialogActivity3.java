@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.SKShareDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimHDialog;
@@ -119,7 +120,7 @@ public class DialogActivity3 extends MActivity {
         menu_dialog.setOnDialogItemClickListener(new XCMenuDialog.OnDialogItemClickListener() {
             @Override
             public void onClick(View view,String hint) {
-                XC.shortToast(((Button) view).getText());
+                XCLog.shortToast(((Button) view).getText());
             }
         });
         menu_dialog.show();
@@ -130,13 +131,13 @@ public class DialogActivity3 extends MActivity {
         query_dialog.setOnDecideListener(new XCQueryDialog.OnDecideListener() {
             @Override
             public void confirm() {
-                XC.dShortToast("confirm");
+                XCLog.dShortToast("confirm");
                 query_dialog.dismiss();
             }
 
             @Override
             public void cancle() {
-                XC.dShortToast("cancle");
+                XCLog.dShortToast("cancle");
                 query_dialog.dismiss();
             }
         });

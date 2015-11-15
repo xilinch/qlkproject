@@ -16,6 +16,7 @@ import com.xiaocoder.android.fw.general.db.XCExceptionDao;
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.model.XCExceptionModel;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
@@ -87,7 +88,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
             if (context instanceof XCApp) {
                 application = (XCApp) context;
             } else {
-                XC.e("XLCrashHandler的init方法中传入的application不是xcapp");
+                XCLog.e("XLCrashHandler的init方法中传入的application不是xcapp");
                 throw new RuntimeException("XLCrashHandler的init方法中传入的application不是xcapp");
             }
 
@@ -161,7 +162,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
      */
     public void toLogcat(String hint) {
 
-        XC.e(hint);
+        XCLog.e(hint);
 
     }
 
@@ -199,7 +200,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
             }
         } catch (NameNotFoundException e) {
             e.printStackTrace();
-            XC.e("an error occured when collect package info--", e);
+            XCLog.e("an error occured when collect package info--", e);
         }
 
         Field[] fields = Build.class.getDeclaredFields();
@@ -207,10 +208,10 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
             try {
                 field.setAccessible(true);
                 infos.put(field.getName(), field.get(null).toString());
-                XC.i(field.getName() + " : " + field.get(null));
+                XCLog.i(field.getName() + " : " + field.get(null));
             } catch (Exception e) {
                 e.printStackTrace();
-                XC.e("an error occured when collect crash info--", e);
+                XCLog.e("an error occured when collect crash info--", e);
             }
         }
     }
@@ -255,7 +256,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
             return "crash=" + fileName + XCIO.LINE_SEPARATOR + sb.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            XC.e("an error occured while writing file--", e);
+            XCLog.e("an error occured while writing file--", e);
         }
 
         return sb.toString();

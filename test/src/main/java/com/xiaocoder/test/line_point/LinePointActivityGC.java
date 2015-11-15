@@ -3,7 +3,7 @@ package com.xiaocoder.test.line_point;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.middle.MActivity;
@@ -34,23 +34,23 @@ public class LinePointActivityGC extends MActivity {
                     e.printStackTrace();
                 }
 
-                XC.i(test_imageview);
-                XC.i(i);
+                XCLog.i(test_imageview);
+                XCLog.i(i);
 
                 System.gc();
                 System.gc();
 
-                XC.i(fragment.toString());
-                XC.i(fragment.getActivity());
+                XCLog.i(fragment.toString());
+                XCLog.i(fragment.getActivity());
 
                 XC.getHandler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        XC.i("handler --" + test_imageview); // 不为空
-                        XC.i("handler --" + i);// 不为空
+                        XCLog.i("handler --" + test_imageview); // 不为空
+                        XCLog.i("handler --" + i);// 不为空
 
-                        XC.i("handler --" + fragment.toString()); // 不为空
-                        XC.i("handler --" + fragment.getActivity()); // 空
+                        XCLog.i("handler --" + fragment.toString()); // 不为空
+                        XCLog.i("handler --" + fragment.getActivity()); // 空
                     }
                 }, 10000);
 
@@ -67,6 +67,6 @@ public class LinePointActivityGC extends MActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        XC.i(this+"--onDestroy()");
+        XCLog.i(this+"--onDestroy()");
     }
 }

@@ -55,9 +55,10 @@ public class MApp extends XCApp {
      * log(可以打印日志到控制台和文件中) 与 toast
      */
     private void initLog() {
-        XC.setLog(new XCLog(getApplicationContext(),
+
+        XCLog.initXCLog(getApplicationContext(),
                 MConfig.IS_DTOAST, MConfig.IS_OUTPUT, MConfig.IS_PRINTLOG,
-                MConfig.APP_ROOT, MConfig.LOG_FILE, MConfig.TEMP_PRINT_FILE, XCConfig.ENCODING_UTF8));
+                MConfig.APP_ROOT, MConfig.LOG_FILE, MConfig.TEMP_PRINT_FILE, XCConfig.ENCODING_UTF8);
     }
 
     /**
@@ -120,12 +121,12 @@ public class MApp extends XCApp {
     }
 
     public void test(XCExceptionModel model, XCExceptionDao dao) {
-        XC.itemp(dao.queryCount());
-        XC.itemp(dao.queryUploadFail(XCExceptionDao.SORT_ASC));
-        XC.itemp(dao.queryUploadFail(XCExceptionDao.SORT_DESC));
-        XC.itemp(dao.queryUploadSuccess(XCExceptionDao.SORT_DESC));
-        XC.itemp(dao.queryAll(XCExceptionDao.SORT_DESC));
-        XC.itemp(dao.queryUnique(model.getUniqueId()));
+        XCLog.itemp(dao.queryCount());
+        XCLog.itemp(dao.queryUploadFail(XCExceptionDao.SORT_ASC));
+        XCLog.itemp(dao.queryUploadFail(XCExceptionDao.SORT_DESC));
+        XCLog.itemp(dao.queryUploadSuccess(XCExceptionDao.SORT_DESC));
+        XCLog.itemp(dao.queryAll(XCExceptionDao.SORT_DESC));
+        XCLog.itemp(dao.queryUnique(model.getUniqueId()));
     }
 
 }

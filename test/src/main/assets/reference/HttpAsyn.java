@@ -37,10 +37,10 @@ public class XCHttpAsyn {
     }
 
     public static void getAsyn(boolean needSecret, boolean isAllowConcurrent, boolean isShowDialog, Context context, String urlString, RequestParams params, XCHttpResponseHandler res) {
-        XC.i(XCConfig.TAG_HTTP, params.toString());
+        XCLog.i(XCConfig.TAG_HTTP, params.toString());
         if (isAllowConcurrent || !isNeting) {
             isNeting = true;
-            XC.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
+            XCLog.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
             res.setContext(context);
             res.yourCompanySecret(params, client, needSecret);
             if (isShowDialog) {
@@ -59,10 +59,10 @@ public class XCHttpAsyn {
     }
 
     public static void postAsyn(boolean needSecret, boolean isAllowConcurrent, boolean isShowDialog, XCBaseActivity context, String urlString, RequestParams params, XCHttpResponseHandler res) {
-        XC.i(XCConfig.TAG_HTTP, params.toString());
+        XCLog.i(XCConfig.TAG_HTTP, params.toString());
         if (isAllowConcurrent || !isNeting) {
             isNeting = true;
-            XC.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
+            XCLog.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
             res.setContext(context);
             res.yourCompanySecret(params, client, needSecret);
             if (isShowDialog) {

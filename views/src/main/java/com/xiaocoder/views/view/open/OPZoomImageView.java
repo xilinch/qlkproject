@@ -17,6 +17,7 @@ import android.widget.Scroller;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 
@@ -323,9 +324,9 @@ public class OPZoomImageView extends ImageView {
             float scaleX = mWidgetRect.width() / mImgRect.width();
             float scaleY = mWidgetRect.height() / mImgRect.height();
 
-            XC.i(XCConfig.TAG_TEMP, mWidgetRect.width() + "---mWidgetRect.width()," + mImgRect.width() + "-- mImgRect.width()");
-            XC.i(XCConfig.TAG_TEMP, mWidgetRect.height() + "---mWidgetRect.height()," + mImgRect.height() + "-- mImgRect.height()");
-            XC.i(XCConfig.TAG_TEMP, scaleX + "---scaleX," + scaleY + "-- scaleY");
+            XCLog.i(XCConfig.TAG_TEMP, mWidgetRect.width() + "---mWidgetRect.width()," + mImgRect.width() + "-- mImgRect.width()");
+            XCLog.i(XCConfig.TAG_TEMP, mWidgetRect.height() + "---mWidgetRect.height()," + mImgRect.height() + "-- mImgRect.height()");
+            XCLog.i(XCConfig.TAG_TEMP, scaleX + "---scaleX," + scaleY + "-- scaleY");
 
             // mScale = scaleX > scaleY ? scaleX : scaleY;
             // 修改 by xiaocoder

@@ -2,7 +2,7 @@ package com.xiaocoder.android.fw.general.function.helper;
 
 import android.app.Activity;
 
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -131,7 +131,7 @@ public class XCActivityHelper {
             while (true) {
 
                 if (stack.isEmpty()) {
-                    XC.e("---toActivity()的stack为null");
+                    XCLog.e("---toActivity()的stack为null");
                     return null;
                 }
 

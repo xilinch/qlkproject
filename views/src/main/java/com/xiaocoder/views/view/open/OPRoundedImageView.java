@@ -26,7 +26,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.views.R;
 
 /**
@@ -208,7 +208,7 @@ public class OPRoundedImageView extends ImageView {
             try {
                 d = rsrc.getDrawable(mResource);
             } catch (NotFoundException e) {
-                XC.e("SelectableRoundedImageView---Unable to find resource: " + mResource, e);
+                XCLog.e("SelectableRoundedImageView---Unable to find resource: " + mResource, e);
                 // Don't try again.
                 mResource = 0;
             }
@@ -388,7 +388,7 @@ public class OPRoundedImageView extends ImageView {
                 if (bm != null) {
                     return new SelectableRoundedCornerDrawable(bm, r);
                 } else {
-                    XC.e("SelectableRoundedImageView---Failed to create bitmap from drawable!");
+                    XCLog.e("SelectableRoundedImageView---Failed to create bitmap from drawable!");
                 }
             }
             return drawable;

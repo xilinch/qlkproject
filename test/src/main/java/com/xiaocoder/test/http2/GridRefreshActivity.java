@@ -10,7 +10,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.ptrrefresh.XCIRefreshHandler;

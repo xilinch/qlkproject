@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 /**
@@ -51,12 +51,12 @@ public class UtilInput {
         if (versionInt > 10) {
             ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             clipboardManager.setText(textView.getText().toString().trim());
-            XC.shortToast("已经复制到粘贴板");
+            XCLog.shortToast("已经复制到粘贴板");
 
         } else {
             android.text.ClipboardManager clipboardManager1 = (android.text.ClipboardManager) context.getSystemService(context.CLIPBOARD_SERVICE);
             clipboardManager1.setText(textView.getText().toString().trim());
-            XC.shortToast("已经复制到粘贴板");
+            XCLog.shortToast("已经复制到粘贴板");
         }
     }
 

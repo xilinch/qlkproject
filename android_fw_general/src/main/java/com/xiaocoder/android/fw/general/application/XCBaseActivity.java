@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilInput;
 import com.xiaocoder.android.fw.general.util.UtilView;
@@ -77,7 +78,7 @@ public abstract class XCBaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            XC.e(this, "回收后重新创建");
+            XCLog.e(this, "回收后重新创建");
         }
 
         // 添加到stack
@@ -264,11 +265,11 @@ public abstract class XCBaseActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        XC.i(this + "---onActivityResult");
+        XCLog.i(this + "---onActivityResult");
         List<Fragment> fragments = base_fm.getFragments();
         if (fragments != null) {
             for (Fragment fragment : fragments) {
-                XC.i(this + "onActivityResult---" + fragment.toString());
+                XCLog.i(this + "onActivityResult---" + fragment.toString());
                 fragment.onActivityResult(requestCode, resultCode, data);
             }
         }

@@ -2,15 +2,14 @@ package com.xiaocoder.test;
 
 import android.os.Bundle;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.js_xl_encryption.aes.AesEncryptAndDecrypt;
 import com.xiaocoder.android.fw.general.js_xl_encryption.des.DesEncryptAndDecrypt;
 import com.xiaocoder.android.fw.general.js_xl_encryption.md5.UtilMd5;
 import com.xiaocoder.android.fw.general.json.XCJsonBean;
 import com.xiaocoder.android.fw.general.json.XCJsonParse;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
 import com.xiaocoder.android.fw.general.util.UtilSystem;
 import com.xiaocoder.middle.MActivity;
@@ -46,7 +45,7 @@ public class TextActivity extends MActivity {
     }
 
     private void test3() {
-        XC.i("UUID----" + UUID.randomUUID() + "----" + UUID.randomUUID().toString().length());
+        XCLog.i("UUID----" + UUID.randomUUID() + "----" + UUID.randomUUID().toString().length());
 
         LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>();
         queue.add("a");
@@ -55,22 +54,22 @@ public class TextActivity extends MActivity {
         queue.add("d");
 
 //        try {
-//            XC.i(queue.take()); // a  //take 类似 poll remove
-//            XC.i(queue.take()); // b
-//            XC.i(queue.take()); // c
-//            XC.i(queue.take()); // d
+//            XCLog.i(queue.take()); // a  //take 类似 poll remove
+//            XCLog.i(queue.take()); // b
+//            XCLog.i(queue.take()); // c
+//            XCLog.i(queue.take()); // d
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
 
-            XC.i(queue.peek()); //a  // peek 类似 element
-            XC.i(queue.peek()); //a
-            XC.i(queue.peek()); //a
-            XC.i(queue.peek()); //a
+            XCLog.i(queue.peek()); //a  // peek 类似 element
+            XCLog.i(queue.peek()); //a
+            XCLog.i(queue.peek()); //a
+            XCLog.i(queue.peek()); //a
             queue.remove("a");
-            XC.i(queue.peek()); //b
-            XC.i(queue.peek()); //b
-            XC.i(queue.peek()); //b
+            XCLog.i(queue.peek()); //b
+            XCLog.i(queue.peek()); //b
+            XCLog.i(queue.peek()); //b
 
 
     }
@@ -78,19 +77,19 @@ public class TextActivity extends MActivity {
     private void test2() {
         String one = UtilMd5.MD5Encode("123456abc");
         String two = UtilMd5.MD5Encode2("123456abc");
-        XC.i(one);
-        XC.i(two);
-        XC.i(UtilString.equalsStr(one, two)); // true
+        XCLog.i(one);
+        XCLog.i(two);
+        XCLog.i(UtilString.equalsStr(one, two)); // true
 
         String des_close = DesEncryptAndDecrypt.encodeRequestStr("today is haha 123");
         String des_open = DesEncryptAndDecrypt.decodeResponseStr(des_close);
-        XC.i(des_close);
-        XC.i(des_open);
+        XCLog.i(des_close);
+        XCLog.i(des_open);
 
         String aes_close = AesEncryptAndDecrypt.encodeRequestStr("computer 123 macpro");
         String aes_open = AesEncryptAndDecrypt.decodeResponseStr(aes_close);
-        XC.i(aes_close);
-        XC.i(aes_open);
+        XCLog.i(aes_close);
+        XCLog.i(aes_open);
     }
 
     private void test1() {
@@ -108,28 +107,28 @@ public class TextActivity extends MActivity {
         List beans = bean.getListList("data", new ArrayList<ArrayList>());
 
         try {
-            XC.i(beans.toString());
-            XC.i(beans.get(0).toString());
+            XCLog.i(beans.toString());
+            XCLog.i(beans.get(0).toString());
             if (beans.get(0) instanceof List) {
-                XC.i("List");
+                XCLog.i("List");
             } else if (beans.get(0) instanceof String[]) {
-                XC.i("string[]");
+                XCLog.i("string[]");
             } else {
-                XC.i(beans.get(0).getClass().toString());
+                XCLog.i(beans.get(0).getClass().toString());
 
                 JSONArray array = (JSONArray) beans.get(0);
                 int count = array.length();
                 for (int i = 0; i < count; i++) {
-                    XC.i((String) array.get(i));
+                    XCLog.i((String) array.get(i));
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            XC.e(this.toString() + "---exception");
+            XCLog.e(this.toString() + "---exception");
         }
 
-        XC.i(UtilSystem.getDeviceId(this) + "--------------deviceId");
+        XCLog.i(UtilSystem.getDeviceId(this) + "--------------deviceId");
     }
 
     // 设置监听

@@ -3,7 +3,6 @@ package com.xiaocoder.test.imageloader;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;

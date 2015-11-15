@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -104,28 +104,28 @@ public class UtilNet {
             int currentNetWork = ni.getType();
             if (currentNetWork == ConnectivityManager.TYPE_MOBILE) {
                 if (ni.getExtraInfo() != null && ni.getExtraInfo().equals("cmwap")) {
-                    XC.i("", "当前网络为:cmwap网络");
+                    XCLog.i("", "当前网络为:cmwap网络");
                     return TYPE_MOBILE_CMWAP;
                 } else if (ni.getExtraInfo() != null && ni.getExtraInfo().equals("uniwap")) {
-                    XC.i("", "当前网络为:uniwap网络");
+                    XCLog.i("", "当前网络为:uniwap网络");
                     return TYPE_MOBILE_CMWAP;
                 } else if (ni.getExtraInfo() != null && ni.getExtraInfo().equals("3gwap")) {
-                    XC.i("", "当前网络为:3gwap网络");
+                    XCLog.i("", "当前网络为:3gwap网络");
                     return TYPE_MOBILE_CMWAP;
                 } else if (ni.getExtraInfo() != null && ni.getExtraInfo().contains("ctwap")) {
-                    XC.i("", "当前网络为:" + ni.getExtraInfo() + "网络");
+                    XCLog.i("", "当前网络为:" + ni.getExtraInfo() + "网络");
                     return TYPE_MOBILE_CTWAP;
                 } else {
-                    XC.i("", "当前网络为:net网络");
+                    XCLog.i("", "当前网络为:net网络");
                     return TYPE_MOBILE_CMNET;
                 }
 
             } else if (currentNetWork == ConnectivityManager.TYPE_WIFI) {
-                XC.i("", "当前网络为:WIFI网络");
+                XCLog.i("", "当前网络为:WIFI网络");
                 return TYPE_WIFI;
             }
         }
-        XC.i("", "当前网络为:不是我们考虑的网络");
+        XCLog.i("", "当前网络为:不是我们考虑的网络");
         return TYPE_NO;
     }
 

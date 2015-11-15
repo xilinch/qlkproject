@@ -1,7 +1,7 @@
 package com.xiaocoder.android.fw.general.util;
 
 import com.xiaocoder.android.fw.general.application.XCConfig;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,9 +21,9 @@ public class UtilDate {
         long curTime = System.currentTimeMillis() / (long) 1000;
         long time = curTime - timeStamp;
 
-        XC.i(XCConfig.TAG_SYSTEM_OUT, time + "---时间差");
-        XC.i(XCConfig.TAG_SYSTEM_OUT, curTime + "---当前时间");
-        XC.i(XCConfig.TAG_SYSTEM_OUT, timeStamp + "---timeStamp");
+        XCLog.i(XCConfig.TAG_SYSTEM_OUT, time + "---时间差");
+        XCLog.i(XCConfig.TAG_SYSTEM_OUT, curTime + "---当前时间");
+        XCLog.i(XCConfig.TAG_SYSTEM_OUT, timeStamp + "---timeStamp");
 
         if (time < 60 && time >= 0) {
             return "刚刚";
@@ -439,9 +439,9 @@ public class UtilDate {
         long curTime = System.currentTimeMillis() ;
         long time = curTime - charttime;
 
-        XC.i(XCConfig.TAG_SYSTEM_OUT, time + "---时间差" + time/ 1000/ 60 + "分钟");
-        XC.i(XCConfig.TAG_SYSTEM_OUT, curTime + "---当前时间" + format(new Date(curTime), FORMAT_LONG_CN_1));
-        XC.i(XCConfig.TAG_SYSTEM_OUT, charttime + "---chartTime" + format(new Date(charttime), FORMAT_LONG_CN_1));
+        XCLog.i(XCConfig.TAG_SYSTEM_OUT, time + "---时间差" + time/ 1000/ 60 + "分钟");
+        XCLog.i(XCConfig.TAG_SYSTEM_OUT, curTime + "---当前时间" + format(new Date(curTime), FORMAT_LONG_CN_1));
+        XCLog.i(XCConfig.TAG_SYSTEM_OUT, charttime + "---chartTime" + format(new Date(charttime), FORMAT_LONG_CN_1));
 
         if (time < 120 * 1000 && time >= 0) {
             return "刚刚";

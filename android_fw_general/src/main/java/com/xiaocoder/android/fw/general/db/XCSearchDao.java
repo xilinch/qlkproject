@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.model.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
@@ -63,7 +64,7 @@ public class XCSearchDao {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = createContentValue(bean);
         long id = db.insert(mTabName, _ID, values);
-        XC.i(XCConfig.TAG_DB, "插入的记录的id是: " + id);
+        XCLog.i(XCConfig.TAG_DB, "插入的记录的id是: " + id);
         db.close();
     }
 
@@ -71,7 +72,7 @@ public class XCSearchDao {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         int rows = db.delete(mTabName, TIME + "=?",
                 new String[]{time + ""});
-        XC.i(XCConfig.TAG_DB, "delete_unique-->" + rows + "行");
+        XCLog.i(XCConfig.TAG_DB, "delete_unique-->" + rows + "行");
         db.close();
         return rows;
     }
@@ -80,7 +81,7 @@ public class XCSearchDao {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         int rows = db.delete(mTabName, KEY_WORD + "=?",
                 new String[]{keyword + ""});
-        XC.i(XCConfig.TAG_DB, "delete-->" + rows + "行");
+        XCLog.i(XCConfig.TAG_DB, "delete-->" + rows + "行");
         db.close();
         return rows;
     }
@@ -98,7 +99,7 @@ public class XCSearchDao {
         ContentValues values = createContentValue(bean);
         int rows = db.update(mTabName, values, TIME + "=?",
                 new String[]{bean.getTime() + ""});
-        XC.i(XCConfig.TAG_DB, "更新了" + rows + "行");
+        XCLog.i(XCConfig.TAG_DB, "更新了" + rows + "行");
         db.close();
         return rows;
     }

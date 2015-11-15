@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilCollections;
 import com.xiaocoder.middle.MActivity;
@@ -54,25 +55,25 @@ public class GridActivity extends MActivity {
 
                             List<TestModel.DataEntity.ResultEntity> result = data.getResult();
 
-                            XC.i(result_bean.toString());
-                            XC.i(result_bean.getMsg());
-                            XC.i(result_bean.getCode() + "");
-                            XC.i(result_bean.getData().getTotalCount() + "");
-                            XC.i(result_bean.getData().getTotalPages() + "");
+                            XCLog.i(result_bean.toString());
+                            XCLog.i(result_bean.getMsg());
+                            XCLog.i(result_bean.getCode() + "");
+                            XCLog.i(result_bean.getData().getTotalCount() + "");
+                            XCLog.i(result_bean.getData().getTotalPages() + "");
 
                             if (!UtilCollections.isListBlank(result)) {
-                                XC.i(result_bean.getData().getResult().toString() + "");
-                                XC.i(result_bean.getData().getResult().get(0).getCommission() + "");
-                                XC.i(result_bean.getData().getResult().get(0).getImgUrl() + "");
-                                XC.i(result_bean.getData().getResult().get(0).getMarketPrice() + "");
-                                XC.i(result_bean.getData().getResult().get(0).getName() + "");
-                                XC.i(result_bean.getData().getResult().get(1).getRebate() + "");
-                                XC.i(result_bean.getData().getResult().get(2).getType() + "");
-                                XC.i(result_bean.getData().getResult().get(2).getShare().getBaseUrl() + "");
-                                XC.i(result_bean.getData().getResult().get(2).getShare().getContent() + "");
-                                XC.i(result_bean.getData().getResult().get(2).getShare().getTitle() + "");
-                                XC.i(result_bean.getData().getResult().get(2).getShare().getIcon() + "");
-                                XC.i(result_bean.getData().getResult().get(1).getImgUrl());
+                                XCLog.i(result_bean.getData().getResult().toString() + "");
+                                XCLog.i(result_bean.getData().getResult().get(0).getCommission() + "");
+                                XCLog.i(result_bean.getData().getResult().get(0).getImgUrl() + "");
+                                XCLog.i(result_bean.getData().getResult().get(0).getMarketPrice() + "");
+                                XCLog.i(result_bean.getData().getResult().get(0).getName() + "");
+                                XCLog.i(result_bean.getData().getResult().get(1).getRebate() + "");
+                                XCLog.i(result_bean.getData().getResult().get(2).getType() + "");
+                                XCLog.i(result_bean.getData().getResult().get(2).getShare().getBaseUrl() + "");
+                                XCLog.i(result_bean.getData().getResult().get(2).getShare().getContent() + "");
+                                XCLog.i(result_bean.getData().getResult().get(2).getShare().getTitle() + "");
+                                XCLog.i(result_bean.getData().getResult().get(2).getShare().getIcon() + "");
+                                XCLog.i(result_bean.getData().getResult().get(1).getImgUrl());
                             }
 
                             // grid_fragment.setTotalNum("100");// 或者setTotalPage也可以
@@ -161,8 +162,8 @@ public class GridActivity extends MActivity {
 
             @Override
             public void onAbsListItemClickListener(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                XC.dShortToast(arg2 + "");
-                XC.i(arg2 + "");
+                XCLog.dShortToast(arg2 + "");
+                XCLog.i(arg2 + "");
             }
         });
     }

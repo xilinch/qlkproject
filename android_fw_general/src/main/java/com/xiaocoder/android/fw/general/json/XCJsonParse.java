@@ -2,6 +2,7 @@ package com.xiaocoder.android.fw.general.json;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
 
@@ -41,7 +42,7 @@ public class XCJsonParse {
     public static <T extends XCJsonBean> List<T> getJsonListParseData(String json, Class<T> beanClass) {
         List<T> list = new ArrayList<T>();
         try {
-            XC.tempPrint(json);
+            XCLog.tempPrint(json);
             JSONArray array = new JSONArray(json);
             int size = array.length();
             for (int i = 0; i < size; i++) {
@@ -95,15 +96,15 @@ public class XCJsonParse {
                         }
                     }
                 } else {
-                    if (XC.getLog().is_OutPut()) {
+                    if (XCLog.is_output) {
                         if (o instanceof Boolean) {
-                            XC.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is boolean");
+                            XCLog.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is boolean");
                         } else if (o instanceof Integer) {
-                            XC.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is Integer");
+                            XCLog.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is Integer");
                         } else if (o instanceof String) {
-                            XC.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is String");
+                            XCLog.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is String");
                         } else {
-                            XC.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is Else Type");
+                            XCLog.i(XCConfig.TAG_JSON_TYPE, key.toString() + "---->" + o.toString() + "----is Else Type");
                         }
                     }
                     result.add(key, o);
@@ -117,7 +118,7 @@ public class XCJsonParse {
     // 创建假bean类 , 这里只是打印出来了而已,然后复制粘贴字段
     public static void json2Bean(String json) {
 
-        if (XC.getLog().is_OutPut() && json != null) {
+        if (XCLog.is_output && json != null) {
             LinkedHashSet<String> set = new LinkedHashSet<String>();
             json = json.replace("\"", "");
             json = json.replace(" ", "");
@@ -174,7 +175,7 @@ public class XCJsonParse {
 
             builder.append("}");
 
-            XC.i(XCConfig.TAG_JSON_BEAN, builder.toString());
+            XCLog.i(XCConfig.TAG_JSON_BEAN, builder.toString());
         }
     }
 }

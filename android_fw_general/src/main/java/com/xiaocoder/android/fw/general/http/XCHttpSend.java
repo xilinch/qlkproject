@@ -8,6 +8,7 @@ import com.loopj.android.http.RequestParams;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.model.XCHttpModel;
 import com.xiaocoder.android.fw.general.tool.XC;
 
@@ -90,7 +91,7 @@ public class XCHttpSend {
     public void sendAsyn(XCIResponseHandler resHandler) {
 
         if (resHandler == null) {
-            XC.e(this + "---resHandler为null");
+            XCLog.e(this + "---resHandler为null");
             return;
         }
 
@@ -106,7 +107,7 @@ public class XCHttpSend {
 
             isNeting = true;
 
-            XC.i(XCConfig.TAG_HTTP_HANDLER, model);
+            XCLog.i(XCConfig.TAG_HTTP_HANDLER, model);
 
             showHttpDialog(resHandler, isShowDialog);
 
@@ -117,7 +118,7 @@ public class XCHttpSend {
             sendHttp(resHandler, httpType, urlString, params);
 
         } else {
-            XC.e(urlString + "--该请求无效，前一个请求还未返回");
+            XCLog.e(urlString + "--该请求无效，前一个请求还未返回");
         }
     }
 
@@ -128,10 +129,10 @@ public class XCHttpSend {
 
         if (resHandler instanceof AsyncHttpResponseHandler) {
             if (httpType == XCHttpType.GET) {
-                XC.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
+                XCLog.i(XCConfig.TAG_HTTP, urlString + "------>get http url");
                 client.get(urlString, params, (AsyncHttpResponseHandler) resHandler);
             } else if (httpType == XCHttpType.POST) {
-                XC.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
+                XCLog.i(XCConfig.TAG_HTTP, urlString + "------>post http url");
                 client.post(urlString, params, (AsyncHttpResponseHandler) resHandler);
             } else {
                 throw new RuntimeException("XCHttpAsyn中的XCHttpType类型不匹配");
@@ -159,7 +160,7 @@ public class XCHttpSend {
             Object value = item.getValue();
             params.put(key, value);
         }
-        XC.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
+        XCLog.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
         return params;
     }
 

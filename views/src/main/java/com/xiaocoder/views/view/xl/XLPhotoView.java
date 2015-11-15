@@ -25,6 +25,7 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.view.xl.XLPhotoViewAttacher.OnMatrixChangedListener;
 import com.xiaocoder.views.view.xl.XLPhotoViewAttacher.OnPhotoTapListener;
@@ -188,7 +189,7 @@ public class XLPhotoView extends ImageView implements XLIPhotoView {
 		try {
 			super.onTouchEvent(event);
 		} catch (Exception e) {
-            XC.e(getContext(), "XLPhotoView---onTouchEvent()", e);
+            XCLog.e(getContext(), "XLPhotoView---onTouchEvent()", e);
 		}
 		return false;
 	}

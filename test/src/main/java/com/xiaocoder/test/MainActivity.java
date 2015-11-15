@@ -9,6 +9,7 @@ import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilActivity;
 import com.xiaocoder.android.fw.general.util.UtilString;
@@ -116,25 +117,25 @@ public class MainActivity extends MMainActivity {
 
     private void log() {
 
-        XC.i(1);
-        XC.i(true);
-        XC.i(false);
+        XCLog.i(1);
+        XCLog.i(true);
+        XCLog.i(false);
         Object obj = null;
-        XC.i(obj);
+        XCLog.i(obj);
 
         try {
-            XC.e("123");
-            XC.e("345");
-            XC.e("678");
+            XCLog.e("123");
+            XCLog.e("345");
+            XCLog.e("678");
             int i = 1 / 0;
         } catch (Exception e) {
-            XC.e(this, "--oncreate()--", e);
+            XCLog.e(this, "--oncreate()--", e);
         }
         // XCApp.clearLog();
-        XC.e(this, "1234567890");
-        XC.tempPrint("android--" + System.currentTimeMillis());
+        XCLog.e(this, "1234567890");
+        XCLog.tempPrint("android--" + System.currentTimeMillis());
 
-        XC.i(XCIO.getAllFilesByDirQueue(XCIOAndroid.createDirInSDCard(MConfig.APP_ROOT), new ArrayList<File>()));
+        XCLog.i(XCIO.getAllFilesByDirQueue(XCIOAndroid.createDirInSDCard(MConfig.APP_ROOT), new ArrayList<File>()));
 
         XCIO.toFileByBytes(XCIOAndroid.createFileInAndroid(this, MConfig.APP_ROOT, "lalala.txt"), "写入的内容--1234567890987654321abc".getBytes(), true);
     }
@@ -142,8 +143,8 @@ public class MainActivity extends MMainActivity {
     @Override
     public void initWidgets() {
 
-        XC.i(XCConfig.TAG_TEMP, MConfig.CURRENT_RUN_ENVIRONMENT.toString() + "-----环境");
-        XC.i(XCConfig.TAG_TEMP, MConfig.DEBUG_CONTROL.toString() + "-----调试");
+        XCLog.i(XCConfig.TAG_TEMP, MConfig.CURRENT_RUN_ENVIRONMENT.toString() + "-----环境");
+        XCLog.i(XCConfig.TAG_TEMP, MConfig.DEBUG_CONTROL.toString() + "-----调试");
 
         test_list_refresh_layout = getViewById(R.id.test_list_refresh_layout);
 

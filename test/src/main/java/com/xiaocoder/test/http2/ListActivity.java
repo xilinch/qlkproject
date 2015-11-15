@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.XCSystemVDialog;
 import com.xiaocoder.android.fw.general.util.UtilCollections;
@@ -52,23 +53,23 @@ public class ListActivity extends MActivity {
                             }
 
                             TestBean testBean = result_bean.getModel(result_bean.data);
-                            XC.i(testBean);
+                            XCLog.i(testBean);
 
                             List<TestBean> testBeans = testBean.getList(testBean.result);
 
                             if (!UtilCollections.isListBlank(testBeans)) {
                                 TestBean bean = testBeans.get(0);
 
-                                XC.i(bean.getString(bean.commission));
-                                XC.i(bean.getString(bean.imgUrl));
-                                XC.i(bean.getString(bean.marketPrice));
-                                XC.i(bean.getString(bean.rebate));
-                                XC.i(bean.getString(bean.proudctId));
+                                XCLog.i(bean.getString(bean.commission));
+                                XCLog.i(bean.getString(bean.imgUrl));
+                                XCLog.i(bean.getString(bean.marketPrice));
+                                XCLog.i(bean.getString(bean.rebate));
+                                XCLog.i(bean.getString(bean.proudctId));
 
-                                XC.i(bean.getModel(bean.share).toString());
-                                XC.i(bean.getModel(bean.share).getString(bean.title));
-                                XC.i(bean.getModel(bean.share).getString(bean.icon));
-                                XC.i(bean.getModel(bean.share).getString(bean.content));
+                                XCLog.i(bean.getModel(bean.share).toString());
+                                XCLog.i(bean.getModel(bean.share).getString(bean.title));
+                                XCLog.i(bean.getModel(bean.share).getString(bean.icon));
+                                XCLog.i(bean.getModel(bean.share).getString(bean.content));
                             }
 
                             // grid_fragment.setTotalNum("100");// 或者setTotalPage也可以
@@ -162,8 +163,8 @@ public class ListActivity extends MActivity {
 
             @Override
             public void onAbsListItemClickListener(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                XC.dShortToast(arg2 + "");
-                XC.i(arg2 + "");
+                XCLog.dShortToast(arg2 + "");
+                XCLog.i(arg2 + "");
             }
 
         });

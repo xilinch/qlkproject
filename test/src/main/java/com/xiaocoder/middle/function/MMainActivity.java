@@ -7,8 +7,8 @@ import com.umeng.analytics.MobclickAgent;
 import com.xiaocoder.android.fw.general.db.XCExceptionDao;
 import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.model.XCExceptionModel;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public abstract class MMainActivity extends MActivity {
             XCActivityHelper.appExit();
         } else {
             back_quit_time = this_quit_time;
-            XC.shortToast("快速再按一次退出");
+            XCLog.shortToast("快速再按一次退出");
         }
     }
 

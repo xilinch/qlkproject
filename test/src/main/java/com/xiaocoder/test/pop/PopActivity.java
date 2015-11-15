@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.util.UtilScreen;
 import com.xiaocoder.views.pop.XCHintPopupWindow;
 import com.xiaocoder.views.pop.XCPhotoPopupWindow;
@@ -75,19 +74,19 @@ public class PopActivity extends MActivity {
         hintPopupWindow.setOnHintPopupItemClickListener(new XCHintPopupWindow.OnHintPopupItemClickListener() {
             @Override
             public void hint1(TextView textview) {
-                XC.dShortToast("1");
+                XCLog.dShortToast("1");
                 hintPopupWindow.dismiss();
             }
 
             @Override
             public void hint2(TextView textview) {
-                XC.dShortToast("2");
+                XCLog.dShortToast("2");
                 hintPopupWindow.dismiss();
             }
 
             @Override
             public void hint3(TextView textview) {
-                XC.dShortToast("3");
+                XCLog.dShortToast("3");
                 hintPopupWindow.dismiss();
             }
         });
@@ -95,25 +94,25 @@ public class PopActivity extends MActivity {
         photoPopupWindow.setOnPhotoPopupItemClickListener(new XCPhotoPopupWindow.onPhotoPopupItemClickListener() {
             @Override
             public void onPhotoUpload() {
-                XC.dShortToast("1");
+                XCLog.dShortToast("1");
                 photoPopupWindow.dismiss();
             }
 
             @Override
             public void onLocalAlbum() {
-                XC.dShortToast("2");
+                XCLog.dShortToast("2");
                 photoPopupWindow.dismiss();
             }
 
             @Override
             public void onCancel() {
-                XC.dShortToast("3");
+                XCLog.dShortToast("3");
                 photoPopupWindow.dismiss();
             }
 
             @Override
             public void onNetPrescription() {
-                XC.dShortToast("4");
+                XCLog.dShortToast("4");
                 photoPopupWindow.dismiss();
             }
         });

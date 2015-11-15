@@ -18,74 +18,70 @@ import java.util.Date;
  * 2 输出log到控制台
  * 3 输出log到文件
  * 4 日志的清空，日志的大小控制
+ *
+ * 使用前初始化initLog方法
  */
 public class XCLog {
+    /**
+     * 毫秒
+     */
+    public static final int TOAST_SHORT_TIME_GAP = 2000;
+    public static final int TOAST_LONG_TIME_GAP = 3000;
+    /**
+     * 缓存文件达到70M就会清空
+     */
+    public static final long LOG_FILE_LIMIT_SIZE = 73400320;
+    /**
+     * 记录上一次土司的时间
+     */
+    public static long last_toast_time;
+    /**
+     * log文件 = dir_name + log_file_name
+     */
+    public static File file;
 
-    private Context context;
-    private long last_time;
-    private File file;
-    public static int TOAST_SHORT_TIME_GAP = 2000;
-    public static int TOAST_LONG_TIME_GAP = 3000;
+    /**
+     * 以下值需要初始化
+     */
+    public static Context context;
+    public static boolean is_dtoast;
+    public static boolean is_printlog;
+    public static boolean is_output;
+    public static String dir_name;
+    public static String log_file_name;
+    public static String temp_file_name;
+    public static String encoding;
 
-    private boolean is_dtoast;
-    private boolean is_printlog;
-    private boolean is_output;
+    public static void initXCLog(Context context, boolean is_dtoast, boolean is_output, boolean is_printlog,
+                                 String dir_name, String log_file_name, String temp_file_name, String encoding) {
 
-    public boolean is_dtoast() {
-        return is_dtoast;
-    }
-
-    public void setIs_dtoast(boolean is_dtoast) {
-        this.is_dtoast = is_dtoast;
-    }
-
-    public boolean is_printlog() {
-        return is_printlog;
-    }
-
-    public void setIs_printlog(boolean is_printlog) {
-        this.is_printlog = is_printlog;
-    }
-
-    public boolean is_OutPut() {
-        return is_output;
-    }
-
-    public void setIs_output(boolean is_output) {
-        this.is_output = is_output;
-    }
-
-    public XCLog(Context context, boolean is_dtoast, boolean is_output, boolean is_printlog,
-                 String app_root_dir, String app_log_file, String app_temp_file, String encoding) {
-
-        this.context = context;
-        this.app_root_dir = app_root_dir;
-        this.app_log_file = app_log_file;
-        this.app_temp_file = app_temp_file;
-        this.encoding = encoding;
-
-        this.is_dtoast = is_dtoast;
-        this.is_output = is_output;
-        this.is_printlog = is_printlog;
+        XCLog.context = context;
+        XCLog.dir_name = dir_name;
+        XCLog.log_file_name = log_file_name;
+        XCLog.temp_file_name = temp_file_name;
+        XCLog.encoding = encoding;
+        XCLog.is_dtoast = is_dtoast;
+        XCLog.is_output = is_output;
+        XCLog.is_printlog = is_printlog;
     }
 
     /**
      * 防止点击频繁, 不断的弹出
      */
-    public void longToast(Object msg) {
-        if (System.currentTimeMillis() - last_time > TOAST_LONG_TIME_GAP) {
-            Toast.makeText(context, msg+"", Toast.LENGTH_LONG).show();
-            last_time = System.currentTimeMillis();
+    public static void longToast(Object msg) {
+        if (System.currentTimeMillis() - last_toast_time > TOAST_LONG_TIME_GAP) {
+            Toast.makeText(context, msg + "", Toast.LENGTH_LONG).show();
+            last_toast_time = System.currentTimeMillis();
         }
     }
 
     /**
      * 防止点击频繁, 不断的弹出
      */
-    public void longToast(boolean showImmediately, Object msg) {
+    public static void longToast(boolean showImmediately, Object msg) {
         if (showImmediately) {
-            Toast.makeText(context, msg+"", Toast.LENGTH_LONG).show();
-            last_time = System.currentTimeMillis();
+            Toast.makeText(context, msg + "", Toast.LENGTH_LONG).show();
+            last_toast_time = System.currentTimeMillis();
         } else {
             longToast(msg);
         }
@@ -94,20 +90,20 @@ public class XCLog {
     /**
      * 防止点击频繁, 不断的弹出
      */
-    public void shortToast(Object msg) {
-        if (System.currentTimeMillis() - last_time > TOAST_SHORT_TIME_GAP) {
-            Toast.makeText(context, msg+"", Toast.LENGTH_SHORT).show();
-            last_time = System.currentTimeMillis();
+    public static void shortToast(Object msg) {
+        if (System.currentTimeMillis() - last_toast_time > TOAST_SHORT_TIME_GAP) {
+            Toast.makeText(context, msg + "", Toast.LENGTH_SHORT).show();
+            last_toast_time = System.currentTimeMillis();
         }
     }
 
     /**
      * 防止点击频繁, 不断的弹出
      */
-    public void shortToast(boolean showImmediately, Object msg) {
+    public static void shortToast(boolean showImmediately, Object msg) {
         if (showImmediately) {
-            Toast.makeText(context, msg+"", Toast.LENGTH_SHORT).show();
-            last_time = System.currentTimeMillis();
+            Toast.makeText(context, msg + "", Toast.LENGTH_SHORT).show();
+            last_toast_time = System.currentTimeMillis();
         } else {
             shortToast(msg);
         }
@@ -117,11 +113,11 @@ public class XCLog {
     /**
      * 调试的toast , 上线前开关关闭
      */
-    public void debugShortToast(Object msg) {
+    public static void dShortToast(Object msg) {
         if (is_dtoast) {
-            if (System.currentTimeMillis() - last_time > TOAST_SHORT_TIME_GAP) {
-                Toast.makeText(context, msg+"", Toast.LENGTH_SHORT).show();
-                last_time = System.currentTimeMillis();
+            if (System.currentTimeMillis() - last_toast_time > TOAST_SHORT_TIME_GAP) {
+                Toast.makeText(context, msg + "", Toast.LENGTH_SHORT).show();
+                last_toast_time = System.currentTimeMillis();
             }
         }
     }
@@ -129,11 +125,11 @@ public class XCLog {
     /**
      * 调试的toast , 上线前开关关闭
      */
-    public void debugLongToast(Object msg) {
+    public static void dLongToast(Object msg) {
         if (is_dtoast) {
-            if (System.currentTimeMillis() - last_time > TOAST_LONG_TIME_GAP) {
-                Toast.makeText(context, msg+"", Toast.LENGTH_LONG).show();
-                last_time = System.currentTimeMillis();
+            if (System.currentTimeMillis() - last_toast_time > TOAST_LONG_TIME_GAP) {
+                Toast.makeText(context, msg + "", Toast.LENGTH_LONG).show();
+                last_toast_time = System.currentTimeMillis();
             }
         }
     }
@@ -143,7 +139,7 @@ public class XCLog {
      * <p/>
      * 上线前is_output 与 is_printlog关闭
      */
-    public void i(Context context, Object msg) {
+    public static void i(Context context, Object msg) {
         if (is_output) {
             Log.i(context.getClass().getSimpleName(), msg + "");
         }
@@ -152,7 +148,7 @@ public class XCLog {
         }
     }
 
-    public void i(String tag, Object msg) {
+    public static void i(String tag, Object msg) {
         if (is_output) {
             Log.i(tag, msg + "");
         }
@@ -161,7 +157,7 @@ public class XCLog {
         }
     }
 
-    public void i(Object msg) {
+    public static void i(Object msg) {
         if (is_output) {
             Log.i(XCConfig.TAG_SYSTEM_OUT, msg + "");
         }
@@ -170,27 +166,36 @@ public class XCLog {
         }
     }
 
+    public static void itemp(Object msg) {
+        i(XCConfig.TAG_TEMP, msg);
+    }
+
+    public static void itest(Object msg) {
+
+        i(XCConfig.TAG_TEST, msg);
+    }
+
     /**
      * 不管是否上线，都打印日志到本地，并输出到控制台
      * 注：e的日志颜色不同
      */
-    public void e(String hint) {
+    public static void e(String hint) {
         Log.e(XCConfig.TAG_ALOG, hint);
         writeLog2File(hint, true);
     }
 
-    public void e(Context context, String hint) {
+    public static void e(Context context, String hint) {
         Log.e(XCConfig.TAG_ALOG, context.getClass().getSimpleName() + "--" + hint);
         writeLog2File(context.getClass().getSimpleName() + "--" + hint, true);
     }
 
-    public void e(String hint, Exception e) {
+    public static void e(String hint, Exception e) {
         e.printStackTrace();
         Log.e(XCConfig.TAG_ALOG, hint + "--" + "Exception-->" + e.toString() + "--" + e.getMessage());
         writeLog2File("Exception-->" + hint + "-->" + e.toString() + "--" + e.getMessage(), true);
     }
 
-    public void e(Context context, String hint, Exception e) {
+    public static void e(Context context, String hint, Exception e) {
         e.printStackTrace();
         Log.e(XCConfig.TAG_ALOG, "Exception-->" + context.getClass().getSimpleName() + "--" + hint + "--" + e.toString() + "--" + e.getMessage());
         writeLog2File("Exception-->" + context.getClass().getSimpleName() + "--" + hint + "--" + e.toString() + "--" + e.getMessage(), true);
@@ -199,22 +204,16 @@ public class XCLog {
     /**
      * 删除日志文件
      */
-    public synchronized void clearLog() {
+    public static synchronized void clearLog() {
         if (file != null && file.exists()) {
             file.delete();
         }
     }
 
-    // -----------------------------------打印到文件中，保存日志----------------------------------------------------------------
-    public String app_root_dir;
-    public String app_log_file;
-    public String app_temp_file;
-    public String encoding;
-
     /**
      * 只在有sd卡的时候，才会打印日志
      */
-    private synchronized void writeLog2File(String content, boolean is_append) {
+    public static synchronized void writeLog2File(String content, boolean is_append) {
 
         if (TextUtils.isEmpty(content) || !XCIOAndroid.isSDcardExist()) {
             return;
@@ -226,7 +225,7 @@ public class XCLog {
             if (file == null || !file.exists()) {
 
                 // sd中，在app_root文件夹下创建log文件
-                file = XCIOAndroid.createFileInSDCard(app_root_dir, app_log_file);
+                file = XCIOAndroid.createFileInSDCard(dir_name, log_file_name);
 
             }
 
@@ -265,41 +264,35 @@ public class XCLog {
      * <p/>
      * 场景：如果json很长，有时控制台未必会全部打印出来，则可以去app的目录下找到这个临时文件查看
      */
-    public void tempPrint(String str) {
+    public synchronized static void tempPrint(String str) {
         if (is_output) {
-            synchronized (this) {
-                FileOutputStream fos = null;
-                try {
-                    // 在app_root目录下创建temp_print文件，如果没有sd卡，则写到内部存储中
-                    fos = new FileOutputStream(XCIOAndroid.createFileInAndroid(context, app_root_dir, app_temp_file));
-                    fos.write(str.getBytes());
-                    fos.flush();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (fos != null) {
-                        try {
-                            fos.close();
-                        } catch (Exception e2) {
-                            e2.printStackTrace();
-                        } finally {
-                            fos = null;
-                        }
+            FileOutputStream fos = null;
+            try {
+                // 在app_root目录下创建temp_print文件，如果没有sd卡，则写到内部存储中
+                fos = new FileOutputStream(XCIOAndroid.createFileInAndroid(context, dir_name, temp_file_name));
+                fos.write(str.getBytes());
+                fos.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    } finally {
+                        fos = null;
                     }
                 }
             }
         }
     }
 
-    public void logFull() throws Exception {
+    public static void logFull() throws Exception {
         if (file != null && file.exists() && file.length() > LOG_FILE_LIMIT_SIZE) {
             file.delete();
             file.createNewFile();
         }
     }
 
-    /**
-     * 缓存文件达到70M就会清空
-     */
-    public static long LOG_FILE_LIMIT_SIZE = 73400320; // 70M
 }

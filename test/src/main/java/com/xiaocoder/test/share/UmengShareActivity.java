@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.umeng.UtilUmeng;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.sso.EmailHandler;
 import com.umeng.socialize.sso.SmsHandler;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 
@@ -75,7 +74,7 @@ public class UmengShareActivity extends MActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                XC.shortToast("wxlogin");
+                XCLog.shortToast("wxlogin");
                 UtilUmeng.loginWX(umLogin, UmengShareActivity.this);
             }
         });

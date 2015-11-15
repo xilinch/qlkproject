@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 /**
@@ -37,9 +38,9 @@ public class XCAdapterTest extends XCBaseAdapter<String> {
 		}
 		bean = list.get(position);
 		if (convertView == null) {
-			XC.i("convertView==null?--true" + position);
+			XCLog.i("convertView==null?--true" + position);
 		} else {
-			XC.i("convertView==null?--false" + position + convertView.toString());
+			XCLog.i("convertView==null?--false" + position + convertView.toString());
 		}
 		if (convertView == null) {
 			TextView textView = new TextView(context);

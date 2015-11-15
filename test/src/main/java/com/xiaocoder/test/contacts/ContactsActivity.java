@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilContacts;
 import com.xiaocoder.android.fw.general.util.UtilView;
@@ -84,7 +85,7 @@ public class ContactsActivity extends MActivity {
 
         // 获取联系人
         List<UtilContacts.XCContactModel> list = UtilContacts.getContacts(this);
-        XC.i(list);
+        XCLog.i(list);
 
         // 创建adapter
         ContactsAdapter adpater = new ContactsAdapter(this, list);

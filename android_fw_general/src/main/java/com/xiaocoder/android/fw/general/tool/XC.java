@@ -46,10 +46,7 @@ public class XC {
      * 调度线程池 -- 数量
      */
     protected static ScheduledExecutorService scheduledThreadPool;
-    /**
-     * 日志 -- 路径 文件名
-     */
-    protected static XCLog log;
+
     protected static XCSP sp;
     /**
      * 图片加载 -- 缓存路径
@@ -96,13 +93,6 @@ public class XC {
         XC.scheduledThreadPool = scheduledThreadPool;
     }
 
-    public static XCLog getLog() {
-        return log;
-    }
-
-    public static void setLog(XCLog log) {
-        XC.log = log;
-    }
 
     public static XCSP getSp() {
         return sp;
@@ -118,62 +108,6 @@ public class XC {
 
     public static void setImageLoader(XCIImageLoader imageLoader) {
         XC.imageLoader = imageLoader;
-    }
-
-    public static void i(Object msg) {
-        log.i(msg);
-    }
-
-    public static void i(String tag, Object msg) {
-        log.i(tag, msg);
-    }
-
-    public static void dShortToast(Object msg) {
-        log.debugShortToast(msg);
-    }
-
-    public static void dLongToast(Object msg) {
-        log.debugLongToast(msg);
-    }
-
-    public static void tempPrint(String msg) {
-        log.tempPrint(msg);
-    }
-
-    public static void shortToast(Object msg) {
-        log.shortToast(msg);
-    }
-
-    public static void longToast(Object msg) {
-        log.longToast(msg);
-    }
-
-    public static void e(String hint, Exception e) {
-        log.e(hint, e);
-    }
-
-    public static void e(String hint) {
-        log.e(hint);
-    }
-
-    public static void e(Context context, String hint, Exception e) {
-        log.e(context, hint, e);
-    }
-
-    public static void e(Context context, String hint) {
-        log.e(context, hint);
-    }
-
-    public static void itemp(Object msg) {
-        log.i(XCConfig.TAG_TEMP, msg);
-    }
-
-    public static void itest(Object msg) {
-        log.i(XCConfig.TAG_TEST, msg);
-    }
-
-    public static void clearLog() {
-        log.clearLog();
     }
 
     public static void spPut(String key, boolean value) {

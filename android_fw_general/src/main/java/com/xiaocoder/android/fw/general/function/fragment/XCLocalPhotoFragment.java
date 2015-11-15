@@ -26,6 +26,7 @@ import android.widget.ImageView;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
 import com.xiaocoder.android.fw.general.util.UtilOom;
@@ -107,7 +108,7 @@ public class XCLocalPhotoFragment extends XCBaseFragment {
                         } else {
                             final Uri uri = data.getData();
                             if (uri == null) {
-                                XC.shortToast("系统获取图片失败");
+                                XCLog.shortToast("系统获取图片失败");
                                 return;
                             }
                             XC.getCacheThreadPool().execute(new Runnable() {
@@ -159,7 +160,7 @@ public class XCLocalPhotoFragment extends XCBaseFragment {
                     listener.onLocalSelectedFile(file);
                 }
             } else {
-                XC.shortToast("未检测到SD卡");
+                XCLog.shortToast("未检测到SD卡");
                 if (listener != null) {
                     listener.onLocalSelectedFile(null);
                 }
@@ -201,7 +202,7 @@ public class XCLocalPhotoFragment extends XCBaseFragment {
                         listener.onLocalSelectedFile(file);
                     }
                 } else {
-                    XC.shortToast("未检测到SD卡");
+                    XCLog.shortToast("未检测到SD卡");
                     if (listener != null) {
                         listener.onLocalSelectedFile(null);
                     }

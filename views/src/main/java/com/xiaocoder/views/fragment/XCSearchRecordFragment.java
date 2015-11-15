@@ -15,12 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
 import com.xiaocoder.android.fw.general.db.XCDbHelper;
 import com.xiaocoder.android.fw.general.db.XCSearchDao;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.model.XCSearchRecordModel;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.views.R;
 import com.xiaocoder.views.view.xc.XCKeyBoardLayout;
@@ -189,7 +188,7 @@ public class XCSearchRecordFragment extends XCBaseFragment implements AdapterVie
         @Override
         public void onClick(View view) {
             Integer position = (Integer) view.getTag();
-            XC.dShortToast(position + "");
+            XCLog.dShortToast(position + "");
             dao.delete_unique(list.get(position).getTime());
             XCSearchRecordFragment.this.update();
         }

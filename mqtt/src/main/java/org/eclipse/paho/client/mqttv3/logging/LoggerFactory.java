@@ -14,6 +14,7 @@ package org.eclipse.paho.client.mqttv3.logging;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.io.InputStream;
@@ -119,7 +120,7 @@ public class LoggerFactory {
 
         try {
             InputStream inputStreamFromAssets = XCIOAndroid.getInputStreamFromAsserts(XCApp.getBase_applicationContext(), "logcat.properties");
-            XC.i(TAG_HEART, "getResourceBundleForLogger");
+            XCLog.i(TAG_HEART, "getResourceBundleForLogger");
             return new PropertyResourceBundle(inputStreamFromAssets);
         } catch (Exception e) {
             e.printStackTrace();

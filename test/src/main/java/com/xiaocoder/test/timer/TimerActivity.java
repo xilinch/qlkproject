@@ -2,9 +2,9 @@ package com.xiaocoder.test.timer;
 
 import android.os.Bundle;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.function.helper.XCTimeHelper;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
@@ -42,12 +42,12 @@ public class TimerActivity extends MActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                XC.i(count++);
+                XCLog.i(count++);
             }
 
             @Override
             public void onFinish() {
-                XC.i(XCConfig.TAG_TEST, count + "--finish");
+                XCLog.i(XCConfig.TAG_TEST, count + "--finish");
             }
         });
         timeHelper.start();
@@ -69,7 +69,7 @@ public class TimerActivity extends MActivity {
                     @Override
                     public void run() {
                         index = index + 1;
-                        XC.shortToast(index);
+                        XCLog.shortToast(index);
                     }
                 });
 
@@ -93,14 +93,14 @@ public class TimerActivity extends MActivity {
         scheduled.schedule(new Runnable() {
             @Override
             public void run() {
-                XC.i("5秒后执行一次");
+                XCLog.i("5秒后执行一次");
             }
         }, 5, TimeUnit.SECONDS);
 
         scheduled.scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run() {
-                XC.i("2秒后开始执行，每隔6秒执行一次");
+                XCLog.i("2秒后开始执行，每隔6秒执行一次");
             }
         }, 2, 6, TimeUnit.SECONDS);
     }

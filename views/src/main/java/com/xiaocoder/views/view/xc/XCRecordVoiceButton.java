@@ -16,8 +16,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
 import com.xiaocoder.views.R;
@@ -189,19 +189,19 @@ public class XCRecordVoiceButton extends Button implements OnTouchListener {
                     onBeforeRecoderVoiceButtonListener.onBeforeRecoderVoiceButtonListener();
                 }
                 boundary_flag = false;
-                XC.i("down");
+                XCLog.i("down");
                 forceStop();// 确保停止了
                 showDialog("松开发送");
                 startRecording();
                 break;
             case MotionEvent.ACTION_UP:
-                XC.i("up");
+                XCLog.i("up");
                 if (isOutSide(event.getX(), event.getY())) {
                     // touch出界了
                     cancelRecord();
-                    XC.i("出界了， 删除文件");
+                    XCLog.i("出界了， 删除文件");
                 } else {
-                    XC.i("未出界");
+                    XCLog.i("未出界");
                     stopRecording();
                 }
                 boundary_flag = false;
@@ -286,7 +286,7 @@ public class XCRecordVoiceButton extends Button implements OnTouchListener {
                 media_recorder.stop();
             } catch (Exception e) {
                 e.printStackTrace();
-                XC.i("时间太短，停止时抛异常了 ，删除文件");
+                XCLog.i("时间太短，停止时抛异常了 ，删除文件");
                 normal = false;
             }
             media_recorder.release();
@@ -303,17 +303,17 @@ public class XCRecordVoiceButton extends Button implements OnTouchListener {
         float gap = end_time - start_time; // 真实时间
         // 判断文件的时间是否符合要求
         if (gap > MAX_TIME) {
-            XC.i("时间不符合 ，删除文件");
-            XC.shortToast("发送失败，每段录音的最大时间限制为" + FAKE_TIME + "秒");
+            XCLog.i("时间不符合 ，删除文件");
+            XCLog.shortToast("发送失败，每段录音的最大时间限制为" + FAKE_TIME + "秒");
             deleteFile("up max time");
         } else if (gap < MIN_TIME) {
             deleteFile("down min time");
             lessTimeOrExceptionDialog();
             return;
         } else {
-            XC.i("时间符合 ，准备上传文件");
+            XCLog.i("时间符合 ，准备上传文件");
             if (file_listener != null) {
-                XC.i(gap + "---原始录音的buttonview中记录的时间");
+                XCLog.i(gap + "---原始录音的buttonview中记录的时间");
                 file_listener.onRecordVoiceSuccessListener(save_file, (long) (gap / COMPRESS_RATIO));
                 save_file = null;
             }
@@ -324,7 +324,7 @@ public class XCRecordVoiceButton extends Button implements OnTouchListener {
     public void deleteFile(String debug) {
         if (save_file != null && save_file.exists()) {
             save_file.delete();
-            XC.i("TAG_CHAT", "delete---" + debug + save_file.getAbsolutePath());
+            XCLog.i("TAG_CHAT", "delete---" + debug + save_file.getAbsolutePath());
             save_file = null;
         }
     }
@@ -365,7 +365,7 @@ public class XCRecordVoiceButton extends Button implements OnTouchListener {
             // 开始缓冲
             recorder.prepare();
         } catch (IOException e) {
-            XC.i("prepare() failed");
+            XCLog.i("prepare() failed");
         }
         return recorder;
     }

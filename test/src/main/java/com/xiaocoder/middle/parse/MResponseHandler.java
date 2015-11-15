@@ -13,6 +13,7 @@ import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.http.XCResponseHandler;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilSystem;
 import com.xiaocoder.middle.function.MMainActivity;
@@ -49,7 +50,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
      */
     public boolean yourCompanyResultRule() {
 
-        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanyResultRule()");
+        XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanyResultRule()");
 
         /**
          * 统一规则 用MModel 或 MBean
@@ -59,12 +60,12 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
             if (((MIResponseInfo) result_bean).getCode() == 0) {
                 return true;
             } else {
-                XC.shortToast(((MIResponseInfo) result_bean).getMsg());
+                XCLog.shortToast(((MIResponseInfo) result_bean).getMsg());
                 return false;
             }
 
         } else {
-            XC.e("yourCompanyResultRule()中的返回结果不是IQlkResponseInfo, MModel 或 Qlkean 类型");
+            XCLog.e("yourCompanyResultRule()中的返回结果不是IQlkResponseInfo, MModel 或 Qlkean 类型");
             throw new RuntimeException("yourCompanyResultRule()中的返回结果不是IQlkResponseInfo ,MModel 或 Qlkean 类型");
         }
 
@@ -80,7 +81,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
     @Override
     public void yourCompanySecret(Object oParams, Object oClient, boolean needSecret) {
 
-        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanySecret()--" + needSecret);
+        XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---yourCompanySecret()--" + needSecret);
 
         setHeaders(oClient);
 
@@ -94,7 +95,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
                 RequestParams params = (RequestParams) oParams;
                 // TODO 补充加密的代码
 
-                XC.i(XCConfig.TAG_HTTP, "secret params-->" + params.toString());
+                XCLog.i(XCConfig.TAG_HTTP, "secret params-->" + params.toString());
             }
         } else {
             throw new RuntimeException("yourCompanySecret()---中传入的params不是RequestParams类型");
@@ -118,7 +119,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
     public void closeHttpDialog() {
         if (httpDialog != null && httpDialog.isShowing()) {
             httpDialog.cancel();
-            XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---closeHttpDialog()");
+            XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---closeHttpDialog()");
         }
     }
 
@@ -149,6 +150,6 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
             });
         }
         httpDialog.show();
-        XC.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---showHttpDialog()");
+        XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "---showHttpDialog()");
     }
 }

@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.model.XCExceptionModel;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilString;
@@ -59,7 +60,7 @@ public class XCExceptionDao {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = createContentValue(bean);
         long id = db.insert(mTabName, _ID, values);
-        XC.i(XCConfig.TAG_DB, "插入的记录的id是: " + id);
+        XCLog.i(XCConfig.TAG_DB, "插入的记录的id是: " + id);
         db.close();
     }
 
@@ -70,7 +71,7 @@ public class XCExceptionDao {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         int rows = db.delete(mTabName, UNIQUE_ID + "=?",
                 new String[]{unique + ""});
-        XC.i(XCConfig.TAG_DB, "delete_unique-->" + rows + "行");
+        XCLog.i(XCConfig.TAG_DB, "delete_unique-->" + rows + "行");
         db.close();
         return rows;
     }
@@ -82,7 +83,7 @@ public class XCExceptionDao {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         int rows = db.delete(mTabName, UPLOAD_SUCCESS + "=?",
                 new String[]{XCExceptionModel.UPLOAD_YES});
-        XC.i(XCConfig.TAG_DB, "delete_uploadSuccess-->" + rows + "行");
+        XCLog.i(XCConfig.TAG_DB, "delete_uploadSuccess-->" + rows + "行");
         db.close();
         return rows;
     }
@@ -94,7 +95,7 @@ public class XCExceptionDao {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         int rows = db.delete(mTabName, USER_ID + "=?",
                 new String[]{userId + ""});
-        XC.i(XCConfig.TAG_DB, "delete_userid-->" + rows + "行");
+        XCLog.i(XCConfig.TAG_DB, "delete_userid-->" + rows + "行");
         db.close();
         return rows;
     }
@@ -111,7 +112,7 @@ public class XCExceptionDao {
         ContentValues values = createContentValue(bean);
         int rows = db.update(mTabName, values, UNIQUE_ID + "=?",
                 new String[]{bean.getUniqueId() + ""});
-        XC.i(XCConfig.TAG_DB, "更新了" + rows + "行");
+        XCLog.i(XCConfig.TAG_DB, "更新了" + rows + "行");
         db.close();
         return rows;
     }

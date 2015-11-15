@@ -8,9 +8,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseActivity;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.io.XCLog;
 
 
 public class XC_VideoActivity2 extends XCBaseActivity {
@@ -72,7 +71,7 @@ public class XC_VideoActivity2 extends XCBaseActivity {
             // 当自动锁屏时,pause()-->stop() 不会调用surface的销毁方法
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-                XC.i("surfaceDestroyed");
+                XCLog.i("surfaceDestroyed");
                 if (player_controller_pop != null) {
                     player_controller_pop.release();
                 }
@@ -82,20 +81,20 @@ public class XC_VideoActivity2 extends XCBaseActivity {
             // 当activity从暂停状态重新到运行状态的时候,会调用oncreate方法
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                XC.i("surfaceCreated");
+                XCLog.i("surfaceCreated");
                 if (player_controller_pop == null) {
                     player_controller_pop = new XCVideoPlayerPop2(base_context, uri, surface_view);//这里是创建播放器,非得放这里,因为只有surface创建好了后,才可以player.setDisplay(surface_holder);,否则报错 surface has beeb release
-                    XC.i("player_controller_pop created");
+                    XCLog.i("player_controller_pop created");
                 } else {
                     player_controller_pop.launchMediaPlayer(uri);
-                    XC.i("player_controller_pop re_init");
+                    XCLog.i("player_controller_pop re_init");
                 }
             }
 
             // surfaceview的大小改变的时候 或者说surfaceView刷新的时候 都会调用该方法
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-                XC.i("surfaceChanged" + "--width" + width + "/height" + height);
+                XCLog.i("surfaceChanged" + "--width" + width + "/height" + height);
             }
         });
     }
@@ -103,14 +102,14 @@ public class XC_VideoActivity2 extends XCBaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        XC.i("videoActivity--onStart");
+        XCLog.i("videoActivity--onStart");
     }
 
     //如果surface没销毁就从这里开始进入播放,如果销毁了就从surfaceChanged方法里面进入播放
     @Override
     protected void onResume() {
         super.onResume();
-        XC.i("videoActivity--onResume");
+        XCLog.i("videoActivity--onResume");
         if (player_controller_pop != null) {
             player_controller_pop.recoverState();
         }
@@ -119,7 +118,7 @@ public class XC_VideoActivity2 extends XCBaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        XC.i("videoActivity--onPause");
+        XCLog.i("videoActivity--onPause");
         if (player_controller_pop != null) {
             player_controller_pop.saveState();
         }
@@ -128,13 +127,13 @@ public class XC_VideoActivity2 extends XCBaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        XC.i("videoActivity--onStop");
+        XCLog.i("videoActivity--onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        XC.i("videoActivity--onDestroy");
+        XCLog.i("videoActivity--onDestroy");
         if (player_controller_pop != null) {
             player_controller_pop.closeThreadPool();
         }
