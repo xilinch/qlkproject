@@ -2,7 +2,7 @@ package com.xiaocoder.android.fw.general.function.helper;
 
 import android.app.Dialog;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.io.File;
@@ -47,7 +47,7 @@ public class XCCleanCacheHelper {
      * 子线程中删除
      */
     public void removeFileAsyn(final File file) {
-        XC.getCacheThreadPool().execute(new Runnable() {
+        XCExecutor.getCache().execute(new Runnable() {
             @Override
             public void run() {
                 // 如果文件不存在

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.android.fw.general.function.runnable.XCDownloadRunnable;
@@ -93,7 +94,7 @@ public class HttpDownLoadActivity extends MActivity {
             }
         });
 
-        XC.getCacheThreadPool().execute(downloadHelper);
+        XCExecutor.getCache().execute(downloadHelper);
     }
 
     @Override

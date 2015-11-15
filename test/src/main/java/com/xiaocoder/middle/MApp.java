@@ -8,7 +8,7 @@ import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
 import com.xiaocoder.android.fw.general.db.XCExceptionDao;
 import com.xiaocoder.android.fw.general.exception.XCIException2Server;
-import com.xiaocoder.android.fw.general.function.helper.XCExecutorHelper;
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.imageloader.JSImageLoader;
 import com.xiaocoder.android.fw.general.imageloader.XCAsynLoader;
 import com.xiaocoder.android.fw.general.imageloader.XCImageLoader;
@@ -65,8 +65,7 @@ public class MApp extends XCApp {
      * http解析时用到该固定线程池
      */
     private void initNumThreadPool() {
-        XC.setFixThreadPool(XCExecutorHelper.getInstance().getFix(MConfig.FIX_THREAD_NUM));
-        XC.setScheduledThreadPool(XCExecutorHelper.getInstance().getScheduledFix(MConfig.SCHEDULE_THREAD_NUM));
+        XCExecutor.initXCExecutor(MConfig.FIX_THREAD_NUM, MConfig.SCHEDULE_THREAD_NUM);
     }
 
     private void createDir() {

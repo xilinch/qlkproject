@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
@@ -110,7 +111,7 @@ public class XCCameraPhotoFragment extends XCBaseFragment {
                                 resizeImage(uri);
                             } else {
 
-                                XC.getCacheThreadPool().execute(new Runnable() {
+                                XCExecutor.getCache().execute(new Runnable() {
                                     Bitmap bitmap;
 
                                     @Override

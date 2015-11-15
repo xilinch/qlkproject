@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.function.helper.XCTimeHelper;
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
@@ -89,7 +90,7 @@ public class TimerActivity extends MActivity {
     ScheduledExecutorService scheduled;
 
     private void timer3() {
-        scheduled = XC.getScheduledThreadPool();
+        scheduled = XCExecutor.getScheduledFix();
         scheduled.schedule(new Runnable() {
             @Override
             public void run() {

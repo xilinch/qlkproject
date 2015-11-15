@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.app.Dialog;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseActivity;
 import com.xiaocoder.android.fw.general.application.XCConfig;
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
@@ -215,7 +215,7 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
         }
 
         // 子线程
-        XC.getFixThreadPool().execute(new Runnable() {
+        XCExecutor.getFix().execute(new Runnable() {
             @Override
             public void run() {
 

@@ -1,10 +1,5 @@
 package com.xiaocoder.android.fw.general.function.fragment;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -24,13 +19,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
 import com.xiaocoder.android.fw.general.util.UtilOom;
 import com.xiaocoder.android_fw_general.R;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author xiaocoder
@@ -111,7 +111,7 @@ public class XCLocalPhotoFragment extends XCBaseFragment {
                                 XCLog.shortToast("系统获取图片失败");
                                 return;
                             }
-                            XC.getCacheThreadPool().execute(new Runnable() {
+                            XCExecutor.getCache().execute(new Runnable() {
                                 Bitmap bitmap;
 
                                 @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 
+import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.tool.XC;
@@ -194,7 +195,7 @@ public class XCRecordVoiceButtonPlus extends Button implements OnTouchListener {
     public UpdateRunnable current_time_runnable;
 
     public void startTime() {
-        XC.getCacheThreadPool().execute(current_time_runnable = new UpdateRunnable());
+        XCExecutor.getCache().execute(current_time_runnable = new UpdateRunnable());
     }
 
     public void endTime() {
