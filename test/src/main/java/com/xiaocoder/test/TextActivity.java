@@ -47,8 +47,23 @@ public class TextActivity extends MActivity {
     }
 
     private void test4() {
-        XCSP.SP
+        XCSP.spPut("1", "123 ");
+        XCSP.spPut("2", 456);
+        XCSP.spPut("3", 789.1F);
+        XCSP.spPut("4", false);
+        XCSP.spPut("5", " abc ");
+
+//        String result = XCSP.spGet("1", "abc") + XCSP.spGet("2", 0) + XCSP.spGet("3", 0.1f)
+//                + XCSP.spGet("4", true) + XCSP.spGet("5", "abc") + XCSP.spGet("6", null) + XCSP.spGet("7", "    jkl");
+//        XCLog.shortToast(result);
+
+        XCSP.spPut("1", 0.1f);
+
+        String result2 = XCSP.spGet("5", "java") + XCSP.spGet("1", 0.0f) + XCSP.spGet("2", 0) + XCSP.spGet("3", 0.1f)
+                + XCSP.spGet("4", true) + XCSP.spGet("6", null) + XCSP.spGet("7", "    jkl");
+        XCLog.shortToast(result2);
     }
+
 
     private void test3() {
         XCLog.i("UUID----" + UUID.randomUUID() + "----" + UUID.randomUUID().toString().length());
@@ -68,14 +83,14 @@ public class TextActivity extends MActivity {
 //            e.printStackTrace();
 //        }
 
-            XCLog.i(queue.peek()); //a  // peek 类似 element
-            XCLog.i(queue.peek()); //a
-            XCLog.i(queue.peek()); //a
-            XCLog.i(queue.peek()); //a
-            queue.remove("a");
-            XCLog.i(queue.peek()); //b
-            XCLog.i(queue.peek()); //b
-            XCLog.i(queue.peek()); //b
+        XCLog.i(queue.peek()); //a  // peek 类似 element
+        XCLog.i(queue.peek()); //a
+        XCLog.i(queue.peek()); //a
+        XCLog.i(queue.peek()); //a
+        queue.remove("a");
+        XCLog.i(queue.peek()); //b
+        XCLog.i(queue.peek()); //b
+        XCLog.i(queue.peek()); //b
 
 
     }
