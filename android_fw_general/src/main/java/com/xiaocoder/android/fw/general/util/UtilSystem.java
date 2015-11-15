@@ -11,12 +11,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -43,6 +45,16 @@ public class UtilSystem {
 
     }
 
+    public static void saveFileToSystem(Context context, File file) {
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), file.getName(), null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getAbsolutePath())));
+    }
+
 
     /**
      * 安装应用
@@ -62,11 +74,11 @@ public class UtilSystem {
     /**
      * 卸载应用
      */
-    public void uninstall(Context context , String packageName) {
+    public void uninstall(Context context, String packageName) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_DELETE);
         //intent.setData(Uri.parse("package:com.enen.hehe"));
-        intent.setData(Uri.parse("package:"+packageName));
+        intent.setData(Uri.parse("package:" + packageName));
         context.startActivity(intent);
     }
 
@@ -241,7 +253,7 @@ public class UtilSystem {
     /**
      * 首先取imei，如果没有取macAddress，再没有就自定义一个变量 规则：id开头的一个32位字符串，根据java.util.UUID类生成，
      * 防止重复 如果到java.util.uuid生成的时候，数据被清掉后会被清除。 但对于这样的设备，比较罕见，模拟器是一类
-     *
+     * <p/>
      * 标准的imei是15位，但是有的是14位
      */
     public static String getDeviceId(Context context) {
@@ -331,6 +343,7 @@ public class UtilSystem {
 
     /**
      * 获取运营商信息
+     *
      * @param con 上下文
      * @return String 运营商信息
      */

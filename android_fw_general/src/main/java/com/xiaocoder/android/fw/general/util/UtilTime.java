@@ -5,7 +5,7 @@ import com.xiaocoder.android.fw.general.tool.XC;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UtilTimeRange {
+public class UtilTime {
     public static void main(String[] args) {
 
         String timePoint = getCurrentTime();

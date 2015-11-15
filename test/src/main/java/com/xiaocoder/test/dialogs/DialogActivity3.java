@@ -8,7 +8,6 @@ import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.SKShareDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimHDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimVDialog;
-import com.xiaocoder.views.dialog.XCMenuDialog;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.views.dialog.XCRotateDialog;
 import com.xiaocoder.views.dialog.XCSystemHDialog;
