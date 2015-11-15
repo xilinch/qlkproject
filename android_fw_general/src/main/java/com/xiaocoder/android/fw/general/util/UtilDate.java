@@ -1,6 +1,6 @@
 package com.xiaocoder.android.fw.general.util;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
+import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.text.ParseException;
@@ -10,8 +10,99 @@ import java.util.Date;
 
 public class UtilDate {
 
+    /**
+     * 将一个时间戳转换成提示性时间字符串，如刚刚，1秒前
+     *
+     * @param timeStamp
+     * @return
+     */
+    public static String convertTimeToFormat(long timeStamp) {
+
+        long curTime = System.currentTimeMillis() / (long) 1000;
+        long time = curTime - timeStamp;
+
+        XC.i(XCConfig.TAG_SYSTEM_OUT, time + "---时间差");
+        XC.i(XCConfig.TAG_SYSTEM_OUT, curTime + "---当前时间");
+        XC.i(XCConfig.TAG_SYSTEM_OUT, timeStamp + "---timeStamp");
+
+        if (time < 60 && time >= 0) {
+            return "刚刚";
+        } else if (time >= 60 && time < 3600) {
+            return time / 60 + "分钟前";
+        } else if (time >= 3600 && time < 3600 * 24) {
+            return time / 3600 + "小时前";
+        } else if (time >= 3600 * 24 && time < 3600 * 24 * 30) {
+            return time / 3600 / 24 + "天前";
+        } else if (time >= 3600 * 24 * 30 && time < 3600 * 24 * 30 * 12) {
+            return time / 3600 / 24 / 30 + "个月前";
+        } else if (time >= 3600 * 24 * 30 * 12) {
+            return time / 3600 / 24 / 30 / 12 + "年前";
+        } else {
+            return "刚刚";
+        }
+    }
+
+
+    // 传入一个时间差， 获取剩余时间
+    public static String[] getRemainTime(long differ) {
+        differ = differ / 1000;
+        String[] result = new String[4];
+        long days = differ / (60 * 60 * 24); // 天
+        long hours = (differ - days * 60 * 60 * 24) / (60 * 60); // 小时
+        long minutes = (differ - days * (60 * 60 * 24) - hours * (60 * 60)) / (60); // 分
+        long seconds = (differ - (days * 60 * 60 * 24) - (hours * 60 * 60)) - minutes * (60); // 秒
+
+        if (days < 10) {
+            result[0] = ("0" + days);
+        } else {
+            result[0] = (days + "");
+        }
+
+        if (hours < 10) {
+            result[1] = ("0" + hours);
+        } else {
+            result[1] = (hours + "");
+        }
+
+        if (minutes < 10) {
+            result[2] = ("0" + minutes);
+        } else {
+            result[2] = (minutes + "");
+        }
+
+        if (seconds < 10) {
+            result[3] = ("0" + seconds);
+        } else {
+            result[3] = (seconds + "");
+        }
+        return result;
+    }
+
+    public static String getRemainTimeNoDay(long time) {
+        time = time / 1000;
+        String h = String.valueOf(time / 3600);
+        String m = String.valueOf(time % 3600 / 60);
+        String s = String.valueOf(time % 3600 % 60);
+
+        if (h.length() == 1) {
+            h = "0" + h;
+        }
+        if (m.length() == 1) {
+            m = "0" + m;
+        }
+        if (s.length() == 1) {
+            s = "0" + s;
+        }
+        return h + ":" + m + ":" + s;
+    }
+
 
     public static String FORMAT_VERY_SHORT = "MM月dd日";
+
+    public static String FORMAT_HH_MM = "HH:mm";
+
+    public static String FORMAT_MM_DD_HH_MM = "MM月dd日 HH:mm";
+
 
     /**
      * 英文简写（默认）如：2010-12-01
@@ -330,89 +421,55 @@ public class UtilDate {
     }
 
     /**
-     * 将一个时间戳转换成提示性时间字符串，如 刚刚，1秒前,10分钟前
-     *
-     * @param timeStamp
+     * 将一个时间戳转换成提示性时间字符串，如
+     * 2分钟内 无显示
+     * 2分钟-24小时 HH:mm
+     * 昨天 昨天 HH:mm
+     * 前天 前天 HH:mm
+     * 一年内 MM:DD HH:mm
+     * 去年 去年 MM:DD HH:mm
+     * 前年 前年 MM:DD HH:mm
+     * 更远 yyyy:MM:DD HH:mm
+     * 毫秒计算
+     * @param charttime
      * @return
      */
-    public static String convertTimeToFormat(long timeStamp) {
+    public static String convertChatDetailTimeFormat(long charttime) {
 
-        long curTime = System.currentTimeMillis() / (long) 1000;
-        long time = curTime - timeStamp;
+        long curTime = System.currentTimeMillis() ;
+        long time = curTime - charttime;
 
-        XC.i(time + "---时间差");
-        XC.i(curTime + "---当前时间");
-        XC.i(timeStamp + "---传入的时间");
+        XC.i(XCConfig.TAG_SYSTEM_OUT, time + "---时间差" + time/ 1000/ 60 + "分钟");
+        XC.i(XCConfig.TAG_SYSTEM_OUT, curTime + "---当前时间" + format(new Date(curTime), FORMAT_LONG_CN_1));
+        XC.i(XCConfig.TAG_SYSTEM_OUT, charttime + "---chartTime" + format(new Date(charttime), FORMAT_LONG_CN_1));
 
-        if (time < 60 && time >= 0) {
+        if (time < 120 * 1000 && time >= 0) {
             return "刚刚";
-        } else if (time >= 60 && time < 3600) {
-            return time / 60 + "分钟前";
-        } else if (time >= 3600 && time < 3600 * 24) {
-            return time / 3600 + "小时前";
-        } else if (time >= 3600 * 24 && time < 3600 * 24 * 30) {
-            return time / 3600 / 24 + "天前";
-        } else if (time >= 3600 * 24 * 30 && time < 3600 * 24 * 30 * 12) {
-            return time / 3600 / 24 / 30 + "个月前";
-        } else if (time >= 3600 * 24 * 30 * 12) {
-            return time / 3600 / 24 / 30 / 12 + "年前";
+        } else if (time >= 120 *1000 && time < 3600 * 24 * 1000) {
+
+            return format(new Date(charttime), FORMAT_HH_MM);
+
+        } else if (time >= 3600 * 24 * 1 * 1000 && time < 3600 * 24 * 2 * 1000) {
+
+            return "昨天" + format(new Date(charttime), FORMAT_HH_MM);
+
+        } else if (time >= 3600 * 24 * 2 * 1000 && time < 3600 * 24 * 3 * 1000) {
+
+            return "前天" + format(new Date(charttime), FORMAT_HH_MM);
+        } else if (time >= 3600 * 24 * 3 * 1000 && time < 3600 * 24 * 365 * 1 * 1000) {
+
+            return format(new Date(charttime), FORMAT_MM_DD_HH_MM);
+        } else if (time >= 3600 * 24 * 365 * 1 * 1000 && time < 3600 * 24 * 365 * 2 * 1000) {
+
+            return "去年" + format(new Date(charttime), FORMAT_MM_DD_HH_MM);
+        } else if (time >= 3600 * 24 * 365 * 2 * 1000 && time < 3600 * 24 * 365 * 3 * 1000) {
+
+            return "前年" + format(new Date(charttime), FORMAT_MM_DD_HH_MM);
+        } else if (time >= 3600 * 24 * 365 * 3 * 1000) {
+
+            return format(new Date(charttime), FORMAT_LONG_CN_1);
         } else {
             return "刚刚";
         }
     }
-
-
-    // 传入一个时间差， 获取剩余时间
-    public static String[] getRemainTime(long differ) {
-        differ = differ / 1000;
-        String[] result = new String[4];
-        long days = differ / (60 * 60 * 24); // 天
-        long hours = (differ - days * 60 * 60 * 24) / (60 * 60); // 小时
-        long minutes = (differ - days * (60 * 60 * 24) - hours * (60 * 60)) / (60); // 分
-        long seconds = (differ - (days * 60 * 60 * 24) - (hours * 60 * 60)) - minutes * (60); // 秒
-
-        if (days < 10) {
-            result[0] = ("0" + days);
-        } else {
-            result[0] = (days + "");
-        }
-
-        if (hours < 10) {
-            result[1] = ("0" + hours);
-        } else {
-            result[1] = (hours + "");
-        }
-
-        if (minutes < 10) {
-            result[2] = ("0" + minutes);
-        } else {
-            result[2] = (minutes + "");
-        }
-
-        if (seconds < 10) {
-            result[3] = ("0" + seconds);
-        } else {
-            result[3] = (seconds + "");
-        }
-        return result;
-    }
-
-    public static String getRemainTimeNoDay(long time) {
-        time = time / 1000;
-        String h = String.valueOf(time / 3600);
-        String m = String.valueOf(time % 3600 / 60);
-        String s = String.valueOf(time % 3600 % 60);
-
-        if (h.length() == 1) {
-            h = "0" + h;
-        }
-        if (m.length() == 1) {
-            m = "0" + m;
-        }
-        if (s.length() == 1) {
-            s = "0" + s;
-        }
-        return h + ":" + m + ":" + s;
-    }
-
 }

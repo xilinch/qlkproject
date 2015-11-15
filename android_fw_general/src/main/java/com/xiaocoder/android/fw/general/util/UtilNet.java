@@ -3,10 +3,7 @@ package com.xiaocoder.android.fw.general.util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.net.Inet4Address;
@@ -55,17 +52,6 @@ public class UtilNet {
             return false;
         }
 
-    }
-
-    private static String getWifiMacAddress(Context context) {
-        // 在wifi未开启状态下，仍然可以获取MAC地址
-        WifiManager wifiMgr = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo info = (null == wifiMgr ? null : wifiMgr.getConnectionInfo());
-        if (null != info) {
-            return info.getMacAddress();
-        } else {
-            return "0";
-        }
     }
 
     /**

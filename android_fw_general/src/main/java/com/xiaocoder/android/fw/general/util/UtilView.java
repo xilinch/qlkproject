@@ -13,23 +13,6 @@ import android.widget.ListView;
  */
 public class UtilView {
 
-    public static void setGone(boolean isShow, View view) {
-        if (isShow) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
-    }
-
-    public static void setVisible(boolean isShow, View view) {
-        if (isShow) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.INVISIBLE);
-        }
-    }
-
-
     public static void setGridViewStyle(GridView view, boolean show_bar, int num) {
         setGridViewStyle(view, show_bar, 0, 0, num);
     }
@@ -67,6 +50,22 @@ public class UtilView {
             view.setGroupIndicator(null);
         } else {
             view.setGroupIndicator(context.getResources().getDrawable(groupIndicate));
+        }
+    }
+
+    public static void setGone(boolean isShow, View view) {
+        if (isShow) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.GONE);
+        }
+    }
+
+    public static void setVisible(boolean isShow, View view) {
+        if (isShow) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.INVISIBLE);
         }
     }
 }

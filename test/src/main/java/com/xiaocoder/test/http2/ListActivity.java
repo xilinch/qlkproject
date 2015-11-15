@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.XCSystemVDialog;
-import com.xiaocoder.android.fw.general.util.Utils;
+import com.xiaocoder.android.fw.general.util.UtilCollections;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.middle.parse.MResponseHandlerBean;
 import com.xiaocoder.pulltorefresh.XCListViewFragment;
@@ -56,7 +56,7 @@ public class ListActivity extends MActivity {
 
                             List<TestBean> testBeans = testBean.getList(testBean.result);
 
-                            if (!Utils.isListBlank(testBeans)) {
+                            if (!UtilCollections.isListBlank(testBeans)) {
                                 TestBean bean = testBeans.get(0);
 
                                 XC.i(bean.getString(bean.commission));

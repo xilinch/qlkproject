@@ -5,7 +5,6 @@ import android.app.Service;
 import android.os.Vibrator;
 
 public class UtilVibrator {
-
 	public static void Vibrate(final Activity activity, long milliseconds) {
 		Vibrator vib = (Vibrator) activity.getSystemService(Service.VIBRATOR_SERVICE);
 		vib.vibrate(milliseconds);
@@ -14,7 +13,6 @@ public class UtilVibrator {
 		Vibrator vib = (Vibrator) activity.getSystemService(Service.VIBRATOR_SERVICE);
 		vib.vibrate(pattern, isRepeat ? 1 : -1);
 	}
-
 }
 /*需要在AndroidManifest.xml 中添加震动权限：
 <uses-permission android:name="android.permission.VIBRATE" />

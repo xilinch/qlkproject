@@ -9,9 +9,8 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
-import com.xiaocoder.android.fw.general.util.Utils;
+import com.xiaocoder.android.fw.general.util.UtilCollections;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.middle.parse.MResponseHandlerModel;
 import com.xiaocoder.pulltorefresh.XCGridViewFragment;
@@ -61,7 +60,7 @@ public class GridActivity extends MActivity {
                             XC.i(result_bean.getData().getTotalCount() + "");
                             XC.i(result_bean.getData().getTotalPages() + "");
 
-                            if (!Utils.isListBlank(result)) {
+                            if (!UtilCollections.isListBlank(result)) {
                                 XC.i(result_bean.getData().getResult().toString() + "");
                                 XC.i(result_bean.getData().getResult().get(0).getCommission() + "");
                                 XC.i(result_bean.getData().getResult().get(0).getImgUrl() + "");

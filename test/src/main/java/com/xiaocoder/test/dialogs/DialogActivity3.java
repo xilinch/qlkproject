@@ -8,6 +8,7 @@ import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.SKShareDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimHDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimVDialog;
+import com.xiaocoder.views.dialog.XCMenuDialog;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.views.dialog.XCRotateDialog;
 import com.xiaocoder.views.dialog.XCSystemHDialog;
@@ -113,10 +114,11 @@ public class DialogActivity3 extends MActivity {
     }
 
     private void showMenuDialog() {
-        menu_dialog = new XCMenuDialog(this,  "菜单", new String[]{"android", "ios", "java", "swift", "c"});
+        menu_dialog = new XCMenuDialog(this);
+        menu_dialog.update( "菜单", new String[]{"android", "ios", "java", "swift", "c"});
         menu_dialog.setOnDialogItemClickListener(new XCMenuDialog.OnDialogItemClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view,String hint) {
                 XC.shortToast(((Button) view).getText());
             }
         });

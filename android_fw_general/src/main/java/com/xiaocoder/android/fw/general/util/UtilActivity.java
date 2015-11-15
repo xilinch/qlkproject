@@ -15,6 +15,15 @@ import java.util.ArrayList;
  */
 public class UtilActivity {
 
+
+    public static void myStartActivity(XCBaseActivity activity, Class<? extends XCBaseActivity> activity_class) {
+        myStartActivity(activity, activity_class, null, null, new String[]{}, new String[]{});
+    }
+
+    public static void myStartActivity(XCBaseActivity activity, Class<? extends XCBaseActivity> activity_class, int flags) {
+        myStartActivity(activity, activity_class, null, flags, new String[]{}, new String[]{});
+    }
+
     /**
      * 在XCBaseActivity里有activity创建和销毁的 动画效果
      *
@@ -85,14 +94,6 @@ public class UtilActivity {
 
         myStartActivity(activity, intent, requestCode);
 
-    }
-
-    public static void myStartActivity(XCBaseActivity activity, Class<? extends XCBaseActivity> activity_class) {
-        myStartActivity(activity, activity_class, null, null, new String[]{}, new String[]{});
-    }
-
-    public static void myStartActivity(XCBaseActivity activity, Class<? extends XCBaseActivity> activity_class, int flags) {
-        myStartActivity(activity, activity_class, null, flags, new String[]{}, new String[]{});
     }
 
 }

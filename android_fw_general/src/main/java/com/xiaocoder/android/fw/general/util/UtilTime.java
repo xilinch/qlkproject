@@ -3,6 +3,7 @@ package com.xiaocoder.android.fw.general.util;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class UtilTime {
@@ -10,12 +11,14 @@ public class UtilTime {
 
         String timePoint = getCurrentTime();
         String timeQuantum = "01:13-23:9";
-        XC.i(m(timePoint, timeQuantum) + "");
+        boolean flag = m(timePoint, timeQuantum);
+        System.out.println(flag);
 
 
         timePoint = getCurrentTime();
         timeQuantum = "01:13-03:20";
-        XC.i(m(timePoint, timeQuantum) + "");
+        flag = m(timePoint, timeQuantum);
+        System.out.println(flag);
     }
 
     /**
@@ -24,7 +27,6 @@ public class UtilTime {
      * @return String 当前系统时间
      */
     public static String getCurrentTime() {
-
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String str = sdf.format(date);
@@ -108,4 +110,21 @@ public class UtilTime {
         return returnStr;
     }
 
+    /**
+     * 判断当前日期是星期几
+     */
+    public static int dayForWeek(Date date) {
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int dayForWeek = 0;
+        if (c.get(Calendar.DAY_OF_WEEK) == 1) {
+            dayForWeek = 7;
+        } else {
+            dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+        }
+        return dayForWeek;
+    }
 }
+
+

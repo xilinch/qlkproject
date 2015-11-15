@@ -27,7 +27,7 @@ public class XCMenuDialog extends Dialog {
         void onClick(View view, String hint);
     }
 
-    public static int TRAN_STYLE = com.xiaocoder.android_fw_general.R.style.xc_s_dialog;
+    public static int TRAN_STYLE = R.style.xc_s_dialog;
 
     /*
      * 如果这里使用getLayoutInflater(),则获取不到双圈的dialog，用LayoutInflater.from可以

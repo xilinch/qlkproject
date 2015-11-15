@@ -27,98 +27,11 @@ import java.util.regex.Pattern;
 
 public class UtilString {
 
-    /**
-     * 比较两个字符串
-     */
-    public static boolean equalsStr(String str1, String str2) {
-
-        if (str1 == null && str2 == null) {
-
-            throw new RuntimeException("UtilString.equalsString()--传入了两个null字符串");
-
-        } else if (str1 != null) {
-
-            return str1.equals(str2);
-
-        } else {
-
-            return false;
-
+    public static String getStringFromLastIndex(String origin, String symbol) {
+        if (isBlank(origin)) {
+            return "";
         }
-
-    }
-
-    /**
-     * 判断给定字符串是否包含空白符
-     * 空白串是指含有空格、制表符、回车符、换行符组成的字符串
-     * 若输入字符串为null或空字符串，也返回true
-     */
-    public static boolean isIncludeBlank(String input) {
-        if (input == null || "".equals(input))
-            return true;
-
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            if (c == ' ' || c == '\t' || c != '\r' || c != '\n') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 只判断空 和 空格
-     */
-    public static boolean isBlank(String str) {
-        return (str == null || str.trim().length() == 0);// trim()也可以去除制表符
-    }
-
-
-    public static int toInt(String str, int defValue) {
-
-        try {
-            return Integer.parseInt(str);
-        } catch (Exception e) {
-            return defValue;
-        }
-
-    }
-
-    public static long toLong(String obj, long defValue) {
-
-        try {
-            return Long.parseLong(obj);
-        } catch (Exception e) {
-            return defValue;
-        }
-
-    }
-
-    public static double toDouble(String obj, double defValue) {
-
-        try {
-            return Double.parseDouble(obj);
-        } catch (Exception e) {
-            return defValue;
-        }
-
-    }
-
-    public static boolean toBool(String b, boolean defValue) {
-        try {
-            return Boolean.parseBoolean(b);
-        } catch (Exception e) {
-            return defValue;
-        }
-    }
-
-    public static boolean isNumber(String str) {
-        try {
-            Integer.parseInt(str);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+        return origin.substring(origin.lastIndexOf(symbol) + 1, origin.length());
     }
 
     /**
@@ -141,7 +54,7 @@ public class UtilString {
     }
 
     /**
-     * 获取文件名类型
+     * 获取文件名后缀
      */
     public static String getHttpFileType(String origin) {
         int position = origin.lastIndexOf(".");
@@ -155,7 +68,7 @@ public class UtilString {
     /**
      * 获取一个url的最后的文件名， 不带文件后缀名
      */
-    public static String getHttpLastNameWithoutDotAndLine(String http_url) {
+    public static String getHttplastnameWithoutDotAndLine(String http_url) {
         int last_dot_position = http_url.lastIndexOf(".");
 
         if (last_dot_position > 0) {
@@ -171,34 +84,92 @@ public class UtilString {
     }
 
     /**
-     * 获取真实存在的文件的后缀名
+     * 比较两个字符串
      */
-    public static String getFileSuffix(File file) {
-        if (file != null && file.exists() && !file.isDirectory()) {
-            String filename = file.getName();
-            if (filename.lastIndexOf(".") < 0) {
-                return null;
-            }
-            return filename.substring(filename.lastIndexOf(".") + 1);
+    public static boolean equalsStr(String str1, String str2) {
+
+        if (str1 == null && str2 == null) {
+
+            throw new RuntimeException("UtilString.equalsString()--传入了两个null字符串");
+
+        } else if (str1 != null) {
+
+            return str1.equals(str2);
+
+        } else {
+
+            return false;
+
         }
-        return null;
+
     }
 
     /**
-     * 获取文件名(不包括后缀名)
-     *
-     * @param file
-     * @return
+     * 给String高亮显示 颜色的格式 #184DA3
      */
-    public static String getFileNameNoSuffix(File file) {
-        if (file != null && file.exists() && !file.isDirectory()) {
-            String filename = file.getName();
-            if (filename.lastIndexOf(".") < 0) {
-                return filename;
-            }
-            return filename.substring(0, filename.lastIndexOf("."));
-        }
-        return null;
+    public static void setLightString(String str, TextView textview, String color) {
+
+        // 实体对象值显示在控件上
+        SpannableString hightlight = new SpannableString(str);
+        // 高亮器
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(color));
+        hightlight.setSpan(span, 0, (str).length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+        textview.setText(hightlight);
+    }
+
+    /**
+     * 指定 位置和 颜色   ，颜色的格式
+     */
+    public static void setLightString(String str, TextView textview, int start, int end, String color) {
+        // 实体对象值显示在控件上
+        SpannableString hightlight = new SpannableString(str);
+        // 高亮器
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(color));
+        hightlight.setSpan(span, start, end, SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+        textview.setText(hightlight);
+    }
+
+    /**
+     * 颜色的格式  Color.parseColor("#FDC2B5")
+     */
+    public static void setLightAppendString(String str, TextView textview, String color) {
+        SpannableString hightlight = new SpannableString(str);
+        // 高亮器
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(color));
+        hightlight.setSpan(span, str.indexOf("：") + 1, (str).length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textview.append(hightlight);
+        textview.append(XCIO.LINE_SEPARATOR);
+    }
+
+    /**
+     * 设置textview的文本的尺寸  20
+     */
+    public static void setSizeAppendString(String str, TextView textview, int size) {
+        // 实体对象值显示在控件上
+        SpannableString sizespan = new SpannableString(str);
+        // 字体大小
+        AbsoluteSizeSpan size_span = new AbsoluteSizeSpan(size);
+        sizespan.setSpan(size_span, 0, (str).length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textview.append(sizespan);
+        textview.append(XCIO.LINE_SEPARATOR);
+    }
+
+    /**
+     * 在String上添加删除线
+     */
+    public static void setDeleteString(String str, TextView textview) {
+        // 删除线
+        SpannableString deleteLine = new SpannableString(str);
+        StrikethroughSpan delete = new StrikethroughSpan();
+        deleteLine.setSpan(delete, 0, str.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+        textview.setText(deleteLine);
+    }
+
+    /**
+     * 在String上添加删除线
+     */
+    public static void setDeleteString(TextView textview) {
+        textview.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     /**
@@ -292,6 +263,63 @@ public class UtilString {
         }
     }
 
+
+    /**
+     * 判断给定字符串是否包含空白符
+     * 空白串是指含有空格、制表符、回车符、换行符组成的字符串
+     * 若输入字符串为null或空字符串，也返回true
+     */
+    public static boolean isIncludeBlank(String input) {
+        if (input == null || "".equals(input))
+            return true;
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c == ' ' || c == '\t' || c != '\r' || c != '\n') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 只判断空 和 空格
+     */
+    public static boolean isBlank(String str) {
+        return (str == null || str.trim().length() == 0);// trim()也可以去除制表符
+    }
+
+    /**
+     * 获取真实存在的文件的后缀名
+     */
+    public static String getFileSuffix(File file) {
+        if (file != null && file.exists() && !file.isDirectory()) {
+            String filename = file.getName();
+            if (filename.lastIndexOf(".") < 0) {
+                return null;
+            }
+            return filename.substring(filename.lastIndexOf(".") + 1);
+        }
+        return null;
+    }
+
+    /**
+     * 获取文件名(不包括后缀名)
+     *
+     * @param file
+     * @return
+     */
+    public static String getFileNameNoSuffix(File file) {
+        if (file != null && file.exists() && !file.isDirectory()) {
+            String filename = file.getName();
+            if (filename.lastIndexOf(".") < 0) {
+                return filename;
+            }
+            return filename.substring(0, filename.lastIndexOf("."));
+        }
+        return null;
+    }
+
     /**
      * 是否是邮件
      */
@@ -302,15 +330,6 @@ public class UtilString {
         return emailer.matcher(email).matches();
     }
 
-    /**
-     * 检测输入的邮箱是否符合要求.
-     */
-    public static boolean validateEmail(String number) {
-        Pattern p = Pattern
-                .compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
-        Matcher m = p.matcher(number);
-        return m.matches();
-    }
 
     /**
      * 是否是电话号码
@@ -323,6 +342,104 @@ public class UtilString {
             // }
         }
         return false;
+    }
+
+    public static int toInt(String str, int defValue) {
+        try {
+            return Integer.parseInt(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defValue;
+        }
+    }
+
+    public static int toInt(Object obj) {
+        if (obj == null) {
+            return 0;
+        } else if (obj.toString().trim().replace(" ", "").equals("")) {
+            return 0;
+        }
+        return toInt(obj.toString(), 0);
+    }
+
+    public static long toLong(String obj){
+        return toLong(obj, 0);
+    }
+
+    public static long toLong(String obj, long defValue) {
+
+        try {
+            return Long.parseLong(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defValue;
+        }
+    }
+
+    public static double toDouble(String obj, double defValue) {
+        try {
+            return Double.parseDouble(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defValue;
+        }
+    }
+
+    public static double toDouble(String obj){
+        return toDouble(obj,0D);
+    }
+
+    public static boolean toBool(String b, boolean defValue) {
+        try {
+            return Boolean.parseBoolean(b);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defValue;
+        }
+    }
+
+    public static boolean toBool(String b){
+        return toBool(b,false);
+    }
+
+    public static boolean isNumber(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static String getMetaValue(Context context, String metaKey) {
+        Bundle metaData = null;
+        String apiKey = null;
+        if (context == null || metaKey == null) {
+            return null;
+        }
+        try {
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            if (null != ai) {
+                metaData = ai.metaData;
+            }
+            if (null != metaData) {
+                apiKey = metaData.getString(metaKey);
+            }
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return apiKey;
+    }
+
+    /**
+     * 检测输入的邮箱是否符合要求.
+     */
+    public static boolean validateEmail(String number) {
+        Pattern p = Pattern
+                .compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
+        Matcher m = p.matcher(number);
+        return m.matches();
     }
 
     /**
@@ -351,25 +468,6 @@ public class UtilString {
 
     }
 
-    public static String getMetaValue(Context context, String metaKey) {
-        Bundle metaData = null;
-        String apiKey = null;
-        if (context == null || metaKey == null) {
-            return null;
-        }
-        try {
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            if (null != ai) {
-                metaData = ai.metaData;
-            }
-            if (null != metaData) {
-                apiKey = metaData.getString(metaKey);
-            }
-        } catch (NameNotFoundException e) {
-
-        }
-        return apiKey;
-    }
 
 //    public String discount(String price_orign, String price_sell, int keep_dot) {
 //
@@ -390,76 +488,6 @@ public class UtilString {
 //        }
 //        return discount_text.substring(0, keep_dot + 2);
 //    }
-
-
-    /**
-     * 给String高亮显示 颜色的格式 #184DA3
-     */
-    public static void setLightString(String str, TextView textview, String color) {
-
-        // 实体对象值显示在控件上
-        SpannableString hightlight = new SpannableString(str);
-        // 高亮器
-        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(color));
-        hightlight.setSpan(span, 0, (str).length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
-        textview.setText(hightlight);
-
-    }
-
-    /**
-     * 指定 位置和 颜色   ，颜色的格式  #184DA3
-     */
-    public static void setLightString(String str, TextView textview, int start, int end, String color) {
-        // 实体对象值显示在控件上
-        SpannableString hightlight = new SpannableString(str);
-        // 高亮器
-        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(color));
-        hightlight.setSpan(span, start, end, SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
-        textview.setText(hightlight);
-    }
-
-    /**
-     * 颜色的格式  "#184DA3"
-     */
-    public static void setLightAppendString(String str, TextView textview, String color) {
-        SpannableString hightlight = new SpannableString(str);
-        // 高亮器
-        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor(color));
-        hightlight.setSpan(span, str.indexOf("：") + 1, (str).length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textview.append(hightlight);
-        textview.append(XCIO.LINE_SEPARATOR);
-    }
-
-    /**
-     * 设置textview的文本的尺寸
-     */
-    public static void setSizeAppendString(String str, TextView textview, int size) {
-        // 实体对象值显示在控件上
-        SpannableString sizespan = new SpannableString(str);
-        // 字体大小
-        AbsoluteSizeSpan size_span = new AbsoluteSizeSpan(size);
-        sizespan.setSpan(size_span, 0, (str).length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textview.append(sizespan);
-        textview.append(XCIO.LINE_SEPARATOR);
-    }
-
-    /**
-     * 在String上添加删除线
-     */
-    public static void setDeleteString(String str, TextView textview) {
-        // 删除线
-        SpannableString deleteLine = new SpannableString(str);
-        StrikethroughSpan delete = new StrikethroughSpan();
-        deleteLine.setSpan(delete, 0, str.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
-        textview.setText(deleteLine);
-    }
-
-    /**
-     * 在String上添加删除线
-     */
-    public static void setDeleteString(TextView textview) {
-        textview.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-    }
 
     /**
      * 设置第一个字母为大写
@@ -665,6 +693,21 @@ public class UtilString {
             }
         }
         return new String(out, 0, outLen);
+    }
+
+    public static String get14IMEI(String imei) {
+
+        if (!isBlank(imei)) {
+            if (imei.length() >= 15) {
+                return imei.substring(0, 14);
+            } else {
+                //小于15的情况
+                return imei;
+            }
+        } else {
+            return null;
+        }
+
     }
 
 }

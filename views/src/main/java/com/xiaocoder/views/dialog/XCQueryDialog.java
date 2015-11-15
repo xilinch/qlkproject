@@ -20,7 +20,7 @@ public class XCQueryDialog extends Dialog {
     public static int TRAN_STYLE = R.style.xc_s_dialog;
 
     /*
-     * 如果这里使用getLayoutInflater(),则获取不到双圈的dialog，用LayoutInflater.from可以
+     * 濡傛灉杩欓噷浣跨敤getLayoutInflater(),鍒欒幏鍙栦笉鍒板弻鍦堢殑dialog锛岀敤LayoutInflater.from鍙互
      */
     public LayoutInflater dialogInflater;
 

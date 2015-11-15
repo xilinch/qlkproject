@@ -30,13 +30,11 @@ public class UtilSystem {
     public static int getPid() {
 
         return android.os.Process.myPid();
-
     }
 
     public static long getThreadId() {
 
         return Thread.currentThread().getId();
-
     }
 
     public static String getThreadName() {
@@ -98,8 +96,7 @@ public class UtilSystem {
                 }
             }
         }
-        ComponentName localComponentName = localList.get(0).topActivity;
-        return localComponentName;
+        return localList.get(0).topActivity;
     }
 
     /**
@@ -156,7 +153,7 @@ public class UtilSystem {
     public static int getVersionCode(Context context) {
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NameNotFoundException e) {
             return -1;
         }
     }
@@ -167,7 +164,7 @@ public class UtilSystem {
     public static String getVersionName(Context context) {
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NameNotFoundException e) {
             return "-1";
         }
     }
@@ -293,8 +290,7 @@ public class UtilSystem {
             String macAddress = info.getMacAddress();
             if (macAddress == null) {
                 UUID u = UUID.randomUUID();
-                macAddress = "id"
-                        + u.toString().replaceAll("-", "").substring(2);
+                macAddress = "id" + u.toString().replaceAll("-", "").substring(2);
             }
             macAddress = macAddress.toLowerCase();
             return macAddress.replaceAll(":", "");

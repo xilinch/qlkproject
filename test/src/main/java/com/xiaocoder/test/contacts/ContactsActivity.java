@@ -10,16 +10,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.tool.XC;
-import com.xiaocoder.views.fragment.XCTitleCommonFragment;
-import com.xiaocoder.android.fw.general.model.XCContactModel;
-import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.android.fw.general.util.UtilContacts;
+import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
+import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 
 import java.util.List;
+
 
 public class ContactsActivity extends MActivity {
     ListView contacts_listview;
@@ -32,9 +31,9 @@ public class ContactsActivity extends MActivity {
 
     }
 
-    class ContactsAdapter extends XCBaseAdapter<XCContactModel> {
+    class ContactsAdapter extends XCBaseAdapter<UtilContacts.XCContactModel> {
 
-        public ContactsAdapter(Context context, List<XCContactModel> list) {
+        public ContactsAdapter(Context context, List<UtilContacts.XCContactModel> list) {
             super(context, list);
         }
 
@@ -84,7 +83,7 @@ public class ContactsActivity extends MActivity {
         UtilView.setListViewStyle(contacts_listview, null, 1, false);
 
         // 获取联系人
-        List<XCContactModel> list = UtilContacts.getContacts(this);
+        List<UtilContacts.XCContactModel> list = UtilContacts.getContacts(this);
         XC.i(list);
 
         // 创建adapter
