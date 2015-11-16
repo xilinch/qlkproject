@@ -332,5 +332,11 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
         }
     }
 
+    @Override
+    public void onRetry(int retryNo) {
+        super.onRetry(retryNo);
+        XCLog.i(XCConfig.TAG_HTTP_HANDLER, retryNo + "----网络连接重试---" + httpModel);
+    }
+
 }
 

@@ -29,6 +29,7 @@ import java.util.Map;
  * 5  PersistentCookieStore 见github文档
  * <p/>
  * 6  Adding HTTP Basic Auth credentials 见github文档
+ * http://loopj.com/android-async-http/
  */
 
 public class XCHttpSend {
@@ -151,12 +152,7 @@ public class XCHttpSend {
      */
     @NonNull
     private RequestParams getRequestParams(Map<String, Object> map) {
-        RequestParams params = new RequestParams();
-        for (Map.Entry<String, Object> item : map.entrySet()) {
-            String key = item.getKey();
-            Object value = item.getValue();
-            params.put(key, value);
-        }
+        RequestParams params = new RequestParams(map);
         XCLog.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
         return params;
     }
