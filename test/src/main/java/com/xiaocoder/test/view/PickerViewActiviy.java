@@ -3,7 +3,6 @@ package com.xiaocoder.test.view;
 import android.os.Bundle;
 
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 import com.xiaocoder.views.view.sx.SXPickerView;

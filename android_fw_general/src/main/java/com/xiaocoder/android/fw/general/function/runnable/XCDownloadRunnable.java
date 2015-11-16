@@ -1,10 +1,8 @@
 package com.xiaocoder.android.fw.general.function.runnable;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.io.File;
 import java.io.IOException;

@@ -10,7 +10,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.http.XCHttper;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.ptrrefresh.XCIRefreshHandler;
 import com.xiaocoder.middle.MActivity;
@@ -56,7 +56,7 @@ public class GridRefreshActivity extends MActivity {
     public static String url = "http://yyf.7lk.com/api/goods/category-goods-list?userId=399&token=c2a623a6f3c7d6e1a126f1655c13b3f0&_m=&catId=515&_v=1.0.0&page=1&num=20&ts=1438155912203&_c=&_p=android&sig=96702f0846e8cb5d2701f5e39f28ba95";
 
     public void reqeust() {
-        XC.getAsyn(false, url, new HashMap(), new MResponseHandlerModel<TestModel>(this, this, TestModel.class) {
+        XCHttper.getAsyn(false, url, new HashMap(), new MResponseHandlerModel<TestModel>(this, this, TestModel.class) {
 
             @Override
             public void success(int code, Header[] headers, byte[] arg2) {

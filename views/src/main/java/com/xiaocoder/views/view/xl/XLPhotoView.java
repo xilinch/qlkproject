@@ -24,9 +24,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.view.xl.XLPhotoViewAttacher.OnMatrixChangedListener;
 import com.xiaocoder.views.view.xl.XLPhotoViewAttacher.OnPhotoTapListener;
 import com.xiaocoder.views.view.xl.XLPhotoViewAttacher.OnViewTapListener;

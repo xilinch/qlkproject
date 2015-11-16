@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.http.XCHttper;
 import com.xiaocoder.android.fw.general.util.UtilInput;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.android_fw_general.R;
@@ -110,7 +110,7 @@ public abstract class XCBaseActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
 
-        XC.resetNetingStatus();
+        XCHttper.resetNetingStatus();
         isActivityDestroied = true;
         recoderNetFailHandler = null;
         super.onDestroy();
@@ -299,7 +299,7 @@ public abstract class XCBaseActivity extends FragmentActivity {
      * 刷新上一次网络失败的请求
      */
     public void refreshNetFailHandler() {
-        XC.sendHttpRequest(recoderNetFailHandler);
+        XCHttper.sendHttpRequest(recoderNetFailHandler);
     }
 
     public XCIResponseHandler getRecoderNetFailHandler() {

@@ -2,9 +2,7 @@ package com.xiaocoder.test.baidumap;
 
 import android.os.Bundle;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.function.MBaiduMapActivity;
 import com.xiaocoder.test.R;
 

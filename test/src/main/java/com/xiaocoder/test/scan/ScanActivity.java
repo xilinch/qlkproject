@@ -34,7 +34,6 @@ import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.XCQueryDialog;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment.RightListener;

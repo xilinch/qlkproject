@@ -14,7 +14,7 @@ import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.http.XCResponseHandler;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.http.XCHttper;
 import com.xiaocoder.android.fw.general.util.UtilSystem;
 import com.xiaocoder.middle.function.MMainActivity;
 import com.xiaocoder.views.dialog.XCSystemHDialog;
@@ -140,7 +140,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
                 public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
                         closeHttpDialog();
-                        XC.resetNetingStatus();
+                        XCHttper.resetNetingStatus();
                         if (!(activity instanceof MMainActivity)) {
                             ((XCBaseActivity) activity).myFinish();
                         }

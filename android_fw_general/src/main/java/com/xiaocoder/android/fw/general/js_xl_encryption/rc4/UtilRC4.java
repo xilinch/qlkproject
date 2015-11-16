@@ -3,9 +3,7 @@ package com.xiaocoder.android.fw.general.js_xl_encryption.rc4;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.security.Key;
 

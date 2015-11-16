@@ -1,18 +1,14 @@
-package com.xiaocoder.android.fw.general.tool;
+package com.xiaocoder.android.fw.general.http;
 
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
-import com.xiaocoder.android.fw.general.http.XCHttpSend;
 
 import java.util.Map;
 
 /**
  * Created by xiaocoder on 2015/11/12.
  */
-public class XC {
+public class XCHttper {
 
-    /**
-     * http
-     */
     protected static XCHttpSend httpSend = new XCHttpSend();
 
     public static XCHttpSend getHttpSend() {
@@ -20,12 +16,9 @@ public class XC {
     }
 
     public static void setHttpSend(XCHttpSend httpSend) {
-        XC.httpSend = httpSend;
+        XCHttper.httpSend = httpSend;
     }
 
-    /**
-     * http请求
-     */
     public static void resetNetingStatus() {
         httpSend.resetNetingStatus();
     }

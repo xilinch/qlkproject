@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.http.XCHttper;
 import com.xiaocoder.views.dialog.XCSystemVDialog;
 import com.xiaocoder.android.fw.general.util.UtilCollections;
 import com.xiaocoder.middle.MActivity;
@@ -40,7 +40,7 @@ public class ListActivity extends MActivity {
     public void request() {
 
         HashMap<String, Object> params = new HashMap<String, Object>();
-        XC.getAsyn(true, url, params,
+        XCHttper.getAsyn(true, url, params,
                 new MResponseHandlerBean<TestBean>(this, this, TestBean.class) {
 
                     @Override

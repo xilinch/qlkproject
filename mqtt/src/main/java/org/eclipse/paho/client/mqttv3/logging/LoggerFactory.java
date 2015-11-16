@@ -15,7 +15,6 @@ package org.eclipse.paho.client.mqttv3.logging;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.io.InputStream;
 import java.lang.reflect.Method;

@@ -4,13 +4,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.function.fragment.XCCameraPhotoFragment;
 import com.xiaocoder.android.fw.general.function.fragment.XCCameraPhotoFragment.OnCaremaSelectedFileListener;
 import com.xiaocoder.android.fw.general.function.fragment.XCLocalPhotoFragment;
 import com.xiaocoder.android.fw.general.function.fragment.XCLocalPhotoFragment.OnLocalSelectedFileListener;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 

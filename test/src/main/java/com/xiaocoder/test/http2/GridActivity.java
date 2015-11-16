@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.http.XCHttper;
 import com.xiaocoder.android.fw.general.util.UtilCollections;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.middle.parse.MResponseHandlerModel;
@@ -40,8 +40,8 @@ public class GridActivity extends MActivity {
     public void request() {
 
         HashMap<String,Object> params =  new HashMap<String,Object>();
-        XC.getAsyn(true, url, params,
-                new MResponseHandlerModel<TestModel>(null,this, TestModel.class) {
+        XCHttper.getAsyn(true, url, params,
+                new MResponseHandlerModel<TestModel>(null, this, TestModel.class) {
                     @Override
                     public void success(int code, Header[] headers, byte[] arg2) {
                         super.success(code, headers, arg2);

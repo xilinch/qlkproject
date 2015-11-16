@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.views.dialog.SKShareDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimHDialog;
 import com.xiaocoder.views.dialog.XCFrameAnimVDialog;
