@@ -10,8 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 
 /**
  * @author xiaocoder
@@ -27,7 +27,7 @@ public class UtilInput {
         view.requestFocus();
         view.selectAll();
         // 必须是handler.否则无法弹出 why?
-        XC.getHandler().postDelayed(new Runnable() {
+        XCApp.getBaseHandler().postDelayed(new Runnable() {
             public void run() {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);

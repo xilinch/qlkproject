@@ -1,9 +1,5 @@
 package com.xiaocoder.views.view.xc;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.media.MediaRecorder;
@@ -16,12 +12,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
 import com.xiaocoder.views.R;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * 可以录音的button，内置一个布局，不可扩展，改为用 XCRecordVoiceButtonPlus
@@ -92,7 +92,7 @@ public class XCRecordVoiceButton extends Button implements OnTouchListener {
             while (!isQuitNow && i >= 0) {
                 try {
                     timeRunnable.update(i--, time_view);
-                    XC.getHandler().post(timeRunnable);
+                    XCApp.getBaseHandler().post(timeRunnable);
                     Thread.sleep(SLEEP_TIME);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -268,7 +268,7 @@ public class XCRecordVoiceButton extends Button implements OnTouchListener {
 
     private void lessTimeOrExceptionDialog() {
         hint.setText("说话时间太短!");
-        XC.getHandler().postDelayed(new Runnable() {
+        XCApp.getBaseHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 closetDialog();

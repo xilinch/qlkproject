@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseActivity;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
@@ -221,7 +222,7 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
 
                 parse(bytes);
 
-                XC.getHandler().post(new Runnable() {
+                XCApp.getBaseHandler().post(new Runnable() {
                     @Override
                     public void run() {
                         // 增加activity是否销毁的判断

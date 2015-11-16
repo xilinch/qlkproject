@@ -106,8 +106,8 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
         if (oClient instanceof AsyncHttpClient) {
             // 添加header
             AsyncHttpClient client = (AsyncHttpClient) oClient;
-            client.addHeader("_v", UtilSystem.getVersionCode(XCApp.getBase_applicationContext()) + "");// 版本号，必填
-            client.addHeader("_m", UtilSystem.getMacAddress(XCApp.getBase_applicationContext()));// 设备的mac地址，选填
+            client.addHeader("_v", UtilSystem.getVersionCode(XCApp.getBaseApplicationContext()) + "");// 版本号，必填
+            client.addHeader("_m", UtilSystem.getMacAddress(XCApp.getBaseApplicationContext()));// 设备的mac地址，选填
             client.addHeader("_c", "2222");// JSONP的回调函数名 ,可选
             client.addHeader("_p", "1"); // 平台，必填
         } else {

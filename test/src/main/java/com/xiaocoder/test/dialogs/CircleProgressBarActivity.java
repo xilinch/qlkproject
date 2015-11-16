@@ -35,7 +35,7 @@ public class CircleProgressBarActivity extends MActivity {
 
         for (int i = 0; i < 10; i++) {
             final int finalI = i;
-            XC.getHandler().postDelayed(new Runnable() {
+            XCApp.getBaseHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (finalI * 10 >= 90) {

@@ -91,7 +91,7 @@ public class XCFrameAnimVDialog extends Dialog {
         if (imageIdList == null) {
             return mContext.getResources().getDrawable(anim_framelist_id);
         } else {
-            return UtilAnim.getAnimationDrawable(XCApp.getBase_applicationContext(), imageIdList, timeGap);
+            return UtilAnim.getAnimationDrawable(XCApp.getBaseApplicationContext(), imageIdList, timeGap);
         }
     }
 

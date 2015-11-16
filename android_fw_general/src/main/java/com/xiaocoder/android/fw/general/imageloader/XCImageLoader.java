@@ -7,11 +7,11 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.widget.ImageView;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -100,7 +100,7 @@ public class XCImageLoader implements XCIImageLoader {
         this.context = context;
         this.defaultImageId = defaultImageId;
 
-        this.handler = XC.getHandler();
+        this.handler = XCApp.getBaseHandler();
         this.lock = new Object();
         this.threadservice = XCExecutor.getCache();
 

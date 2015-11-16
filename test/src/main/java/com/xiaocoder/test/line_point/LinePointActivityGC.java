@@ -3,11 +3,11 @@ package com.xiaocoder.test.line_point;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
-import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
+import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 
 public class LinePointActivityGC extends MActivity {
     int i = 10;
@@ -43,7 +43,7 @@ public class LinePointActivityGC extends MActivity {
                 XCLog.i(fragment.toString());
                 XCLog.i(fragment.getActivity());
 
-                XC.getHandler().postDelayed(new Runnable() {
+                XCApp.getBaseHandler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         XCLog.i("handler --" + test_imageview); // 不为空

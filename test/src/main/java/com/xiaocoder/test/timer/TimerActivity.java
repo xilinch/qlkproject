@@ -2,11 +2,11 @@ package com.xiaocoder.test.timer;
 
 import android.os.Bundle;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.function.helper.XCTimeHelper;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 
@@ -66,7 +66,7 @@ public class TimerActivity extends MActivity {
             @Override
             public void run() {
 
-                XC.getHandler().post(new Runnable() {
+                XCApp.getBaseHandler().post(new Runnable() {
                     @Override
                     public void run() {
                         index = index + 1;

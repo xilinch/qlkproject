@@ -2,8 +2,8 @@ package com.xiaocoder.test.dialogs;
 
 import android.os.Bundle;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
@@ -45,7 +45,7 @@ public class ProgressViewActivity extends MActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    XC.getHandler().post(new Runnable() {
+                    XCApp.getBaseHandler().post(new Runnable() {
                         @Override
                         public void run() {
                             view.setProgress(view.getProgress() + 2);

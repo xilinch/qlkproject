@@ -2,26 +2,29 @@ package com.xiaocoder.android.fw.general.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
 
 import com.xiaocoder.android.fw.general.util.UtilScreen;
 import com.xiaocoder.android.fw.general.util.UtilSystem;
 
-/**
- * 1 存储activity ， 回到首页activity， 弹出指定activity等
- * 2 线程池    handler  图片加载  log等
- */
 public class XCApp extends Application {
 
-    protected static Context base_applicationContext;
+    protected static Context baseApplicationContext;
+    protected static Handler baseHandler;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        base_applicationContext = getApplicationContext();
+        baseApplicationContext = getApplicationContext();
+        baseHandler = new Handler();
     }
 
-    public static Context getBase_applicationContext() {
-        return base_applicationContext;
+    public static Context getBaseApplicationContext() {
+        return baseApplicationContext;
+    }
+
+    public static Handler getBaseHandler() {
+        return baseHandler;
     }
 
     /**

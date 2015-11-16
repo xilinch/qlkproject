@@ -1,6 +1,5 @@
 package com.xiaocoder.android.fw.general.tool;
 
-import android.os.Handler;
 import android.widget.ImageView;
 
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
@@ -13,10 +12,7 @@ import java.util.Map;
  * Created by xiaocoder on 2015/11/12.
  */
 public class XC {
-    /**
-     * 主线程中的handler
-     */
-    protected static Handler handler = new Handler();
+
     /**
      * http
      */
@@ -26,15 +22,6 @@ public class XC {
      * 图片加载 -- 缓存路径
      */
     protected static XCIImageLoader imageLoader;
-
-
-    public static Handler getHandler() {
-        return handler;
-    }
-
-    public static void setHandler(Handler handler) {
-        XC.handler = handler;
-    }
 
     public static XCHttpSend getHttpSend() {
         return httpSend;

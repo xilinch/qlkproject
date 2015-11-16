@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
 import com.xiaocoder.views.R;
 
@@ -182,7 +182,7 @@ public class XCRecordVoiceButtonPlus extends Button implements OnTouchListener {
             while (!isQuitNow && i >= 0) {
                 try {
                     timeRunnable.update(i--);
-                    XC.getHandler().post(timeRunnable);
+                    XCApp.getBaseHandler().post(timeRunnable);
                     Thread.sleep(SLEEP_TIME);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -344,7 +344,7 @@ public class XCRecordVoiceButtonPlus extends Button implements OnTouchListener {
     }
 
     private void quit(final OnButtonStatus.RecoderStop stop, long time) {
-        XC.getHandler().postDelayed(new Runnable() {
+        XCApp.getBaseHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 closetDialog(stop);

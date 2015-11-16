@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilDate;
 import com.xiaocoder.android.fw.general.util.UtilOom;
 import com.xiaocoder.android_fw_general.R;
@@ -118,7 +118,7 @@ public class XCCameraPhotoFragment extends XCBaseFragment {
                                     public void run() {
                                         bitmap = UtilOom.getBitmapForLargeByUri(getActivity(), uri, 500, Bitmap.Config.RGB_565);
 
-                                        XC.getHandler().post(new Runnable() {
+                                        XCApp.getBaseHandler().post(new Runnable() {
                                             @Override
                                             public void run() {
                                                 getImage(bitmap);

@@ -2,8 +2,8 @@ package com.xiaocoder.android.fw.general.function.helper;
 
 import android.app.Dialog;
 
+import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
-import com.xiaocoder.android.fw.general.tool.XC;
 
 import java.io.File;
 
@@ -55,7 +55,7 @@ public class XCCleanCacheHelper {
                     return;
                 }
                 // 文件存在，则开始转圈
-                XC.getHandler().post(new Runnable() {
+                XCApp.getBaseHandler().post(new Runnable() {
                     @Override
                     public void run() {
                         if (mDeletingDialog != null) {
@@ -69,7 +69,7 @@ public class XCCleanCacheHelper {
                 } else {
                     file.delete();
                 }
-                XC.getHandler().postDelayed(new Runnable() {
+                XCApp.getBaseHandler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if (mDeletingDialog != null) {

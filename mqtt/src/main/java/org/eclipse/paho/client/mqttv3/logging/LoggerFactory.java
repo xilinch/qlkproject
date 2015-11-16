@@ -119,7 +119,7 @@ public class LoggerFactory {
     public static ResourceBundle createBundle() {
 
         try {
-            InputStream inputStreamFromAssets = XCIOAndroid.getInputStreamFromAsserts(XCApp.getBase_applicationContext(), "logcat.properties");
+            InputStream inputStreamFromAssets = XCIOAndroid.getInputStreamFromAsserts(XCApp.getBaseApplicationContext(), "logcat.properties");
             XCLog.i(TAG_HEART, "getResourceBundleForLogger");
             return new PropertyResourceBundle(inputStreamFromAssets);
         } catch (Exception e) {
