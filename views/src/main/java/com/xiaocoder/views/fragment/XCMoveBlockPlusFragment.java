@@ -11,7 +11,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
-import com.xiaocoder.android.fw.general.tool.XC;
+import com.xiaocoder.android.fw.general.imageloader.XCImager;
 import com.xiaocoder.android.fw.general.util.UtilScreen;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.views.R;
@@ -154,7 +154,7 @@ public class XCMoveBlockPlusFragment extends XCBaseFragment {
                         uri = imageUris[index++];
                     }
                     if (uri != null) {
-                        XC.displayImage(uri, xc_id_move_block_imageview);
+                        XCImager.displayImage(uri, xc_id_move_block_imageview);
                         UtilView.setGone(true, xc_id_move_block_imageview);
                     } else {
                         UtilView.setGone(false, xc_id_move_block_imageview);

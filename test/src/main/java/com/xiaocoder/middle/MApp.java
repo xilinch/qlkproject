@@ -5,18 +5,18 @@ import android.content.Context;
 import com.umeng.analytics.MobclickAgent;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
-import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
 import com.xiaocoder.android.fw.general.db.XCExceptionDao;
+import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
+import com.xiaocoder.android.fw.general.exception.XCExceptionModel;
 import com.xiaocoder.android.fw.general.exception.XCIException2Server;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.imageloader.JSImageLoader;
 import com.xiaocoder.android.fw.general.imageloader.XCAsynLoader;
 import com.xiaocoder.android.fw.general.imageloader.XCImageLoader;
+import com.xiaocoder.android.fw.general.imageloader.XCImager;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.io.XCSP;
-import com.xiaocoder.android.fw.general.exception.XCExceptionModel;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.test.R;
 
 /**
@@ -83,19 +83,19 @@ public class MApp extends XCApp {
 
     private void initImageLoader() {
 
-        XC.setImageLoader(new XCAsynLoader(MConfig.getImageloader(getApplicationContext()),
+        XCImager.initImager(new XCAsynLoader(MConfig.getImageloader(getApplicationContext()),
                 MConfig.default_image_options
         ));
     }
 
     private void initImageLoader2() {
-        XC.setImageLoader(new XCImageLoader(getApplicationContext(),
+        XCImager.initImager(new XCImageLoader(getApplicationContext(),
                 XCIOAndroid.createDirInAndroid(getApplicationContext(), MConfig.CACHE_DIR),
                 R.drawable.image_a));
     }
 
     private void initImageLoader3() {
-        XC.setImageLoader(new JSImageLoader(R.drawable.image_a));
+        XCImager.initImager(new JSImageLoader(R.drawable.image_a));
     }
 
     private void initCrash() {

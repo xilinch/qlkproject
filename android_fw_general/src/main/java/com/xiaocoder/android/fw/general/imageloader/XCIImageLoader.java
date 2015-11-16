@@ -4,8 +4,6 @@ import android.widget.ImageView;
 
 /**
  * Created by xiaocoder on 2015/10/15.
- * version: 1.2.0
- * description:
  */
 public interface XCIImageLoader {
 

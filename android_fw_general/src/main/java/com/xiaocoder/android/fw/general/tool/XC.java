@@ -1,10 +1,7 @@
 package com.xiaocoder.android.fw.general.tool;
 
-import android.widget.ImageView;
-
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.http.XCHttpSend;
-import com.xiaocoder.android.fw.general.imageloader.XCIImageLoader;
 
 import java.util.Map;
 
@@ -18,36 +15,12 @@ public class XC {
      */
     protected static XCHttpSend httpSend = new XCHttpSend();
 
-    /**
-     * 图片加载 -- 缓存路径
-     */
-    protected static XCIImageLoader imageLoader;
-
     public static XCHttpSend getHttpSend() {
         return httpSend;
     }
 
     public static void setHttpSend(XCHttpSend httpSend) {
         XC.httpSend = httpSend;
-    }
-
-    public static XCIImageLoader getImageLoader() {
-        return imageLoader;
-    }
-
-    public static void setImageLoader(XCIImageLoader imageLoader) {
-        XC.imageLoader = imageLoader;
-    }
-
-    /**
-     * 图片加载
-     */
-    public static void displayImage(String uri, ImageView imageView, Object... options) {
-        imageLoader.display(uri, imageView, options);
-    }
-
-    public static void displayImage(String uri, ImageView imageView) {
-        imageLoader.display(uri, imageView);
     }
 
     /**

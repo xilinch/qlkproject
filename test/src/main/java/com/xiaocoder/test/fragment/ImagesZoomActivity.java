@@ -3,12 +3,12 @@ package com.xiaocoder.test.fragment;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.xiaocoder.android.fw.general.imageloader.XCImager;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
-import com.xiaocoder.views.fragment.XCTitleCommonFragment;
-import com.xiaocoder.views.fragment.XCImagesZoomFragment;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
+import com.xiaocoder.views.fragment.XCImagesZoomFragment;
+import com.xiaocoder.views.fragment.XCTitleCommonFragment;
 
 import java.util.ArrayList;
 
@@ -54,7 +54,7 @@ public class ImagesZoomActivity extends MActivity {
                 // ------------->补充这里即可--------->用你的图片加载方式加载--->url为图片的链接
                 //imageview.setImageResource(R.drawable.ic_launcher);
                 XCLog.i(url);
-                XC.displayImage(url, imageview);
+                XCImager.displayImage(url, imageview);
             }
         });
 

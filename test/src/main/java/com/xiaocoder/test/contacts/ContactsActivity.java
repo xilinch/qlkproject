@@ -10,8 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
+import com.xiaocoder.android.fw.general.imageloader.XCImager;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.android.fw.general.util.UtilContacts;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.middle.MActivity;
@@ -58,7 +58,7 @@ public class ContactsActivity extends MActivity {
 
             // 获取和设置控件的显示值
             holder.textview.setText(bean.name + "--" + bean.email + "--" + bean.phone_number);
-            XC.displayImage("http://www.baidu.com/img/bdlogo.png", holder.imageview);
+            XCImager.displayImage("http://www.baidu.com/img/bdlogo.png", holder.imageview);
 
             return convertView;
 
