@@ -1,4 +1,4 @@
-package com.xiaocoder.android.fw.general.model;
+package com.xiaocoder.android.fw.general.exception;
 
 import java.io.Serializable;
 

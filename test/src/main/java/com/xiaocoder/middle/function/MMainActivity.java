@@ -8,7 +8,7 @@ import com.xiaocoder.android.fw.general.db.XCExceptionDao;
 import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.model.XCExceptionModel;
+import com.xiaocoder.android.fw.general.exception.XCExceptionModel;
 import com.xiaocoder.middle.MActivity;
 
 import java.util.List;

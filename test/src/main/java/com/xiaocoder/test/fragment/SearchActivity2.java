@@ -7,7 +7,7 @@ import android.widget.Button;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.views.fragment.XCSearchRecordFragment;
 import com.xiaocoder.views.fragment.XCTitleSearchFragment;
-import com.xiaocoder.android.fw.general.model.XCSearchRecordModel;
+import com.xiaocoder.android.fw.general.db.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.util.UtilActivity;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.middle.MDbHelper;

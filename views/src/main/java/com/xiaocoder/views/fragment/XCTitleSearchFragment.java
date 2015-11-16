@@ -18,7 +18,7 @@ import com.xiaocoder.android.fw.general.application.XCBaseFragment;
 import com.xiaocoder.android.fw.general.db.XCDbHelper;
 import com.xiaocoder.android.fw.general.db.XCSearchDao;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.model.XCSearchRecordModel;
+import com.xiaocoder.android.fw.general.db.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.util.UtilString;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.views.R;

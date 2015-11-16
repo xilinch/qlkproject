@@ -1,4 +1,4 @@
-package com.xiaocoder.android.fw.general.model;
+package com.xiaocoder.android.fw.general.http;
 
 import com.xiaocoder.android.fw.general.http.XCHttpType;
 

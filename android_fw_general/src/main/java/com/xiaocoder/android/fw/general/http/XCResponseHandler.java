@@ -13,7 +13,6 @@ import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.json.XCJsonParse;
-import com.xiaocoder.android.fw.general.model.XCHttpModel;
 import com.xiaocoder.android.fw.general.tool.XC;
 
 import org.apache.http.Header;

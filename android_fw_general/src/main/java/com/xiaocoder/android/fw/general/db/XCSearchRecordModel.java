@@ -1,4 +1,4 @@
-package com.xiaocoder.android.fw.general.model;
+package com.xiaocoder.android.fw.general.db;
 
 import java.io.Serializable;
 

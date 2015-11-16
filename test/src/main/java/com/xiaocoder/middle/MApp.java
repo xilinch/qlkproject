@@ -15,7 +15,7 @@ import com.xiaocoder.android.fw.general.imageloader.XCImageLoader;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.io.XCSP;
-import com.xiaocoder.android.fw.general.model.XCExceptionModel;
+import com.xiaocoder.android.fw.general.exception.XCExceptionModel;
 import com.xiaocoder.android.fw.general.tool.XC;
 import com.xiaocoder.test.R;
 
