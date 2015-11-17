@@ -14,11 +14,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.xiaocoder.android.fw.general.db.XCSearchRecordModelDb;
+import com.xiaocoder.android.fw.general.function.searchdb.XCSearchRecordModelDb;
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.db.XCSearchRecordModel;
+import com.xiaocoder.android.fw.general.function.searchdb.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.views.R;
 import com.xiaocoder.views.view.xc.XCKeyBoardLayout;

@@ -15,9 +15,9 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
-import com.xiaocoder.android.fw.general.db.XCSearchRecordModelDb;
+import com.xiaocoder.android.fw.general.function.searchdb.XCSearchRecordModelDb;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.db.XCSearchRecordModel;
+import com.xiaocoder.android.fw.general.function.searchdb.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.util.UtilString;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.views.R;

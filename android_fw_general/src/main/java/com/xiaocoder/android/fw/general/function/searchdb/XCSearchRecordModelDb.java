@@ -1,4 +1,4 @@
-package com.xiaocoder.android.fw.general.db;
+package com.xiaocoder.android.fw.general.function.searchdb;
 
 import android.content.ContentValues;
 import android.content.Context;

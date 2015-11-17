@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.xiaocoder.android.fw.general.db.XCSearchRecordModelDb;
+import com.xiaocoder.android.fw.general.function.searchdb.XCSearchRecordModelDb;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.views.fragment.XCSearchRecordFragment;
 import com.xiaocoder.views.fragment.XCTitleSearchFragment;
-import com.xiaocoder.android.fw.general.db.XCSearchRecordModel;
+import com.xiaocoder.android.fw.general.function.searchdb.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.util.UtilActivity;
 import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.middle.MDbConfig;
