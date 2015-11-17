@@ -41,4 +41,6 @@ public class XCSearchRecordModel implements Serializable {
 		this.key_word = key_word;
 	}
 
+	public XCSearchRecordModel() {
+	}
 }

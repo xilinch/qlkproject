@@ -5,9 +5,9 @@ import android.content.Context;
 import com.umeng.analytics.MobclickAgent;
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
-import com.xiaocoder.android.fw.general.db.XCExceptionDao;
 import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
 import com.xiaocoder.android.fw.general.exception.XCExceptionModel;
+import com.xiaocoder.android.fw.general.exception.XCExceptionModelDb;
 import com.xiaocoder.android.fw.general.exception.XCIException2Server;
 import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import com.xiaocoder.android.fw.general.imageloader.JSImageLoader;
@@ -106,25 +106,26 @@ public class MApp extends XCApp {
         XCCrashHandler.getInstance().setUploadServer(new XCIException2Server() {
             @Override
             public void uploadException2Server(String info, Throwable ex, Thread thread,
-                                               XCExceptionModel model, XCExceptionDao dao) {
+                                               XCExceptionModel model, XCExceptionModelDb dao) {
                 // 将未try catch的异常信息 上传到友盟
                 MobclickAgent.reportError(getApplicationContext(), info);
                 // 如果MConfig.IS_INIT_CRASH_HANDLER（枚举值中可设置）为false，则dao为空
                 if (dao != null) {
                     model.setUserId(MUser.getUserId());
-                    dao.update(model);
+                    dao.update(model, model.getUniqueId());
                     // TODO 将异常信息在下次重启应用时，上传到服务器,如果是成功上传，则更新uploadSuccess字段为“1”
+                    test(model, dao);
                 }
             }
         });
     }
 
-    public void test(XCExceptionModel model, XCExceptionDao dao) {
+    public void test(XCExceptionModel model, XCExceptionModelDb dao) {
         XCLog.itemp(dao.queryCount());
-        XCLog.itemp(dao.queryUploadFail(XCExceptionDao.SORT_ASC));
-        XCLog.itemp(dao.queryUploadFail(XCExceptionDao.SORT_DESC));
-        XCLog.itemp(dao.queryUploadSuccess(XCExceptionDao.SORT_DESC));
-        XCLog.itemp(dao.queryAll(XCExceptionDao.SORT_DESC));
+        XCLog.itemp(dao.queryUploadFail(XCExceptionModelDb.SORT_ASC));
+        XCLog.itemp(dao.queryUploadFail(XCExceptionModelDb.SORT_DESC));
+        XCLog.itemp(dao.queryUploadSuccess(XCExceptionModelDb.SORT_DESC));
+        XCLog.itemp(dao.queryAllByDESC());
         XCLog.itemp(dao.queryUnique(model.getUniqueId()));
     }
 

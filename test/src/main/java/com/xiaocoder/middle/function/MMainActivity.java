@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
-import com.xiaocoder.android.fw.general.db.XCExceptionDao;
 import com.xiaocoder.android.fw.general.exception.XCCrashHandler;
+import com.xiaocoder.android.fw.general.exception.XCExceptionModelDb;
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.exception.XCExceptionModel;
@@ -56,8 +56,13 @@ public abstract class MMainActivity extends MActivity {
      * 进入首页时或闪屏页，把未上传的异常信息上传到服务器
      */
     protected void uploadException() {
-        List<XCExceptionModel> xcExceptionModels = XCCrashHandler.getInstance().getDao().queryUploadFail(XCExceptionDao.SORT_DESC);
+        List<XCExceptionModel> xcExceptionModels = XCCrashHandler.getInstance().getExceptionModelDb().queryUploadFail(XCExceptionModelDb.SORT_DESC);
         // TODO 上传到服务器，每上传成功一条，更新model中的uploadSuccess为“1”
+        XCLog.itemp(XCCrashHandler.getInstance().getExceptionModelDb().queryCount());
+        XCLog.itemp(XCCrashHandler.getInstance().getExceptionModelDb().queryUploadFail(XCExceptionModelDb.SORT_ASC));
+        XCLog.itemp(XCCrashHandler.getInstance().getExceptionModelDb().queryUploadFail(XCExceptionModelDb.SORT_DESC));
+        XCLog.itemp(XCCrashHandler.getInstance().getExceptionModelDb().queryUploadSuccess(XCExceptionModelDb.SORT_DESC));
+        XCLog.itemp(XCCrashHandler.getInstance().getExceptionModelDb().queryAllByDESC());
     }
 
 

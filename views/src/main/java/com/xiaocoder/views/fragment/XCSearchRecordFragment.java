@@ -14,10 +14,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.xiaocoder.android.fw.general.db.XCSearchRecordModelDb;
 import com.xiaocoder.android.fw.general.function.adapter.XCBaseAdapter;
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
-import com.xiaocoder.android.fw.general.db.XCDbHelper;
-import com.xiaocoder.android.fw.general.db.XCSearchDao;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.db.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.util.UtilView;
@@ -37,7 +36,7 @@ public class XCSearchRecordFragment extends XCBaseFragment implements AdapterVie
     // 记录界面不显示状态
     XCKeyBoardLayout xc_id_fragment_search_record_keyboard_layout;
 
-    XCSearchDao dao;
+    XCSearchRecordModelDb dao;
     SearchRecordAdapter adapter;
     TextView xc_id_fragment_search_record_close;
 
@@ -96,7 +95,7 @@ public class XCSearchRecordFragment extends XCBaseFragment implements AdapterVie
             if ("清空所有历史记录".equals(xc_id_fragment_search_record_clear_button.getText())) {
                 dao.deleteAll();
                 // 查询数据库记录
-                List<XCSearchRecordModel> searchRecordBeans = dao.queryAll(XCSearchDao.SORT_DESC);
+                List<XCSearchRecordModel> searchRecordBeans = dao.queryAllByDESC();
                 if (searchRecordBeans != null && searchRecordBeans.size() > 0) {
                     xc_id_fragment_search_record_clear_button.setText("清空所有历史记录");
                 } else {
@@ -134,7 +133,7 @@ public class XCSearchRecordFragment extends XCBaseFragment implements AdapterVie
 
     public void update() {
         // 查询数据库记录 , 恢复查询历史记录
-        List<XCSearchRecordModel> searchRecordBeans = dao.queryAll(XCSearchDao.SORT_DESC);
+        List<XCSearchRecordModel> searchRecordBeans = dao.queryAllByDESC();
 
         if (searchRecordBeans != null && searchRecordBeans.size() > 0) {
             xc_id_fragment_search_record_clear_button.setText("清空所有历史记录");
@@ -189,7 +188,7 @@ public class XCSearchRecordFragment extends XCBaseFragment implements AdapterVie
         public void onClick(View view) {
             Integer position = (Integer) view.getTag();
             XCLog.dShortToast(position + "");
-            dao.delete_unique(list.get(position).getTime());
+            dao.deleteByTime(list.get(position).getTime());
             XCSearchRecordFragment.this.update();
         }
     }
@@ -197,25 +196,17 @@ public class XCSearchRecordFragment extends XCBaseFragment implements AdapterVie
     String mDbName;
     int mVersion;
     String mTableName;
-    String[] mSqls;
-    Class<? extends XCDbHelper> mDbHelper;
 
     /**
-     * @param tabName  这个fragment用到该数据库中的哪一张表
-     * @param dbHelper
-     * @param dbName   数据库名
-     * @param version  数据库版本
-     * @param sqls     数据库创建时，执行的sql
+     * @param tabName 这个fragment用到该数据库中的哪一张表
+     * @param dbName  数据库名
+     * @param version 数据库版本
      */
-    public void setDbParams(String tabName, Class<? extends XCDbHelper> dbHelper, String dbName,
-                            int version, String[] sqls) {
+    public void setDbParams(String tabName, String dbName, int version) {
         mDbName = dbName;
         mVersion = version;
         mTableName = tabName;
-        mSqls = sqls;
-        mDbHelper = dbHelper;
     }
-
 
     @Override
     public void initWidgets() {
@@ -232,7 +223,7 @@ public class XCSearchRecordFragment extends XCBaseFragment implements AdapterVie
     }
 
     public void initDao() {
-        dao = new XCSearchDao(getBaseActivity(), mTableName, mDbHelper, mDbName, mVersion, mSqls);
+        dao = new XCSearchRecordModelDb(getBaseActivity(), mDbName, mVersion, mTableName);
     }
 
     @Override

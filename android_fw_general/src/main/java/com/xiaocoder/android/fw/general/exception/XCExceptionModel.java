@@ -47,6 +47,9 @@ public class XCExceptionModel implements Serializable {
                 '}';
     }
 
+    public XCExceptionModel() {
+    }
+
     public XCExceptionModel(String info, String exceptionTime, String uploadSuccess, String userId, String uniqueId) {
         this.info = info;
         this.exceptionTime = exceptionTime;

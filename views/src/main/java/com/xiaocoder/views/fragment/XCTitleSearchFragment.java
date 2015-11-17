@@ -15,8 +15,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
-import com.xiaocoder.android.fw.general.db.XCDbHelper;
-import com.xiaocoder.android.fw.general.db.XCSearchDao;
+import com.xiaocoder.android.fw.general.db.XCSearchRecordModelDb;
 import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.db.XCSearchRecordModel;
 import com.xiaocoder.android.fw.general.util.UtilString;
@@ -35,7 +34,7 @@ public class XCTitleSearchFragment extends XCBaseFragment {
 
     OPClearEditText xc_id_fragment_search_edittext;
     TextView xc_id_fragment_search_cancle;
-    XCSearchDao dao;
+    XCSearchRecordModelDb dao;
 
     boolean isClickeble = true;
     boolean isCancleButtonVisiable;
@@ -160,11 +159,11 @@ public class XCTitleSearchFragment extends XCBaseFragment {
         int count = dao.queryCount();
 
         if (count > mRecoderNumMax) {
-            List<XCSearchRecordModel> xcSearchRecordModels = dao.queryAll(XCSearchDao.SORT_DESC);
+            List<XCSearchRecordModel> xcSearchRecordModels = dao.queryAllByDESC();
             for (int i = mRecoderNumMax; i < count; i++) {
                 XCSearchRecordModel model = xcSearchRecordModels.get(i);
                 if (model != null) {
-                    dao.delete_unique(model.getTime());
+                    dao.deleteByTime(model.getTime());
                 }
             }
         }
@@ -172,7 +171,7 @@ public class XCTitleSearchFragment extends XCBaseFragment {
 
     private void checkRecoderExistAndSave(String keyword) {
 
-        List<XCSearchRecordModel> xcSearchRecordModels1 = dao.queryAll(XCSearchDao.SORT_DESC);
+        List<XCSearchRecordModel> xcSearchRecordModels1 = dao.queryAllByDESC();
         boolean is_exist = false;
         for (XCSearchRecordModel model : xcSearchRecordModels1) {
             if (keyword.equals(model.getKey_word())) {
@@ -198,23 +197,16 @@ public class XCTitleSearchFragment extends XCBaseFragment {
     String mDbName;
     int mVersion;
     String mTableName;
-    String[] mSqls;
-    Class<? extends XCDbHelper> mDbHelper;
 
     /**
-     * @param tabName  这个fragment用到该数据库中的哪一张表
-     * @param dbHelper
-     * @param dbName   数据库名
-     * @param version  数据库版本
-     * @param sqls     数据库创建时，执行的sql
+     * @param tabName 这个fragment用到该数据库中的哪一张表
+     * @param dbName  数据库名
+     * @param version 数据库版本
      */
-    public void setDbParams(String tabName, Class<? extends XCDbHelper> dbHelper, String dbName,
-                            int version, String[] sqls) {
+    public void setDbParams(String tabName, String dbName, int version) {
         mDbName = dbName;
         mVersion = version;
         mTableName = tabName;
-        mSqls = sqls;
-        mDbHelper = dbHelper;
     }
 
 
@@ -244,7 +236,7 @@ public class XCTitleSearchFragment extends XCBaseFragment {
     }
 
     public void initDao() {
-        dao = new XCSearchDao(getBaseActivity(), mTableName, mDbHelper, mDbName, mVersion, mSqls);
+        dao = new XCSearchRecordModelDb(getBaseActivity(), mDbName, mVersion, mTableName);
     }
 
     @Override

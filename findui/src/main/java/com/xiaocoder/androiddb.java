@@ -116,7 +116,7 @@ public class androiddb {
 				+ "    @Override\n"
 				+ "    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {\n\n"
 				+ "    }\n \n"
-				// + "/**该方法可删除*/\n"
+				// + "\n"
 				// + "    public static "
 				// + createFileName
 				// +
@@ -153,7 +153,7 @@ public class androiddb {
 		sb.append("SQLiteDatabase db = getWritableDatabase();\n");
 		sb.append("ContentValues values = createContentValue(model);\n");
 		sb.append("int rows = db.update(mOperatorTableName, values, KEY_FIELD + \"=?\",new String[]{value + \"\"});\n");
-		sb.append("	//XCLog.i(XCConfig.TAG_DB, \"更新了\" + rows + \"行\");");
+		sb.append("	//XCLog.i(XCConfig.TAG_DB, \"更新了\" + rows + \"行\");\n");
 		sb.append("db.close();\n");
 		sb.append("return rows;\n}\n");
 		return sb.toString();
@@ -168,7 +168,7 @@ public class androiddb {
 				+ "> queryPage(int pageNum, int capacity){\n");
 		sb.append("String offset = (pageNum - 1) * capacity + \"\"; // 偏移量\n");
 		sb.append(" String len = capacity + \"\"; // 个数\n");
-		sb.append("SQLiteDatabase db = getWritableDatabase();\n");
+		sb.append("SQLiteDatabase db = getReadableDatabase();\n");
 		sb.append("Cursor c = db.query(mOperatorTableName, null, null, null, null, null,null, offset + \",\" + len);\n");
 		sb.append("List<" + createModelName + "> beans = new ArrayList<"
 				+ createModelName + ">();\n");
@@ -188,8 +188,8 @@ public class androiddb {
 		sb.append("//TODO 指定你的查找的字段，替换KEY_FIELD \n");
 		sb.append(" public List<" + createModelName
 				+ "> queryUnique(String value) {\n");
-		sb.append("SQLiteDatabase db = getWritableDatabase();\n");
-		sb.append("Cursor c = db.query(mOperatorTableName, null, KEY_FIELD + \"=?\", new String[]{value}, null, null, null)\n");
+		sb.append("SQLiteDatabase db = getReadableDatabase();\n");
+		sb.append("Cursor c = db.query(mOperatorTableName, null, KEY_FIELD + \"=?\", new String[]{value}, null, null, null);\n");
 		sb.append("List<" + createModelName + "> beans = new ArrayList<"
 				+ createModelName + ">();\n");
 		sb.append("while (c.moveToNext()) {\n");
@@ -208,7 +208,7 @@ public class androiddb {
 		StringBuilder sb = new StringBuilder("\n");
 		sb.append("/** 查询所有*/ \n");
 		sb.append(" public List<" + createModelName + "> queryAllByDESC() {\n");
-		sb.append("SQLiteDatabase db = getWritableDatabase();\n");
+		sb.append("SQLiteDatabase db = getReadableDatabase();\n");
 		sb.append("Cursor c = db.query(mOperatorTableName, null, null, null, null, null,_ID + SORT_DESC); // 条件为null可以查询所有\n");
 		sb.append("List<" + createModelName + "> beans = new ArrayList<"
 				+ createModelName + ">();\n");
@@ -228,7 +228,7 @@ public class androiddb {
 		StringBuilder sb = new StringBuilder("\n");
 		sb.append("/** 查询所有*/ \n");
 		sb.append(" public List<" + createModelName + "> queryAllByASC() {\n");
-		sb.append("SQLiteDatabase db = getWritableDatabase();\n");
+		sb.append("SQLiteDatabase db = getReadableDatabase();\n");
 		sb.append("Cursor c = db.query(mOperatorTableName, null, null, null, null, null,_ID + SORT_ASC); // 条件为null可以查询所有\n");
 		sb.append("List<" + createModelName + "> beans = new ArrayList<"
 				+ createModelName + ">();\n");
@@ -248,7 +248,7 @@ public class androiddb {
 		StringBuilder sb = new StringBuilder("\n");
 		sb.append("/** 查询共有多少条记录 */ \n");
 		sb.append("public int queryCount() {\n");
-		sb.append("SQLiteDatabase db = getWritableDatabase();\n");
+		sb.append("SQLiteDatabase db = getReadableDatabase();\n");
 		sb.append("Cursor c = db.query(mOperatorTableName, new String[]{\"COUNT(*)\"},null, null, null, null, null);\n");
 		sb.append("c.moveToNext();\n");
 		sb.append("int count = c.getInt(0);\n");
@@ -274,9 +274,9 @@ public class androiddb {
 
 		StringBuilder sb = new StringBuilder("\n");
 		sb.append("//TODO 指定你的查找的字段，替换KEY_FIELD \n");
-		sb.append("public int delete(String keyword) {\n");
+		sb.append("public int delete(String value) {\n");
 		sb.append("SQLiteDatabase db = getWritableDatabase();\n");
-		sb.append("int rows = db.delete(mOperatorTableName, KEY_FIELD + \"=?\",new String[]{keyword + \"\"});\n");
+		sb.append("int rows = db.delete(mOperatorTableName, KEY_FIELD + \"=?\",new String[]{value + \"\"});\n");
 		sb.append("	//XCLog.i(XCConfig.TAG_DB, \"delete-->\" + rows + \"行\");\n");
 		sb.append("db.close();\n");
 		sb.append("return rows;\n}\n");
@@ -493,3 +493,20 @@ public class androiddb {
 		}
 	}
 }
+
+
+
+// public void remit(int from, int to, int amount) {
+// SQLiteDatabase qlk_db = helper.getWritableDatabase();
+// try {
+// qlk_db.beginTransaction(); // 开始事务
+// qlk_db.execSQL("UPDATE person SET balance=balance-? WHERE id=?", new
+// Object[] { amount, from });
+// qlk_db.execSQL("UPDATE person SET balance=balance+? WHERE id=?", new
+// Object[] { amount, to });
+// qlk_db.setTransactionSuccessful(); // 事务结束时, 成功点之前的操作会被提交
+// } finally {
+// qlk_db.endTransaction(); // 结束事务, 将成功点之前的操作提交
+// qlk_db.close();
+// }
+// }

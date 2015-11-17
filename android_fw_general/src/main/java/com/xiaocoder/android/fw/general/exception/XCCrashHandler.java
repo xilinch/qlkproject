@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.xiaocoder.android.fw.general.application.XCApp;
 import com.xiaocoder.android.fw.general.application.XCConfig;
-import com.xiaocoder.android.fw.general.db.XCExceptionDao;
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
 import com.xiaocoder.android.fw.general.io.XCIO;
 import com.xiaocoder.android.fw.general.io.XCIOAndroid;
@@ -58,7 +57,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
     /**
      * 异常db
      */
-    XCExceptionDao dao;
+    XCExceptionModelDb exceptionModelDb;
     /**
      * 存入数据库的时间
      */
@@ -75,8 +74,8 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
         return INSTANCE;
     }
 
-    public XCExceptionDao getDao() {
-        return dao;
+    public XCExceptionModelDb getExceptionModelDb() {
+        return exceptionModelDb;
     }
 
     public XCCrashHandler init(boolean isInit, Context context, String crash_dir, boolean isShowExceptionActivity) {
@@ -93,9 +92,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
             mIsShowExceptionActivity = isShowExceptionActivity;
             mCrashDir = crash_dir;
 
-            dao = new XCExceptionDao(context, XCExceptionDbHelper.DB_TABLE_EXCEPTION, XCExceptionDbHelper.class,
-                    XCExceptionDbHelper.DB_NAME_EXCEPTION, XCExceptionDbHelper.DB_VERSION_EXCEPTION,
-                    new String[]{XCExceptionDbHelper.DB_SQL_EXCEPTION});
+            exceptionModelDb = new XCExceptionModelDb(context, "XCExceptionDb.db", 1, "exception_1");
 
             Thread.setDefaultUncaughtExceptionHandler(this);
         }
@@ -127,7 +124,7 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
 
         //上传到服务器
         if (uploadServer != null) {
-            uploadServer.uploadException2Server(info, ex, thread, model, dao);
+            uploadServer.uploadException2Server(info, ex, thread, model, exceptionModelDb);
         }
 
         endException();
@@ -147,8 +144,8 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
                 tempTime + XCConfig.UNDERLINE + UUID.randomUUID()
         );
 
-        if (dao != null) {
-            dao.insert(model);
+        if (exceptionModelDb != null) {
+            exceptionModelDb.insert(model);
         }
 
         return model;
