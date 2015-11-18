@@ -48,7 +48,7 @@ import java.util.List;
  * <p/>
  * MainActivity onDetory()
  */
-public abstract class XCBaseFragment extends Fragment implements OnClickListener {
+public abstract class XCBaseFragment extends Fragment {
 
     public ViewGroup mContainer;
 
@@ -154,10 +154,5 @@ public abstract class XCBaseFragment extends Fragment implements OnClickListener
                 fragment.onActivityResult(requestCode, resultCode, data);
             }
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

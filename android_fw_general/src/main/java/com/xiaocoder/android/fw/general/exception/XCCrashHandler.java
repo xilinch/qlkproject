@@ -131,9 +131,6 @@ public class XCCrashHandler implements UncaughtExceptionHandler {
 
     }
 
-    /**
-     * 存入数据库,userId可在MAPP中更新
-     */
     private XCExceptionModel sava2DB(String info) {
 
         XCExceptionModel model = new XCExceptionModel(

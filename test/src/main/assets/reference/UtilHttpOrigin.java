@@ -1,4 +1,4 @@
-package com.xiaocoder.android.fw.general.util;
+package reference;
 
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.io.XCIO;
