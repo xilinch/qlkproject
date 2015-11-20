@@ -21,8 +21,6 @@ public class UtilSound {
         } else {
             //关闭扬声器
             audioManager.setSpeakerphoneOn(false);
-            audioManager.setRouting(AudioManager.MODE_NORMAL, AudioManager.ROUTE_EARPIECE, AudioManager.ROUTE_ALL);
-            activity.setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
             //把声音设定成Earpiece（听筒）出来，设定为正在通话中
             audioManager.setMode(AudioManager.MODE_IN_CALL);
         }

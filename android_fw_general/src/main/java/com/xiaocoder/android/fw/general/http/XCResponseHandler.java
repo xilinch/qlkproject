@@ -144,8 +144,8 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
      */
     @Override
     public void finish() {
-        XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "----finish()");
         XCHttper.resetNetingStatus();
+        XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "----finish()");
         closeHttpDialog();
     }
 
@@ -170,10 +170,21 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
             }
         }
 
-        if (httpBack(code, headers, arg2, e)) {
-            failure(code, headers, arg2, e);
+        try {
+            if (httpBack(code, headers, arg2, e)) {
+                failure(code, headers, arg2, e);
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            XCLog.e(activity, httpModel.getUrlString() + "---httpBack（） failure（） 异常了", e1);
+        } finally {
+            try {
+                httpEnd(code, headers, arg2, e);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                XCLog.e(activity, httpModel.getUrlString() + "failure---httpEnd（） 异常了", e1);
+            }
         }
-        httpEnd(code, headers, arg2, e);
     }
 
     /**
@@ -228,11 +239,21 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
                             return;
                         }
 
-                        if (httpBack(code, headers, bytes, null)) {
-                            success(code, headers, bytes);
+                        try {
+                            if (httpBack(code, headers, bytes, null)) {
+                                success(code, headers, bytes);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            XCLog.e(activity, httpModel.getUrlString() + "---httpBack（） success（） 异常了", e);
+                        } finally {
+                            try {
+                                httpEnd(code, headers, bytes, null);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                XCLog.e(activity, httpModel.getUrlString() + "success---httpEnd（） 异常了", e);
+                            }
                         }
-
-                        httpEnd(code, headers, bytes, null);
                     }
                 });
             }
