@@ -1,0 +1,6 @@
+1 不是之前的库，可能的bug指正，项目的依赖关系，配置方向的框架，test的用处，大家的代码，xml模板的非侵入，showpage
+ 网络背景，git地址
+ 2中间层配置文件文件夹演示，adapter，异常模块与缓存db，加密包
+ 3基类介绍，tab页，http非侵入，trycatch，参数的解释，dialog的各页面的定制，解析json的gson与更改，线程解析，destroy的判断
+ 4http的同步 ， 模板的快捷代码，model生成，getid注释，数据库生成
+ 5图片加载，util，下拉刷新 分页 属性 无网的背景
