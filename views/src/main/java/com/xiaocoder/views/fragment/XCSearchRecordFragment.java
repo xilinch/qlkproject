@@ -1,6 +1,4 @@
-/**
- *
- */
+
 package com.xiaocoder.views.fragment;
 
 import android.content.Context;
@@ -28,7 +26,7 @@ import java.util.List;
 /**
  * 搜索记录界面
  */
-public class XCSearchRecordFragment extends XCBaseFragment implements AdapterView.OnItemClickListener {
+public class XCSearchRecordFragment extends XCBaseFragment  implements View.OnClickListener , AdapterView.OnItemClickListener {
 
     ListView xc_id_fragment_search_record_listview;
     Button xc_id_fragment_search_record_clear_button;

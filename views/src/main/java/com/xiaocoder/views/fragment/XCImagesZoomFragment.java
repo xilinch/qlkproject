@@ -1,7 +1,6 @@
 package com.xiaocoder.views.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
@@ -10,8 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xiaocoder.android.fw.general.function.adapter.XCAdapterViewPagerRecyle;
+
 import com.xiaocoder.android.fw.general.application.XCBaseFragment;
+import com.xiaocoder.android.fw.general.function.adapter.XCAdapterViewPagerRecyle;
 import com.xiaocoder.views.R;
 import com.xiaocoder.views.view.open.OPZoomImageView;
 
@@ -23,7 +23,7 @@ import java.util.List;
  * @date 2015-1-6 下午10:50:22
  * 1 图片可以触摸缩放 2可以初始化选中第几张图
  */
-public class XCImagesZoomFragment extends XCBaseFragment {
+public class XCImagesZoomFragment extends XCBaseFragment implements View.OnClickListener {
 
     ViewPager qlk_id_viewpager;
     TextView xc_id_fragment_viewpager_count;
@@ -42,6 +42,13 @@ public class XCImagesZoomFragment extends XCBaseFragment {
         void onLoadImage(ImageView imageview, String url);
     }
 
+    OnLoadImage on_load_image_listener;
+
+    public void setOnLoadImageListener(OnLoadImage on_load_image_listener) {
+        this.on_load_image_listener = on_load_image_listener;
+    }
+
+
     public interface OnImageClickListener {
         void onImageClickListener(int position);
     }
@@ -50,12 +57,6 @@ public class XCImagesZoomFragment extends XCBaseFragment {
 
     public void setOnImageClickListener(OnImageClickListener listener) {
         this.listener = listener;
-    }
-
-    OnLoadImage on_load_image_listener;
-
-    public void setOnLoadImageListener(OnLoadImage on_load_image_listener) {
-        this.on_load_image_listener = on_load_image_listener;
     }
 
     // 会等父fragment的onActivityCreated完成后才会调用子fragment的onCreate()方法
@@ -92,7 +93,6 @@ public class XCImagesZoomFragment extends XCBaseFragment {
         }
     }
 
-    @NonNull
     private OPZoomImageView getZoomImageView(int index) {
         OPZoomImageView imageview = new OPZoomImageView(getActivity());
         imageview.setScaleType(ImageView.ScaleType.CENTER_CROP);

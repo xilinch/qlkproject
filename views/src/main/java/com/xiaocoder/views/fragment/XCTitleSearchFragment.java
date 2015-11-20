@@ -30,7 +30,7 @@ import java.util.List;
  * @Description: 可以搜索的title
  * @date 2015-1-16 下午1:50:08
  */
-public class XCTitleSearchFragment extends XCBaseFragment {
+public class XCTitleSearchFragment extends XCBaseFragment  implements View.OnClickListener {
 
     OPClearEditText xc_id_fragment_search_edittext;
     TextView xc_id_fragment_search_cancle;

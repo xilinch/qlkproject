@@ -20,7 +20,7 @@ import com.xiaocoder.views.R;
  * 动态创建滑块
  */
 @Deprecated
-public class XCMoveBlockPlusFragment extends XCBaseFragment {
+public class XCMoveBlockPlusFragment extends XCBaseFragment  implements View.OnClickListener {
     // scrollview下面的linearlayout
     private LinearLayout xc_id_move_block_linearlayout;
     // 内容数组 如 电影 音乐 软件 游戏

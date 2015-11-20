@@ -23,7 +23,7 @@ import com.xiaocoder.android.fw.general.application.XCBaseFragment;
 import com.xiaocoder.views.R;
 
 @Deprecated
-public class XCWebViewFragment extends XCBaseFragment {
+public class XCWebViewFragment extends XCBaseFragment implements View.OnClickListener {
 
     WebView qlk_id_webview;
     String url;

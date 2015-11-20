@@ -9,6 +9,7 @@ import com.xiaocoder.middle.MActivity;
 import com.xiaocoder.test.R;
 import com.xiaocoder.views.fragment.XCImagesZoomFragment;
 import com.xiaocoder.views.fragment.XCTitleCommonFragment;
+import com.xiaocoder.views.view.open.OPZoomImageView;
 
 import java.util.ArrayList;
 
@@ -49,12 +50,18 @@ public class ImagesZoomActivity extends MActivity {
         fragment.setOnLoadImageListener(new XCImagesZoomFragment.OnLoadImage() {
 
             @Override
-            public void onLoadImage(ImageView imageview, String url) {
+            public void onLoadImage(ImageView imageview,final String url) {
                 // 这里用本地的图片模拟 ,
                 // ------------->补充这里即可--------->用你的图片加载方式加载--->url为图片的链接
                 //imageview.setImageResource(R.drawable.ic_launcher);
                 XCLog.i(url);
                 XCImager.displayImage(url, imageview);
+                ((OPZoomImageView) imageview).setOnLongPressListener(new OPZoomImageView.OnLongPressListener() {
+                    @Override
+                    public void onLongPress() {
+                        XCLog.shortToast("long " + url);
+                    }
+                });
             }
         });
 

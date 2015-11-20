@@ -34,7 +34,7 @@ import java.util.List;
  * @date 2014-12-31 上午11:30:24
  */
 @Deprecated
-public abstract class XCBaseAbsListFragment<T extends AbsListView> extends XCBaseFragment implements OnItemClickListener, OnRefreshListener2<T> {
+public abstract class XCBaseAbsListFragment<T extends AbsListView> extends XCBaseFragment implements View.OnClickListener, OnItemClickListener, OnRefreshListener2<T> {
 
     // 可以刷新的listview或gridview
     public PullToRefreshAdapterViewBase<T> base_refresh_abs_listview;
@@ -244,7 +244,6 @@ public abstract class XCBaseAbsListFragment<T extends AbsListView> extends XCBas
 
     @Override
     public void onClick(View v) {
-        super.onClick(v);
         int id = v.getId();
         if (id == R.id.xc_id_data_zero_do_button || id == R.id.xc_id_data_zero_imageview) {
             if (onBgZeroButtonClickToDoListener != null) {

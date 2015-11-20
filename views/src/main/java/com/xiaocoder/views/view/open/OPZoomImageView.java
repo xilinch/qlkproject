@@ -69,7 +69,8 @@ class Info {
 public class OPZoomImageView extends ImageView {
 
     private final static int ANIMA_DURING = 300;
-    private final static float MAX_SCALE = 2.5f;
+    /** 最大倍数 */
+    private final static float MAX_SCALE = 10.0f;// edit by xjs on 20151104-1750
     private int MAX_OVER_SCROLL = 0;
     private int MAX_FLING_OVER_SCROLL = 0;
     private int MAX_OVER_RESISTANCE = 0;
@@ -97,6 +98,7 @@ public class OPZoomImageView extends ImageView {
     private boolean imgLargeHeight;
 
     private float mScale = 1.0f;
+    private float defaultScale = 1.0f;
     private int mTranslateX;
     private int mTranslateY;
 
@@ -326,10 +328,8 @@ public class OPZoomImageView extends ImageView {
             XCLog.i(XCConfig.TAG_TEMP, mWidgetRect.height() + "---mWidgetRect.height()," + mImgRect.height() + "-- mImgRect.height()");
             XCLog.i(XCConfig.TAG_TEMP, scaleX + "---scaleX," + scaleY + "-- scaleY");
 
-            // mScale = scaleX > scaleY ? scaleX : scaleY;
-            // 修改 by xiaocoder
-            mScale = scaleX > scaleY ? scaleY : scaleX;
-
+            // mScale = scaleX > scaleY ? scaleX : scaleY;            defaultScale = scaleX > scaleY ? scaleY : scaleX;
+            mScale = defaultScale;
             mAnimaMatrix.postScale(mScale, mScale, mScreenCenter.x, mScreenCenter.y);
 
             executeTranslate();
@@ -440,9 +440,9 @@ public class OPZoomImageView extends ImageView {
         if (mScale < 1) {
             scale = 1;
             mTranslate.withScale(mScale, 1);
-        } else if (mScale > MAX_SCALE * 4) {
-            scale = MAX_SCALE * 4;
-            mTranslate.withScale(mScale, MAX_SCALE * 4);
+        } else if (mScale > MAX_SCALE) {
+            scale = MAX_SCALE;
+            mTranslate.withScale(mScale, MAX_SCALE);
         }
 
         mAnimaMatrix.getValues(mValues);
@@ -586,7 +586,23 @@ public class OPZoomImageView extends ImageView {
         }
     };
 
+    public void  setOnLongPressListener(OnLongPressListener onLongPressListener){
+        this.onLongPressListener = onLongPressListener;
+    }
+    private OnLongPressListener onLongPressListener;
+
+    public interface OnLongPressListener{
+         void onLongPress();
+    }
+
     private GestureDetector.OnGestureListener mGestureListener = new GestureDetector.SimpleOnGestureListener() {
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            if(onLongPressListener != null){
+                onLongPressListener.onLongPress();
+            }
+        }
 
         @Override
         public boolean onDown(MotionEvent e) {
@@ -690,7 +706,7 @@ public class OPZoomImageView extends ImageView {
 
             if (mScale == 1) {
                 from = 1;
-                to = MAX_SCALE;
+                to = defaultScale;
 
                 if (mImgRect.width() < mWidgetRect.width())
                     mDoubleTab.set(mScreenCenter.x, mScreenCenter.y);

@@ -28,7 +28,7 @@ import com.xiaocoder.views.R;
  */
 
 @Deprecated
-public class XCTitleCommonFragment extends XCBaseFragment {
+public class XCTitleCommonFragment extends XCBaseFragment  implements View.OnClickListener {
 
     LinearLayout xc_id_titlebar_left_layout;
     ImageView xc_id_titlebar_left_imageview;

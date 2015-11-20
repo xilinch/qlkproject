@@ -37,7 +37,7 @@ import java.util.Date;
  * @Description: 打开本地相册
  * @date 2015-1-6 下午10:50:22
  */
-public class XCLocalPhotoFragment extends XCBaseFragment {
+public class XCLocalPhotoFragment extends XCBaseFragment implements View.OnClickListener {
     ImageView xc_id_photo_local_imageview;
     public static final int LOCAL_IMAGE_REQUEST_CODE = 2;// 打开当地相册的请求码
     public static final int RESIZE_REQUEST_CODE = 3;// 裁剪的请求码

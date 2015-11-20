@@ -31,7 +31,7 @@ import java.util.UUID;
  * @Description: 拍照获取图片
  * @date 2015-1-6 下午10:50:22
  */
-public class XCCameraPhotoFragment extends XCBaseFragment {
+public class XCCameraPhotoFragment extends XCBaseFragment implements View.OnClickListener {
     ImageView xc_id_photo_camera_imageview;
     public static final int CAMERA_REQUEST_CODE = 0;// 打开当地相册的请求码
     public static final int RESIZE_REQUEST_CODE = 1;// 裁剪的请求码
