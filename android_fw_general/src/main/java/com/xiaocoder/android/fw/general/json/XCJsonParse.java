@@ -125,7 +125,7 @@ public class XCJsonParse {
             String[] items = json.split(",");
             StringBuilder builder = new StringBuilder("");
 
-            builder.append("public class  文件名  extends QlkBean {");
+            builder.append("public class  文件名  extends MBean {");
 
             LinkedHashSet<String> sub = new LinkedHashSet<String>();
 

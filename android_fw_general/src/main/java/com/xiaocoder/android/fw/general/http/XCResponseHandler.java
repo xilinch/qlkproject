@@ -12,7 +12,6 @@ import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
 import com.xiaocoder.android.fw.general.io.XCLog;
-import com.xiaocoder.android.fw.general.json.XCJsonParse;
 
 import org.apache.http.Header;
 
@@ -95,7 +94,7 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
      * @param result_http                   如果为null，不会异常，但是不会调用 有网无网的页面转换与重刷新 的功能
      * @param notify                        如果为null，不会异常，但是不会调用 请求的并行和串行的监听方法
      * @param activity                      如果为null，不会异常，但是不会showdialog，以及与context有关的功能都无法使用
-     * @param content_type                  默认为JSON，目前也只有JSON的判断，xml photo的类型待以后加
+     * @param content_type                  默认为JSON，目前也只有JSON的判断，xml 类型待以后加，photo可以直接用bytes
      * @param show_background_when_net_fail true 为展示背景 , false弹出吐司
      * @param result_bean_class             model的字节码文件
      */
@@ -150,7 +149,7 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
     }
 
     /**
-     * 主线程
+     * 主线程，该方法不要去重写
      */
     @Override
     public final void onFailure(int code, Header[] headers, byte[] arg2, Throwable e) {
@@ -206,7 +205,7 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
 
 
     /**
-     * 这里有数据解析的代码 -->在子线程中执行
+     * 这里有数据解析的代码 -->在子线程中执行，该方法不要去重写
      */
     @Override
     public final void onSuccess(final int code, final Header[] headers, final byte[] bytes) {
@@ -326,15 +325,12 @@ public abstract class XCResponseHandler<T> extends AsyncHttpResponseHandler impl
     public void parse(byte[] response_bytes) {
         try {
             XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "-----parse()");
-            // 这里仅提供通用的json格式的解析 ，有些不通用的json，需要重写parse
             if (content_type == JSON) {
                 String response_str = new String(response_bytes, XCConfig.ENCODING_UTF8);
-                // 把json串打印到控制台
+                // 把json串打印到控制台，该方法受log的isoutput开关控制
                 XCLog.i(XCConfig.TAG_HTTP, response_str);
                 // 有的时候json太长，控制台无法全部打印出来，就打印到本地的文件中，该方法受log的isoutput开关控制
                 XCLog.tempPrint(response_str);
-                // 打印bean到控制台， 然后复制，格式化，即为自动生成的假bean，该方法受log的isoutput开关控制
-                XCJsonParse.json2Bean(response_str);
 
                 result_bean = parseWay(response_str, response_bytes);
 

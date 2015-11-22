@@ -34,6 +34,9 @@ public class MResponseHandlerBean<T extends MBean> extends MResponseHandler<T> {
 
         XCLog.i(XCConfig.TAG_HTTP_HANDLER, this.toString() + "-----parseWay()");
 
+        // 打印bean到控制台， 然后复制，格式化，即自动生成字段常量，该方法受log的isoutput开关控制
+        XCJsonParse.json2Bean(responseStr);
+
         return XCJsonParse.getJsonParseData(responseStr, result_bean_class);
     }
 

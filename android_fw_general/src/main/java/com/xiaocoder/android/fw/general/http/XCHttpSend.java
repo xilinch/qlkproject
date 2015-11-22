@@ -120,7 +120,7 @@ public class XCHttpSend {
             sendHttp(resHandler, httpType, urlString, params);
 
         } else {
-            XCLog.e(urlString + "--该请求无效，前一个请求还未返回");
+            XCLog.e(model + "--该请求无效，前一个请求还未返回");
         }
     }
 
