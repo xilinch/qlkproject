@@ -4,7 +4,7 @@ import org.apache.http.Header;
 
 /**
  * Created by xiaocoder on 2015/10/30.
- * description: 对http请求回调的刚开始和结束的拦截
+ * description: 对http请求回调后的刚开始和结束的拦截
  */
 public interface XCIHttpNotify {
 

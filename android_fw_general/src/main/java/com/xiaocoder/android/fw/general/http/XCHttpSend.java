@@ -40,6 +40,10 @@ public class XCHttpSend {
      * 上一个请求是否正在进行
      */
     private boolean isNeting;
+    /**
+     * 网络超时,毫秒
+     */
+    public int timeOut = 10000;
 
     public XCHttpSend() {
         initAsynHttpClient();
@@ -47,7 +51,7 @@ public class XCHttpSend {
 
     public void initAsynHttpClient() {
         client = new AsyncHttpClient();
-        client.setTimeout(10000);
+        client.setTimeout(timeOut);
     }
 
     public boolean isNeting() {
@@ -152,7 +156,14 @@ public class XCHttpSend {
      */
     @NonNull
     private RequestParams getRequestParams(Map<String, Object> map) {
-        RequestParams params = new RequestParams(map);
+        RequestParams params = new RequestParams();
+        if (map != null) {
+            for (Map.Entry<String, Object> item : map.entrySet()) {
+                String key = item.getKey();
+                Object value = item.getValue();
+                params.put(key, value);
+            }
+        }
         XCLog.i(XCConfig.TAG_HTTP, "加密前参数---" + params.toString());
         return params;
     }
