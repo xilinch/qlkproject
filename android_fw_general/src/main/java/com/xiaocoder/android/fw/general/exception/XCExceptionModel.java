@@ -24,7 +24,7 @@ public class XCExceptionModel implements Serializable {
      */
     String uploadSuccess = "";
     /**
-     * 哪一个用户
+     * 哪一个用户，这个字段需要项目中去设置（可选）
      */
     String userId = "";
     /**
