@@ -8,9 +8,32 @@ import com.xiaocoder.android.fw.general.function.thread.XCExecutor;
 import java.io.File;
 
 /**
- * 删除缓存 ，removeFileAsyn（文件或文件夹）
+ * 删除缓存 ，是在子线程运行的（文件或文件夹）
  */
 public class XCCleanCacheHelper {
+
+    public interface RemoveDirListener {
+
+        /**
+         * 正要删除的文件
+         * <p/>
+         * 这个方法是在子线程中运行的
+         */
+        void removing(File file);
+
+        /**
+         * 子线程的删除文件代码执行完成，handler到主线程
+         * <p/>
+         * 这个方法是在主线程中运行的
+         */
+        void removeFinish();
+    }
+
+    RemoveDirListener removeDirListener;
+
+    public void setRemoveDirListener(RemoveDirListener removeDirListener) {
+        this.removeDirListener = removeDirListener;
+    }
 
     public boolean isGoOnDeleting;
 
@@ -34,6 +57,9 @@ public class XCCleanCacheHelper {
                         if (file.isDirectory()) {
                             removeDir(file);
                         } else {
+                            if (removeDirListener != null) {
+                                removeDirListener.removing(file);
+                            }
                             file.delete();
                         }
                     }
@@ -67,11 +93,18 @@ public class XCCleanCacheHelper {
                 if (file.isDirectory()) {
                     removeDir(file);
                 } else {
+                    if (removeDirListener != null) {
+                        removeDirListener.removing(file);
+                    }
                     file.delete();
                 }
                 XCApp.getBaseHandler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if (removeDirListener != null) {
+                            removeDirListener.removeFinish();
+                        }
+
                         if (mDeletingDialog != null) {
                             mDeletingDialog.cancel();
                         }
