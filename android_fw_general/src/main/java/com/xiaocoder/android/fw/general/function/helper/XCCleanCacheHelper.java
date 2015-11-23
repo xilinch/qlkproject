@@ -29,10 +29,10 @@ public class XCCleanCacheHelper {
         void removeFinish();
     }
 
-    RemoveDirListener removeDirListener;
+    RemoveDirListener mRemoveDirListener;
 
     public void setRemoveDirListener(RemoveDirListener removeDirListener) {
-        this.removeDirListener = removeDirListener;
+        this.mRemoveDirListener = removeDirListener;
     }
 
     public boolean isGoOnDeleting;
@@ -57,8 +57,8 @@ public class XCCleanCacheHelper {
                         if (file.isDirectory()) {
                             removeDir(file);
                         } else {
-                            if (removeDirListener != null) {
-                                removeDirListener.removing(file);
+                            if (mRemoveDirListener != null) {
+                                mRemoveDirListener.removing(file);
                             }
                             file.delete();
                         }
@@ -93,16 +93,16 @@ public class XCCleanCacheHelper {
                 if (file.isDirectory()) {
                     removeDir(file);
                 } else {
-                    if (removeDirListener != null) {
-                        removeDirListener.removing(file);
+                    if (mRemoveDirListener != null) {
+                        mRemoveDirListener.removing(file);
                     }
                     file.delete();
                 }
                 XCApp.getBaseHandler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (removeDirListener != null) {
-                            removeDirListener.removeFinish();
+                        if (mRemoveDirListener != null) {
+                            mRemoveDirListener.removeFinish();
                         }
 
                         if (mDeletingDialog != null) {
