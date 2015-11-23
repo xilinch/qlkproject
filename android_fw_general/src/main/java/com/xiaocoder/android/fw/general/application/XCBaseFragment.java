@@ -125,7 +125,7 @@ public abstract class XCBaseFragment extends Fragment {
 
     public void myFinish() {
         if (getActivity() != null) {
-            getBaseActivity().myFinish();
+            getBaseActivity().finish();
         }
     }
 

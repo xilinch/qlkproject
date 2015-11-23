@@ -118,9 +118,10 @@ public abstract class XCBaseActivity extends FragmentActivity {
         XCActivityHelper.delActivityFromStack(this);
     }
 
-    public void myFinish() {
+    @Override
+    public void finish() {
         UtilInput.hiddenInputMethod(this);
-        finish();
+        super.finish();
     }
 
     @Override

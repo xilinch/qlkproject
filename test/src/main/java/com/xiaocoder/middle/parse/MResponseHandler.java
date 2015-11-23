@@ -8,7 +8,6 @@ import android.view.KeyEvent;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.xiaocoder.android.fw.general.application.XCApp;
-import com.xiaocoder.android.fw.general.application.XCBaseActivity;
 import com.xiaocoder.android.fw.general.application.XCConfig;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpNotify;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
@@ -142,7 +141,7 @@ public abstract class MResponseHandler<T> extends XCResponseHandler<T> {
                         closeHttpDialog();
                         XCHttper.resetNetingStatus();
                         if (!(activity instanceof MMainActivity)) {
-                            ((XCBaseActivity) activity).myFinish();
+                            activity.finish();
                         }
                     }
                     return false;
