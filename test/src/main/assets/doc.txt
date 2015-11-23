@@ -1,6 +1,169 @@
-1 不是之前的库，可能的bug指正，项目的依赖关系，配置方向的框架，test的用处，大家的代码，xml模板的非侵入，showpage
- 网络背景，git地址
- 2中间层配置文件文件夹演示，adapter，异常模块与缓存db，加密包
- 3基类介绍，tab页，http非侵入，trycatch，参数的解释，dialog的各页面的定制，解析json的gson与更改，线程解析，destroy的判断
- 4http的同步 ， 模板的快捷代码，model生成，getid注释，数据库生成
- 5图片加载，util，下拉刷新 分页 属性 无网的背景
+
+github地址：
+
+相比之前的版本，做了很多的调整，简化了很多类，也增加了许多新功能
+
+android.fw.general包：核心包
+views包：一些常见的ui
+ptr-lib包：下拉刷新包
+test：测试包，该包里有使用该库的demo
+
+一、 android.fw.general：主要有基类activity，异常模块，日志模块，加密模块，http模块，图片加载模块，util模块等
+    1、application包
+        XCBaseActivity：
+           a：添加activity到栈，与销毁时从栈移出
+           b：重写finish方法，该方法内部会先隐藏键盘，再销毁activity
+           c：isActivityDestroied()方法，判断activity是否销毁，主要用于http回调的时候
+           d：activity的进入和退出动画
+           e：fragment使用的一系列代码
+           f：在activity的onActivityResult中，调用了fragment的onActivityResult，否则fragment的该方法无法被调用
+           g：showPage()内含showTitle()与showContent()两个方法，基类统一处理在首次打开页面时网络请求还没返回，布局页面是否可见，默认设置是可见
+         XCConfig：
+           日志的tag，便于调试时查看日志，以及一些常用符号的常量
+           TAG_SYSTEM_OUT：system.out的输出
+           TAG_HTTP：http请求过程中的日志，有状态码 ，返回的参数，json格式，等
+           TAG_JSON_TYPE：可以查看每个json字段的类型
+           TAG_ALOG：异常等重要的日志
+
+    2、exception包
+        XCCrashHandler：异常处理类，当发生异常时，会收集异常信息做以下操作
+          a：持久化异常信息到crash目录下的一个以异常发生的时间戳为命名的文件中
+          b：异常信息打印到控制台
+          c：异常信息写到log日志中
+          d：异常信息打印到手机屏幕
+          e：异常信息存入到数据库，可能情形（上传异常信息到公司服务器失败，下次重启应用时，从数据库查询上传失败的异常
+             再重新上传服务器，从数据库查询上传失败的异常的方法已经封装好，直接调用即可）
+          f：当异常发生时，会回调一个外部传入的listener，通过该listener，可以拿到与该次异常相关的很多对象信息
+        XCExceptionModelDb：异常db（该类90%的代码都是通过代码工具生成的，即以前发的dbutil代码生成工具）
+        XLShowExceptionsActivity：异常信息在手机中显示的activity（用的时候记得在清单文件里面注册）
+
+    3、function包
+          A：adapter
+             a：XCAdapterTest：方便调试用的，listview.setAdapter(new XCAdapterText(context,null);，即会有很多测试数据生成
+             b：XCAdapterViewPager：不会回收的viewpageradapter
+             c：XCAdapterViewPagerFragment：不会回收的viewpagerfragment
+             d：XCAdapterViewPagerRecyle：会回收的viewpageradapter
+             e：XCBaseAdapter：简化代码。继承该adapter，以后就不用再重复重写getList getItem getCount方法了
+             f：XLBaseAdapterExpand：expandListView可以用该adapter
+          B：fragment
+             a：XCCameraPhotoFragment：从手机的摄像头获取照片，添加该fragment对象并设置一个监听即可获取到系统回调的图片
+             b：XCLocalPhotoFragment：从手机本地获取图片，添加该fragment对象并设置一个监听即可获取到系统回调的图片
+          C：helper
+             a：XCActivityHelper
+                 1：activity的管理类，单例的
+                 2：appExit（）退出应用的方法
+                 3：toActivity(Class<? extends Activity> activity_class)，跳转到指定的activity
+                 4：一系列finishAcitity的方法
+                 5：isActivityExist（），判断该activity是否存在的方法
+             b: XCCleanCacheHelper
+                1：参数一：传入一个文件夹路径，即可清除该文件夹下的所有文件。（在子线程删除的（线程池），效率一般不是问题）
+                2：参数二：传入一个dialog，如果该dialog不为空，则会show这个dialog，如果为null，则不show这个dialog
+                3：该类内部有一个isGoOnDeleting字段，即在activity退出时，删除停止
+                4：该类可以设置一个RemoveDirListener监听器
+                        在每删除一个文件之前会回调RemoveDirListener.removing(file),该回调方法是在子线程中的
+                        在删除完之后，会回调RemoveDirListener.removeFinish()，该回调方法是在主线程中的
+             c：XCTimeHelper：一个定时器
+          D：listener
+             XCScrollListener
+                1：记录了listview滑动停止的状态，即一个Parcelable
+                2：有一个判断是否滑动到底部的方法isBottom()
+                3：可以获取到当前的索引等值
+          E：runnable
+             XCDownloadRunnable：下载的帮助类，有文件开始下载、下载进度、下载成功、下载失败的回调
+          F：searchdb
+             XCSearchRecordModel：两个字段，keyWord与时间戳
+             XCSearchRecordModelDb：内置了多张结构相同的表，一般可以应付一个应用中的有多个搜索界面的情况
+          G：thread
+             XCExecutor：
+             1、获取single线程池
+             2、获取cache线程池
+             3、获取固定数量的线程池
+             4、获取scheduled线程池
+
+    4、http包
+          XCIHttpNotify：（可选）当一个请求刚返回来的时候，以及一个请求执行结束后，会调用该接口的方法（主要用于串行，以及并发时的哪个http先返回的监听）
+          XCIHttpResult：（可选）通知activity，这次的网络请求是成功还是失败，然后统一显示无网络的背景
+          XCIResponseHandler：http执行返回的回调接口
+          XCResponseHandler：抽象类，也是XCIResponseHandler的子类
+          MResponseHandlerModel：XCResponseHandler的实现类之一，gson解析的，回调后无需手动进行gson解析，框架内部已经解析好了
+          MResponseHandlerBean: XCResponseHandler的实现类之一，jsonbean解析的，回调后无需手动写解析，可以用于一个小接口
+
+                1、model的解析是在框架的内部子线程中进行的，效率一般不是问题
+                2、success fail finish方法都是在try catch中进行的，即框架内部进行了trycatch，activity中的http业务代码里不必再trycatch，直接写逻辑即可
+                3、判断了该activity在http回调时是否已经销毁，如果已经销毁，则不继续执行后面的代码了，效率更高更稳定了
+                4、（重要）解耦，不再依赖于某个第三方库，以后如果更改http请求库，上层代码很少改动，方便以后更改底层的http库
+                   比如现在的框架需要传递的参数：public void getAsyn(boolean needSecret, boolean isFrequentlyClick, boolean isShowDialog,
+                   String urlString, Map<String, Object> map, XCIResponseHandler resHandler)
+                   前5个参数都是javase的标准库的数据类型，XCIResponseHandler是框架内定义的一个接口，这些参数并不依赖于第三方的封装类（
+                   以前用的是第三方的RequestParams、AsyncHttpResponseHandler，依赖较强）
+                5、yourCompanySecret（needSecret），框架统一进行加密的处理，且新增一个是否加密的字段，因为有时候，某些接口并不需要加密
+                6、yourCompanyResultRule（），框架统一进行json解析规则的处理，比如code值是多少时，算成功
+                7、showHttpDialog（） closeHttpDialog（），框架统一处理了dialog的显示和隐藏，无需手动操作dialog，且新增一个功能
+                   每个页面都可以很轻便的显示不同的dialog，即如果某个页面不显示默认的dialog，只需要在这个页面重写showHttpDialog方法即可，
+                   closeHttpDialog一般不需要重写
+          XCHttpSend：
+             public void getAsyn(boolean needSecret, boolean isFrequentlyClick, boolean isShowDialog,
+                String urlString, Map<String, Object> map, XCIResponseHandler resHandler)
+              isFrequentlyClick：是否可以频繁的点击（比如登录按钮，购物车的加减按钮、收藏按钮等）
+                如果为true：只有当前一个http请求返回来了，这次点击的请求才可以执行，否则请求无效
+                如果为false：点击一次，就发送一次请求
+
+    5、imageloader包
+          XCIImageLoader：图片加载的接口
+          XCIImageLoader的实现类：
+                XCAsynLoader（universal-image-loader-1.9.0-with-sources.jar）第三方的
+                XCImageLoader（以前的）
+                JSImageLoader（山哥的）
+          XCImager：该类有图片的加载方法，可以用这个类的方法加载图片。app初始化的时候传入一个XCIImageLoader的实现类即可
+          注：不要直接用实现类，便于以后更换图片加载库而不影响上层的代码
+
+    6、io包
+        XCIOAndroid（都是静态方法）
+           1、内部存储、外部存储文件或文件夹的创建只需一行代码（创建成功或已经存在则返回该file对象、创建失败返回null）
+                a：createDirInAndroid（context,"aa/bb/cc"）
+                   1、如果有sd卡，在在sd卡里创建；如果没有sd卡，则在内部存储中创建
+                   2、如果有sd卡，则在getExternalStorageDirectory（）的目录下，创建aa文件夹->bb文件夹->cc文件夹
+                b：createDirInSDCard（"aa/bb/cc"）
+                   表示仅在sd卡下建立目录，如果没有sd卡，返回null
+                c：createFileInAndroid（context，"aa/bb/cc","123.txt"）
+                   1、如果有sd卡，在在sd卡里创建；如果没有sd卡，则在内部存储中创建
+                   2、如果有sd卡，则在getExternalStorageDirectory（）的目录下，创建aa文件夹->bb文件夹->cc文件夹，再创建"123.txt"文件
+           2、isSDcardExist（），sd卡是否存在的方法
+           3、getInputStreamFromUri（）  getInputStreamFromRaw（）  getInputStreamFromAsserts等（）
+           4、getStringFromRaw（）、getStringFromAssets（）
+           5、写入和读取sd卡或者内部存储也只需一句代码
+                  write2SDCard("aa/bb/cc", "123.txt", "hello!")
+                  1、如果有sd卡则执行，没有则抛异常
+                  2、如果目录不存在，则会创建aa/bb/cc目录，再创建123.txt文件，然后写入hello！到文件中
+                  3、如果目录存在，则会直接写hello！到123.txt文件中
+
+         XCLog（都是静态方法）
+           1、XCLog.shortToast(Object obj)显示土司，obj可以是null
+              XCLog.dShortToast(Object obj)显示土司，obj可以是null，仅测试与开发环境会显示，线上环境不显示
+           不同手机上的toast样式可能不一致，如果统一这个shortToast（），以后可以在方法内部自定义一个统一的toast样式
+           ，且该shortToast方法对频繁点击进行了限制，两秒内的多次点击视为一次toast
+           2、XCLog.i("hello!"),调试环境会打印到控制台并写入log，但是线上环境不会
+              XCLog.e(),都会写入log，并打印到控制台
+           3、clearLog（）,清空log的方法
+           4、对log文件的大小做了限制，每当log类中的内从大于70M时，会自动清空，然后重建
+
+        XCSP（都是静态方法）
+           XCSP.putString(key,value),XCSP.getString(key,default)
+           XCSP.spPut(key,value),XCSP.spGet(key,default)
+
+    7、js_xl_encryption包
+        含有 aes des md5 rc4 rsa加密的工具类
+
+    8、json包
+       XCJsonBean：加强了的jsonbean
+       XCJsonParse：可以解析一般格式的json对象和json数组
+
+    9、util包
+       UtilCollections：isListBlank(List list)，判断一个集合是否是空
+       UtilString： equalsStr(String str1, String str2) ，判断两个字符串是否相等，
+       UtilScreen：获取屏幕的宽高dp px，以及dp px互转，sp转px等
+
+
+
+
+
