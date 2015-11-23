@@ -9,6 +9,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.xiaocoder.android.fw.general.application.XCBaseActivity;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIHttpResult;
 import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
+import com.xiaocoder.android.fw.general.http.XCHttper;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.test.R;
 import com.xiaocoder.views.view.open.OPSwipeBackLayout;
@@ -24,6 +25,10 @@ public abstract class MActivity extends XCBaseActivity implements View.OnClickLi
      * 向右滑动，销毁activity
      */
     public OPSwipeBackLayout back_layout;
+    /**
+     * 记录网络失败的请求，待重刷新
+     */
+    private XCIResponseHandler recoderNetFailHandler;
     /**
      * 无网络时显示的界面
      */
@@ -121,5 +126,29 @@ public abstract class MActivity extends XCBaseActivity implements View.OnClickLi
 
         back_layout.attachToActivity(this);
 
+    }
+
+    /**
+     * 刷新上一次网络失败的请求
+     */
+    public void refreshNetFailHandler() {
+        XCHttper.sendHttpRequest(recoderNetFailHandler);
+    }
+
+    public XCIResponseHandler getRecoderNetFailHandler() {
+        return recoderNetFailHandler;
+    }
+
+    /**
+     * 记录最近一次网络失败的请求
+     */
+    public void setRecoderNetFailHandler(XCIResponseHandler recoderNetFailHandler) {
+        this.recoderNetFailHandler = recoderNetFailHandler;
+    }
+
+    @Override
+    protected void onDestroy() {
+        recoderNetFailHandler = null;
+        super.onDestroy();
     }
 }

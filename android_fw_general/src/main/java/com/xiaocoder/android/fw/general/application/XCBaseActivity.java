@@ -13,9 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xiaocoder.android.fw.general.function.helper.XCActivityHelper;
-import com.xiaocoder.android.fw.general.http.IHttp.XCIResponseHandler;
-import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.http.XCHttper;
+import com.xiaocoder.android.fw.general.io.XCLog;
 import com.xiaocoder.android.fw.general.util.UtilInput;
 import com.xiaocoder.android.fw.general.util.UtilView;
 import com.xiaocoder.android_fw_general.R;
@@ -48,10 +47,6 @@ public abstract class XCBaseActivity extends FragmentActivity {
      * activity是否销毁
      */
     private boolean isActivityDestroied;
-    /**
-     * 记录网络失败的请求，待重刷新
-     */
-    private XCIResponseHandler recoderNetFailHandler;
 
     @SuppressWarnings("unchecked")
     public <T extends View> T getViewById(int id) {
@@ -112,7 +107,6 @@ public abstract class XCBaseActivity extends FragmentActivity {
 
         XCHttper.resetNetingStatus();
         isActivityDestroied = true;
-        recoderNetFailHandler = null;
         super.onDestroy();
 
         XCActivityHelper.delActivityFromStack(this);
@@ -258,7 +252,6 @@ public abstract class XCBaseActivity extends FragmentActivity {
         }
     }
 
-
     /**
      * 这里得重写,否则startforresult时, 无法回调到fragment中的方法 ,
      * 如果fragment中又有嵌套的话,fragmetn中的该方法也得重写
@@ -294,23 +287,5 @@ public abstract class XCBaseActivity extends FragmentActivity {
             //overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
             //overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
         }
-    }
-
-    /**
-     * 刷新上一次网络失败的请求
-     */
-    public void refreshNetFailHandler() {
-        XCHttper.sendHttpRequest(recoderNetFailHandler);
-    }
-
-    public XCIResponseHandler getRecoderNetFailHandler() {
-        return recoderNetFailHandler;
-    }
-
-    /**
-     * 记录最近一次网络失败的请求
-     */
-    public void setRecoderNetFailHandler(XCIResponseHandler recoderNetFailHandler) {
-        this.recoderNetFailHandler = recoderNetFailHandler;
     }
 }
