@@ -44,7 +44,9 @@ public class XCSearchRecordModelDb extends SQLiteOpenHelper {
         }
 
         if (operatorTableName == null || operatorTableName.length() < 1) {
-            throw new RuntimeException("操作的表名不能为空");
+            mOperatorTableName = TABLE_1;
+        } else {
+            mOperatorTableName = operatorTableName;
         }
         mDbName = dbName;
         mVersion = version;
